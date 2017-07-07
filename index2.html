@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Title</title>
+    <script src="js/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+<video id="video" preload="metadata" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+       x5-video-player-fullscreen="true" x5-video-player-type="h5"
+       width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>
+</body>
+</html>
+
+<script>
+
+    $().ready(function () {
+
+        $("#video").click(function () {
+            var v = $("#video").get(0);
+            if(v.paused){
+                v.play();
+            }else{
+                v.pause();
+            }
+        })
+
+    })
+
+</script>

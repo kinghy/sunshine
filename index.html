@@ -1,0 +1,210 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Title</title>
+    <script src="js/jquery-3.1.0.min.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        font-family: "Microsoft YaHei";
+        scrollbar-3dlight-color: transparent;
+    }
+    body {
+        width: 100%;
+        font-size: 14px;
+        color: #878787;
+        -ms-touch-action: inherit;
+        touch-action: inherit;
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
+        background-color: #000;
+    }
+    body{
+        margin:0 auto;
+        border:none !important;
+    }
+    div {
+        border: none;
+    }
+    #pageWrap {
+        width: 100%;
+        height: 100%;
+        display: none;
+        overflow: hidden;
+    }
+
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        text-align: center;
+        overflow: hidden;
+    }
+    .page-current {
+        display: block;
+    }
+    .zoom-page {
+        width: 810px;
+        height: 1316px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        /*top: -50px;*/
+        -webkit-transform-origin: 0% 100%;
+        transform-origin: 0% 100%;
+        z-index: 2;
+    }
+    #video {
+        position: absolute;
+        left: 0;
+        /*width: 810px;*/
+        /*height: 398px;*/
+        background-color: #000;
+    }
+
+    #startBtn{
+        position: absolute;
+        bottom:50px;
+        left:0;
+        right:0;
+        width: 100%;
+        height: 150px ;
+        z-index:1000;
+        background-color: transparent;
+        border: 0;
+    }
+
+</style>
+<body style="overflow: hidden;">
+<div style="position: absolute;left: 0;top:0;width: 100%;height: 100%">
+    <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+    <div style="position: absolute; text-align: center;top: 100px;width: 100%">
+        <img id="logo" src="resource/logo_s1.png" style="width:250px;height:250px"  />
+    </div>
+    <div style="position: absolute; text-align: center;bottom: 50px;width: 100%">
+        <div style=""><canvas id="cv"></canvas></div>
+        <img id="stage" src="resource/stage.png" style="width:250px"  />
+    </div>
+
+</div>
+
+<!--<div id="curtain" style="overflow: hidden;position:absolute;width: 100%;height: 100%">-->
+    <!--<button id="startBtn" style=""></button>-->
+    <!--<div><img src="resource/111_0003.JPG" width="100%" height="100%"></div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<button  style="background-color: aqua;z-index: 9999;width: 300px;height: 100px;position: absolute;bottom:0" :>123123</button>&ndash;&gt;-->
+<!--<div id="pageWrap" style="overflow: hidden; display: none;">-->
+    <!--<div class="page page-1-1 page-current ">-->
+        <!--<div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">-->
+            <!--<video id="video" preload="metadata" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""-->
+                   <!--x5-video-player-fullscreen="false" x5-video-player-type="h5"-->
+                   <!--width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+</body>
+</html>
+<!--<script>-->
+
+<!--$().ready(function () {-->
+   <!--$("#startBtn").click(function () {-->
+       <!--$("#curtain").hide();-->
+       <!--$("#pageWrap").show();-->
+       <!--$("#video").get(0).play();-->
+
+   <!--})-->
+
+    <!--$("#video").click(function () {-->
+        <!--var v = $("#video").get(0);-->
+        <!--if(v.paused){-->
+            <!--v.play();-->
+        <!--}else{-->
+            <!--v.pause();-->
+        <!--}-->
+    <!--})-->
+
+    <!--$(window).on('resize', function () {-->
+        <!--zoomResize();-->
+    <!--});-->
+    <!--zoomResize();-->
+<!--})-->
+
+<!--//自适应-->
+<!--function zoomResize() {-->
+    <!--var ratio = parseFloat(innerWidth / 810);-->
+<!--//    $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");-->
+<!--//    $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");-->
+<!--//    $(".zoom-page").css("height", innerHeight / ratio + 1);-->
+<!--//    zoomk();-->
+<!--}-->
+<!--</script>-->
+<script>
+    var winWidth = $(window).width();
+    var winHeight = $(window).height();
+    $().ready(function () {
+        //在js中设置canvas的宽高时，如果设置方式不正确，或者在cass中设置时，在绘制图像时就会出现拉伸的情况。这是因为canvas的默认宽高为300px*150px，在css中设置canvas的宽高，实际上是把canvas在300px*150px的基础上进行了拉伸。所以绘制出来的图像会发生变形。
+        $("#cv").get(0).width = 288/2;
+
+        $("#cv").get(0).height = 381/2;
+        var mycv = document.getElementById("cv");
+
+        var myctx = mycv.getContext("2d");
+
+        var imgs = ["resource/01.png","resource/02.png","resource/03.png","resource/04.png"];
+        var animation = AnimationImages.init(myctx,imgs);
+
+    })
+
+    var AnimationImages = {
+        init:function (ctx,imgs) {//构造方法
+            var images = new Array();
+            var length = imgs.length;
+            var loadCallBack = function(index){
+                length--;
+                if(length==0){
+                    ctx.drawImage(images[0],0,0,288,381,0,0,288/2,381/2);
+                    var times = 0,count=images.length;
+                    setInterval(function () {
+                        ctx.clearRect(0,0,288,381);
+                        ctx.drawImage(images[times%count],0,0,288,381,0,0,288/2,381/2);
+                        times++;
+                    },1000/6);
+                }
+            }
+            for(var i=0;i<imgs.length;++i){
+                images[i] = this.addImage(imgs[i],i,loadCallBack.bind(this));
+            }
+            return {
+
+            };
+        },
+        addImage:function(src,index,loadCallBack){
+            var img = new Image();
+            img.src = src;
+            img.onload = function(){
+                loadCallBack(index);
+            };
+            return img;
+        }
+
+    }
+
+
+</script>
+
