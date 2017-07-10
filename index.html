@@ -11,7 +11,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Title</title>
+    <title>阳光之道</title>
     <script src="js/jquery-3.1.0.min.js"></script>
 </head>
 
@@ -92,10 +92,11 @@
 
 </style>
 <body style="overflow: hidden;">
-<div style="position: absolute;left: 0;top:0;width: 100%;height: 100%">
+<!-- Loading -->
+<div id="loading_page" style="position: absolute;left: 0;top:0;width: 100%;height: 100%">
     <img id="bg" src="resource/bg.png" width="100%" height="100%" />
-    <div style="position: absolute; text-align: center;top: 100px;width: 100%">
-        <img id="logo" src="resource/logo_s1.png" style="width:250px;height:250px"  />
+    <div style="position: absolute; text-align: center;top: 80px;width: 100%">
+        <img id="logo" src="resource/logo_s1.png" style="width:200px;height:200px"  />
     </div>
     <div style="position: absolute; text-align: center;bottom: 50px;width: 100%">
         <div style=""><canvas id="cv"></canvas></div>
@@ -103,58 +104,59 @@
     </div>
 
 </div>
+<!-- 第二页 -->
+<div  id="start_page" style="position: absolute;left: 0;top:0;width: 100%;height: 100%;display: none">
+    <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+    <div style="position: absolute; text-align: center;top: 70px;width: 100%">
+        <img id="logo_start" src="resource/logo_start.png" style="width:236px;height:345px"  />
+    </div>
+    <div style="position: absolute; text-align: center;bottom: 30px;width: 100%">
+        <div style="margin-bottom: 50px"><img id="go_btn" src="resource/go.png" style="width:117px;height: 41px;"/></div>
+        <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" style="width:127px;height: 27px"  /></div>
+    </div>
+</div>
+<!-- 视频 -->
+<div id="pageWrap" style="overflow: hidden; display: none;">
+    <div class="page page-1-1 page-current ">
+        <div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">
+            <video id="video" preload="metadata" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+                   x5-video-player-fullscreen="false" x5-video-player-type="h5"
+                   width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>
+        </div>
+    </div>
+    <div id="first_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
+        <img id="y_btn" data="yes" src="resource/yes.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="n_btn" data="no" src="resource/no.png" style="width:72px;height:72px"  />
+    </div>
+    <div id="second_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
+        <img id="y3_btn" data="3" src="resource/y3.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="y4_btn" data="4" src="resource/y4.png" style="width:72px;height:72px"  /><br><br>
+        <img id="y5_btn" data="5" src="resource/y5.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="y6_btn" data="6" src="resource/y6.png" style="width:72px;height:72px"  />
+    </div>
+</div>
 
-<!--<div id="curtain" style="overflow: hidden;position:absolute;width: 100%;height: 100%">-->
-    <!--<button id="startBtn" style=""></button>-->
-    <!--<div><img src="resource/111_0003.JPG" width="100%" height="100%"></div>-->
-<!--</div>-->
-<!--&lt;!&ndash;<button  style="background-color: aqua;z-index: 9999;width: 300px;height: 100px;position: absolute;bottom:0" :>123123</button>&ndash;&gt;-->
-<!--<div id="pageWrap" style="overflow: hidden; display: none;">-->
-    <!--<div class="page page-1-1 page-current ">-->
-        <!--<div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">-->
-            <!--<video id="video" preload="metadata" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""-->
-                   <!--x5-video-player-fullscreen="false" x5-video-player-type="h5"-->
-                   <!--width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<!-- 第三页 -->
+<div  id="end_page" style="position: absolute;left: 0;top:0;width: 100%;height: 100%;display: none">
+    <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+    <div style="position: absolute; text-align: center;top: 70px;width: 100%">
+        <img id="logo_end" src="resource/logo_end.png" style="width:235px;height:353px"  />
+    </div>
+    <div style="position: absolute; text-align: center;bottom: 30px;width: 100%;z-index: 1000">
+        <div style="margin-bottom: 50px">
+            <img id="exit_btn" src="resource/exit_btn.png" style="width:57px;height: 83px;"/>
+            <img id="replay_btn" src="resource/replay_btn.png" style="width:57px;height: 83px;margin-left: 50px"/>
+        </div>
+        <div style="margin-right: 30px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style="width:127px;height: 27px"  /></div>
+    </div>
+</div>
 </body>
 </html>
-<!--<script>-->
 
-<!--$().ready(function () {-->
-   <!--$("#startBtn").click(function () {-->
-       <!--$("#curtain").hide();-->
-       <!--$("#pageWrap").show();-->
-       <!--$("#video").get(0).play();-->
-
-   <!--})-->
-
-    <!--$("#video").click(function () {-->
-        <!--var v = $("#video").get(0);-->
-        <!--if(v.paused){-->
-            <!--v.play();-->
-        <!--}else{-->
-            <!--v.pause();-->
-        <!--}-->
-    <!--})-->
-
-    <!--$(window).on('resize', function () {-->
-        <!--zoomResize();-->
-    <!--});-->
-    <!--zoomResize();-->
-<!--})-->
-
-<!--//自适应-->
-<!--function zoomResize() {-->
-    <!--var ratio = parseFloat(innerWidth / 810);-->
-<!--//    $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");-->
-<!--//    $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");-->
-<!--//    $(".zoom-page").css("height", innerHeight / ratio + 1);-->
-<!--//    zoomk();-->
-<!--}-->
-<!--</script>-->
 <script>
+    // 68,图书开始;70:图书结束;71:第一题;79:第一题结束;80:正确;83正确结束;83错误;92错误结束
+    var firstQA = {start:72,end:80,correctStart:80,correctEnd:83,wrong1Start:83,wrong1End:86,wrong2End:86,wrong2End:92}
+
     var winWidth = $(window).width();
     var winHeight = $(window).height();
     $().ready(function () {
@@ -169,7 +171,169 @@
         var imgs = ["resource/01.png","resource/02.png","resource/03.png","resource/04.png"];
         var animation = AnimationImages.init(myctx,imgs);
 
+        //五秒后切换场景1
+        setInterval(function () {
+            $("#loading_page").hide();
+            $("#start_page").show();
+        },100)
+
+        //第一题
+        $("#y_btn").click(function () {
+            this.src = "resource/yes_highlight.png"
+            setTimeout(function () {
+                //正确
+                var video = document.querySelector("video");
+                video.currentTime = 80;
+                $("#first_qa").hide();
+                this.src = "resource/yes.png"
+                video.play();
+                pauseVideo(video,82.5,function () {
+                    //第一个问题
+                    video.currentTime = 92.8;
+                    video.play();
+                    pauseVideo(video,100,function () {
+                        //第二个问题
+                        $("#second_qa").fadeIn();
+                    });
+                });
+            }.bind(this),500)
+        })
+
+        var fTimes = 0
+
+        $("#n_btn").click(function () {
+            fTimes++;
+            this.src = "resource/no_highlight.png"
+            setTimeout(function () {
+                //正确
+                var video = document.querySelector("video");
+                if(fTimes<2) {
+                    video.currentTime = 83;
+                    $("#first_qa").hide();
+                    this.src = "resource/no.png"
+                    video.play();
+                    pauseVideo(video, 86, function () {
+                        //第一个问题
+                        video.currentTime = 79;
+                        $("#first_qa").fadeIn();
+                    });
+                }else{
+                    video.currentTime = 86.5;
+                    $("#first_qa").hide();
+                    this.src = "resource/no.png"
+                    video.play();
+                    pauseVideo(video, 92, function () {
+                        //第一个问题
+                        video.currentTime = 79;
+                        $("#first_qa").fadeIn();
+                    });
+                }
+            }.bind(this),500)
+        })
+
+        //第一题
+        $("#y3_btn").click(function () {
+            this.src = "resource/y3_highlight.png"
+            setTimeout(function () {
+                //正确
+                var video = document.querySelector("video");
+                video.currentTime = 80;
+                $("#second_qa").hide();
+                this.src = "resource/yes.png"
+                video.play();
+                pauseVideo(video,82.5,function () {
+                    //第一个问题
+                    video.currentTime = 92.8;
+                    video.play();
+                    pauseVideo(video,100,function () {
+                        //第二个问题
+                        $("#second_qa").fadeIn();
+                    });
+                });
+            }.bind(this),500)
+        })
+123123
+        var sTimes = 0
+//
+//        $("#y4_btn").click(function () {
+//            fTimes++;
+//            this.src = "resource/no_highlight.png"
+//            setTimeout(function () {
+//                //正确
+//                var video = document.querySelector("video");
+//                if(fTimes<2) {
+//                    video.currentTime = 83;
+//                    $("#first_qa").hide();
+//                    this.src = "resource/no.png"
+//                    video.play();
+//                    pauseVideo(video, 86, function () {
+//                        //第一个问题
+//                        video.currentTime = 79;
+//                        $("#first_qa").fadeIn();
+//                    });
+//                }else{
+//                    video.currentTime = 86.5;
+//                    $("#first_qa").hide();
+//                    this.src = "resource/no.png"
+//                    video.play();
+//                    pauseVideo(video, 92, function () {
+//                        //第一个问题
+//                        video.currentTime = 79;
+//                        $("#first_qa").fadeIn();
+//                    });
+//                }
+//            }.bind(this),500)
+//        })
+
+        $("#go_btn").click(function () {
+            $("#start_page").hide();
+            $("#pageWrap").show();
+            var video = document.querySelector("video");
+
+            video.play();
+
+            setTimeout(function () {
+                video.currentTime = 78;
+//                video.pause();
+
+                pauseVideo(video,79,function () {
+                    //第一个问题
+                    $("#first_qa").fadeIn();
+                });
+            },1000);
+        });
+
+        //调整视频大小
+        $(window).on('resize', function () {
+            zoomResize();
+        });
+        zoomResize();
+
+        //视频播放完成事件
+        var video = document.querySelector("video");
+        video.addEventListener("ended",function(){
+            $("#pageWrap").hide();
+            $("#end_page").show();
+        });
+        //重播事件
+        $("#replay_btn").click(function () {
+            $("#pageWrap").show();
+            $("#end_page").hide();
+            var video = document.querySelector("video");
+            video.play();
+        });
+
     })
+
+    function pauseVideo(videoId,pauseTime,callback) {
+        var videoTimeInterval = setInterval(function () {
+            if (videoId.currentTime.toFixed(1) == pauseTime) {
+                videoId.pause();
+                callback();
+                clearInterval(videoTimeInterval);
+            }
+        }, 10);
+    }
 
     var AnimationImages = {
         init:function (ctx,imgs) {//构造方法
@@ -205,6 +369,15 @@
 
     }
 
+
+    //video屏幕自适应
+    function zoomResize() {
+        var ratio = parseFloat(innerWidth / 810);
+        $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");
+        $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");
+        $(".zoom-page").css("height", innerHeight / ratio + 1);
+//    zoomk();
+    }
 
 </script>
 
