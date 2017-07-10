@@ -124,16 +124,43 @@
                    width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>
         </div>
     </div>
+    <div id="desc" style="display:none;position: absolute;width: 100%;bottom: 0px;left: 0px;text-align: center;z-index: 1000">
+        <img src="resource/desc.png" style="width:322px;height: 490px" >
+    </div>
+    <div id="start_qa" style="display:none;position: absolute;width: 100%;bottom: 0px;left: 0px;text-align: center;z-index: 1000">
+        <img src="resource/desc.png" style="width:322px;height: 490px" >
+    </div>
     <div id="first_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
         <img id="y_btn" data="yes" src="resource/yes.png" style="width:72px;height:72px;margin-right: 100px"  />
         <img id="n_btn" data="no" src="resource/no.png" style="width:72px;height:72px"  />
     </div>
     <div id="second_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
-        <img id="y3_btn" data="3" src="resource/y3.png" style="width:72px;height:72px;margin-right: 100px"  />
-        <img id="y4_btn" data="4" src="resource/y4.png" style="width:72px;height:72px"  /><br><br>
-        <img id="y5_btn" data="5" src="resource/y5.png" style="width:72px;height:72px;margin-right: 100px"  />
-        <img id="y6_btn" data="6" src="resource/y6.png" style="width:72px;height:72px"  />
+        <img id="y3_btn" data="y3" src="resource/y3.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="y4_btn" data="y4" src="resource/y4.png" style="width:72px;height:72px"  /><br><br>
+        <img id="y5_btn" data="y5" src="resource/y5.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="y6_btn" data="y6" src="resource/y6.png" style="width:72px;height:72px"  />
     </div>
+    <div id="third_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
+        <img id="ysly_btn" data="ysly" src="resource/ysly.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="hlwjr_btn" data="hlwjr" src="resource/hlwjr.png" style="width:72px;height:72px"  /><br><br>
+        <img id="swkj_btn" data="swkj" src="resource/swkj.png" style="width:72px;height:72px;margin-right: 100px"  />
+        <img id="qjny_btn" data="qjny" src="resource/qjny.png" style="width:72px;height:72px"  />
+    </div>
+    <div id="fourth_qa" style="position: absolute; text-align: center;top: 40%;width: 100%;z-index:1000;display: none">
+        <div id="fourth_answer" style="margin:0 auto;padding-top:10px;width:293px;height:118px;background-image: url(resource/kuang.png);  -moz-background-size:100% 100%;background-size:100% 100%;">
+        </div>
+        <div><img id="submit_btn" data="submit" src="resource/submit.png" style="width:59px;height:59px"></div>
+        <div id="fourth_choice" >
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="zqjy_btn" data="zqjy" src="resource/zqjy.png" style="width:60px;height:60px;"  /></div>
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="hbjc_btn" data="hbjc" src="resource/hbjc.png" style="width:60px;height:60px;"  /></div>
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="rhyy_btn" data="rhyy" src="resource/rhyy.png" style="width:60px;height:60px;"  /></div>
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="xybzbx_btn" data="xybzbx" src="resource/xybzbx.png" style="width:60px;height:60px;"  /></div>
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="zcgl_btn" data="zcgl" src="resource/zcgl.png" style="width:60px;height:60px;"  /></div>
+            <div style="margin-left: 50px;width:60px;height:60px;float: left;margin-top: 10px"><img id="hjs_btn" data="hjs" src="resource/hjs.png" style="width:60px;height:60px;"  /></div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    
 </div>
 
 <!-- 第三页 -->
@@ -179,130 +206,224 @@
 
         //第一题
         $("#y_btn").click(function () {
-            this.src = "resource/yes_highlight.png"
+            correct(this,"first_qa"
+                        ,80
+                        ,82.5
+                        ,"second_qa"
+                        ,92.8
+                        ,100);
+        })
+
+        var correct = function (btn,thisId,correctStartTime,correctEndTime,nextId,nextStartTime,nextEndTime) {
+            var $this = $(btn);
+            btn.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
                 //正确
                 var video = document.querySelector("video");
-                video.currentTime = 80;
-                $("#first_qa").hide();
-                this.src = "resource/yes.png"
+                video.currentTime = correctStartTime;
+                $("#" + thisId).hide();
+                btn.src = "resource/"+$this.attr("data")+".png";
                 video.play();
-                pauseVideo(video,82.5,function () {
+                pauseVideo(video, correctEndTime, function () {
                     //第一个问题
-                    video.currentTime = 92.8;
+                    video.currentTime = nextStartTime;
                     video.play();
-                    pauseVideo(video,100,function () {
+                    pauseVideo(video, nextEndTime, function () {
                         //第二个问题
-                        $("#second_qa").fadeIn();
+                        $("#" + nextId).fadeIn();
                     });
                 });
-            }.bind(this),500)
-        })
+            }.bind(this), 500)
+        }
 
         var fTimes = 0
 
         $("#n_btn").click(function () {
-            fTimes++;
-            this.src = "resource/no_highlight.png"
+            wrong(this,++fTimes,"first_qa"
+                    ,79
+                    ,83
+                    ,86
+                    ,86.5
+                    ,92);
+        })
+
+        var wrong = function (btn,times,thiId,questionTime,wrong1startTime,wrong1EndTime,wrong2StartTime,wrong2EndTime) {
+            var $this = $(btn);
+            btn.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
                 //正确
                 var video = document.querySelector("video");
-                if(fTimes<2) {
-                    video.currentTime = 83;
-                    $("#first_qa").hide();
-                    this.src = "resource/no.png"
+                if(times<2) {
+                    video.currentTime = wrong1startTime;
+                    $("#"+thiId).hide();
+                    btn.src = "resource/"+$this.attr("data")+".png"
                     video.play();
-                    pauseVideo(video, 86, function () {
+                    pauseVideo(video, wrong1EndTime, function () {
                         //第一个问题
-                        video.currentTime = 79;
-                        $("#first_qa").fadeIn();
+                        video.currentTime = questionTime;
+                        $("#"+thiId).fadeIn();
                     });
                 }else{
-                    video.currentTime = 86.5;
-                    $("#first_qa").hide();
-                    this.src = "resource/no.png"
+                    video.currentTime = wrong2StartTime;
+                    $("#"+thiId).hide();
+                    btn.src = "resource/"+$this.attr("data")+".png"
                     video.play();
-                    pauseVideo(video, 92, function () {
+                    pauseVideo(video, wrong2EndTime, function () {
                         //第一个问题
-                        video.currentTime = 79;
-                        $("#first_qa").fadeIn();
+                        video.currentTime = questionTime;
+                        $("#"+thiId).fadeIn();
                     });
                 }
             }.bind(this),500)
+        }
+
+        //第2题
+        $("#y3_btn").click(function () {
+            correct(this,"second_qa"
+                    ,100.5
+                    ,104
+                    ,"third_qa"
+                    ,114.8
+                    ,120);
         })
 
-        //第一题
-        $("#y3_btn").click(function () {
-            this.src = "resource/y3_highlight.png"
-            setTimeout(function () {
-                //正确
-                var video = document.querySelector("video");
-                video.currentTime = 80;
-                $("#second_qa").hide();
-                this.src = "resource/yes.png"
-                video.play();
-                pauseVideo(video,82.5,function () {
-                    //第一个问题
-                    video.currentTime = 92.8;
-                    video.play();
-                    pauseVideo(video,100,function () {
-                        //第二个问题
-                        $("#second_qa").fadeIn();
-                    });
-                });
-            }.bind(this),500)
-        })
-123123
         var sTimes = 0
-//
-//        $("#y4_btn").click(function () {
-//            fTimes++;
-//            this.src = "resource/no_highlight.png"
-//            setTimeout(function () {
-//                //正确
-//                var video = document.querySelector("video");
-//                if(fTimes<2) {
-//                    video.currentTime = 83;
-//                    $("#first_qa").hide();
-//                    this.src = "resource/no.png"
-//                    video.play();
-//                    pauseVideo(video, 86, function () {
-//                        //第一个问题
-//                        video.currentTime = 79;
-//                        $("#first_qa").fadeIn();
-//                    });
-//                }else{
-//                    video.currentTime = 86.5;
-//                    $("#first_qa").hide();
-//                    this.src = "resource/no.png"
-//                    video.play();
-//                    pauseVideo(video, 92, function () {
-//                        //第一个问题
-//                        video.currentTime = 79;
-//                        $("#first_qa").fadeIn();
-//                    });
-//                }
-//            }.bind(this),500)
-//        })
+
+        $("#y4_btn,#y5_btn,#y6_btn").click(function () {
+            wrong(this,++sTimes,"second_qa"
+                    ,100
+                    ,104.5
+                    ,107
+                    ,108.3
+                    ,114);
+        })
+
+
+        //第3题
+        $("#hlwjr_btn").click(function () {
+            correct(this,"third_qa"
+                    ,121
+                    ,124
+                    ,"fourth_qa"
+                    ,135
+                    ,141);
+        })
+
+        var tTimes = 0
+
+        $("#ysly_btn,#qjny_btn,#swkj_btn").click(function () {
+            wrong(this,++tTimes,"third_qa"
+                    ,120
+                    ,125
+                    ,128
+                    ,128.5
+                    ,134);
+        })
+
+        //第四题
+        var forTimes=0;
+        $("#fourth_choice img").click(function () {
+            var $this = $(this);
+            this.src = "resource/"+$this.attr("data")+"_highlight.png";
+            setTimeout(function () {
+                $this.hide();
+                var data = $this.attr("data");
+                this.src = "resource/"+data+".png";
+                var $img = $("<img id=\""+data+"_answer\" data=\""+$this.attr("data")+"\" src=\"resource/"+$this.attr("data")+".png\" style=\"width:40px;height:40px;\"/>")
+                var $dom = $("<div style=\"margin-left: 40px;width:40px;height:40px;float: left;margin-top: 5px\">"+ "</div>");
+                $dom.append($img);
+                $("#fourth_answer").append($dom);
+                $img.click(function () {
+                    var $thisImg = $(this);
+                    var data = $thisImg.attr("data");
+                    this.src = "resource/"+data+"_highlight.png";
+                    setTimeout(function () {
+                        $thisImg.parent().remove();
+                        $this.show();
+                    }.bind(this), 500);
+                });
+
+            }.bind(this), 500);
+        })
+        $("#submit_btn").click(function () {
+            var corrects = 0;
+            $("#fourth_answer img").each(function () {
+                var data = $(this).attr("data");
+                if(data!="zqjy" && data!="hbjc"){
+                    corrects ++;
+                }else{
+                    corrects --;
+                }
+            });
+            if(corrects==4){
+                setTimeout(function () {
+                    //正确
+                    var video = document.querySelector("video");
+                    video.currentTime = 141.5;
+                    $("#fourth_qa").hide();
+                    video.play();
+                    pauseVideo(video, 144, function () {
+                        //第一个问题
+                        video.currentTime = 155.5;
+                        video.play();
+                    });
+                }.bind(this), 500);
+            }else{
+                wrong(this,++forTimes,"fourth_qa"
+                        ,141
+                        ,145
+                        ,148
+                        ,148.8
+                        ,154);
+            }
+
+            setTimeout(function () {
+                $("#fourth_answer").html("");
+                $("#fourth_choice img").show();
+                wCounts=0;
+            },1000);
+
+        })
 
         $("#go_btn").click(function () {
             $("#start_page").hide();
             $("#pageWrap").show();
-            var video = document.querySelector("video");
+            playvideo();
+        });
 
+        $("#desc").click(function () {
+            $(this).hide();
+            var video = document.querySelector("video");
+            video.currentTime = 45;
+            video.play();
+            pauseVideo(video,68,function () {
+                //第一个问题
+                $("#start_qa").fadeIn();
+            });
+        })
+        $("#start_qa").click(function () {
+            $(this).hide();
+            var video = document.querySelector("video");
+            video.currentTime = 71;
+            video.play();
+            pauseVideo(video,79,function () {
+                //第一个问题
+                $("#first_qa").fadeIn();
+            });
+        })
+        
+        var playvideo = function () {
+            var video = document.querySelector("video");
             video.play();
 
             setTimeout(function () {
-                video.currentTime = 78;
-//                video.pause();
-
-                pauseVideo(video,79,function () {
+                video.currentTime = 44;
+                pauseVideo(video,45,function () {
                     //第一个问题
-                    $("#first_qa").fadeIn();
+                    $("#desc").fadeIn();
                 });
             },1000);
-        });
-
+        }
         //调整视频大小
         $(window).on('resize', function () {
             zoomResize();
@@ -319,8 +440,7 @@
         $("#replay_btn").click(function () {
             $("#pageWrap").show();
             $("#end_page").hide();
-            var video = document.querySelector("video");
-            video.play();
+            playvideo();
         });
 
     })
