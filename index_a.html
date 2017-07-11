@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=320, maximum-scale=0.88, user-scalable=no,minimal-ui">
+    <meta name="viewport" content="width=320, user-scalable=no,minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="yes" name="apple-touch-fullscreen">
@@ -122,12 +122,19 @@
 
 <script>
     // 68,图书开始;70:图书结束;71:第一题;79:第一题结束;80:正确;83正确结束;83错误;92错误结束
-    var firstQA = {start:72,end:80,correctStart:80,correctEnd:83,wrong1Start:83,wrong1End:86,wrong2End:86,wrong2End:92}
 
-    var winWidth = $(window).width();
+    var firstQA = {start:72,end:80,correctStart:80,correctEnd:83,wrong1Start:83,wrong1End:86,wrong2End:86,wrong2End:92}
+    var winWidth = $(window).innerWidth();
     var winHeight = $(window).height();
+
+
     $().ready(function () {
-        //在js中设置canvas的宽高时，如果设置方式不正确，或者在cass中设置时，在绘制图像时就会出现拉伸的情况。这是因为canvas的默认宽高为300px*150px，在css中设置canvas的宽高，实际上是把canvas在300px*150px的基础上进行了拉伸。所以绘制出来的图像会发生变形。
+//        alert(winWidth+";"+innerWidth+";"+screen.width)
+        var scale = 320/screen.width;
+        var viewport = $("head").find("[name='viewport']");
+        var content = viewport.attr("content")+", maximum-scale="+scale.toFixed(2);
+        viewport.attr("content",content);
+//在js中设置canvas的宽高时，如果设置方式不正确，或者在cass中设置时，在绘制图像时就会出现拉伸的情况。这是因为canvas的默认宽高为300px*150px，在css中设置canvas的宽高，实际上是把canvas在300px*150px的基础上进行了拉伸。所以绘制出来的图像会发生变形。
         $("#cv").get(0).width = 288/2;
 
         $("#cv").get(0).height = 381/2;
