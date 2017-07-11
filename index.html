@@ -90,6 +90,35 @@
         border: 0;
     }
 
+    .light_rotate{
+        -moz-animation:rotate 20s infinite linear;
+        -webkit-animation:rotate 20s infinite linear;
+        animation:rotate 20s infinite linear;
+    }
+    @-moz-keyframes rotate{
+        0%{
+            -moz-transform:rotate(0deg);
+        }
+        100%{
+            -moz-transform:rotate(360deg);
+        }
+    }
+    @-webkit-keyframes rotate{
+        0%{
+            -webkit-transform:rotate(0deg);
+        }
+        100%{
+            -webkit-transform:rotate(360deg);
+        }
+    }
+    @keyframes rotate{
+        0%{
+            transform:rotate(0deg);
+        }
+        100%{
+            transform:rotate(360deg);
+        }
+    }
 </style>
 <body style="overflow: hidden;">
 <!-- Loading -->
@@ -119,7 +148,7 @@
 <div id="pageWrap" style="overflow: hidden; display: none;">
     <div class="page page-1-1 page-current ">
         <div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">
-            <video id="video" preload="metadata" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+            <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
                    x5-video-player-fullscreen="false" x5-video-player-type="h5"
                    width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>
         </div>
@@ -127,8 +156,22 @@
     <div id="desc" style="display:none;position: absolute;width: 100%;bottom: 0px;left: 0px;text-align: center;z-index: 1000">
         <img src="resource/desc.png" style="width:322px;height: 490px" >
     </div>
-    <div id="start_qa" style="display:none;position: absolute;width: 100%;bottom: 0px;left: 0px;text-align: center;z-index: 1000">
-        <img src="resource/desc.png" style="width:322px;height: 490px" >
+    <div id="start_qa" style="display:none;position: absolute;width: 100%;height:85%;top: 15%;left: 0px;text-align: center;z-index: 1000">
+        <div>
+            <img id="light_img" src="resource/light.png" style="width:293px;height: 293px;" >
+            <div style="width: 100% ;position: absolute;top: 54px;left: 0;text-align: center">
+                <img id="book_img" src="resource/book.png" style="width:184px;height: 220px;" >
+            </div>
+            <div style="margin-top: 40px">
+                <img src="resource/hand.png" style="width:63px;height: 78px;">
+            </div>
+            <div style="margin-top: 20px">
+                <img src="resource/goon_text.png" style="width:158px;height: 25px;">
+            </div>
+            <div style="width: 100% ;position: absolute;bottom: 10px;left: 0;text-align: center">
+                <img src="resource/next.png" style="width:40px;height: 40px;">
+            </div>
+        </div>
     </div>
     <div id="first_qa" style="position: absolute; text-align: center;top: 50%;width: 100%;z-index:1000;display: none">
         <img id="y_btn" data="yes" src="resource/yes.png" style="width:72px;height:72px;margin-right: 100px"  />
@@ -202,7 +245,7 @@
         setInterval(function () {
             $("#loading_page").hide();
             $("#start_page").show();
-        },100)
+        },5000)
 
         //第一题
         $("#y_btn").click(function () {
@@ -380,7 +423,6 @@
             setTimeout(function () {
                 $("#fourth_answer").html("");
                 $("#fourth_choice img").show();
-                wCounts=0;
             },1000);
 
         })
@@ -398,11 +440,12 @@
             video.play();
             pauseVideo(video,68,function () {
                 //第一个问题
-                $("#start_qa").fadeIn();
+                $("#start_qa").fadeIn().find("#light_img").addClass("light_rotate");
             });
         })
         $("#start_qa").click(function () {
             $(this).hide();
+            $(this).find("#light_img").removeClass("light_rotate")
             var video = document.querySelector("video");
             video.currentTime = 71;
             video.play();
@@ -417,10 +460,10 @@
             video.play();
 
             setTimeout(function () {
-                video.currentTime = 44;
-                pauseVideo(video,45,function () {
+                video.currentTime = 0;
+                pauseVideo(video,44,function () {
                     //第一个问题
-                    $("#desc").fadeIn();
+                    $("#desc").fadeIn().find("#light_img").addClass("light_rotate")
                 });
             },1000);
         }
