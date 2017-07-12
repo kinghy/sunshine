@@ -146,6 +146,16 @@
     var cvHeight = 406;//canvas高度
     var loadingTime = 5000;//loading最大时间
 
+    var Stage = {
+        init:function(stageId){
+            return {
+                play:function(){
+
+                },
+                hide()
+            }
+        }
+    }
 
 
     $().ready(function () {
@@ -157,6 +167,7 @@
             event.preventDefault();//屏蔽事件传递
         })
 
+        //loading页
         var mycv = document.getElementById("cv");
         var myctx = mycv.getContext("2d");
         var imgs = ["resource/01.png","resource/02.png","resource/03.png","resource/04.png"];
@@ -165,6 +176,13 @@
             $("#loading_page").hide();
             $("#start_page").show();
         },loadingTime);
+
+        //开始页
+        $("#go_btn").click(function () {
+            $("#start_page").hide();
+            $("#pageWrap").show();
+            playvideo();
+        });
 
         //第一题
         $("#y_btn").click(function () {
@@ -348,11 +366,7 @@
 
         })
 
-        $("#go_btn").click(function () {
-            $("#start_page").hide();
-            $("#pageWrap").show();
-            playvideo();
-        });
+
 
         $("#desc").click(function () {
             $(this).hide();
