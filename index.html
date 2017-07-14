@@ -2,7 +2,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=640,  user-scalable=no,minimal-ui">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <script>
+        //页面适配，根据屏幕的高度自动缩放
+        $().ready(function () {
+            var vp = $("head").find("[name='viewport']");
+            vp.attr("content",vp.attr("content")+",maximum-scale="+(document.documentElement.clientHeight/1140).toFixed(2));
+        })
+    </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="yes" name="apple-touch-fullscreen">
@@ -12,10 +20,11 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>阳光之道</title>
-    <script src="js/jquery-3.1.0.min.js"></script>
+
 </head>
 
 <link type="text/css" rel="stylesheet" href="css/main.css">
+<script src="js/s1.js"></script>
 
 <body>
 <!-- Loading -->
@@ -25,10 +34,9 @@
         <img id="logo" src="resource/logo_s1.png" />
     </div>
     <div class="loading_foot">
-        <div style="margin-bottom: -25px"><canvas id="cv"></canvas></div>
+        <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
         <img id="stage" src="resource/stage.png"   />
     </div>
-
 </div>
 <!-- 第二页 -->
 <div  id="start_page" style="display: none" class="page_full">
@@ -37,7 +45,7 @@
         <img id="logo_start" src="resource/logo_start.png"   />
     </div>
     <div class="start_foot" >
-        <div style="margin-bottom: 90px"><img id="go_btn" src="resource/go.png" /></div>
+        <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
         <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
     </div>
 </div>
@@ -47,7 +55,7 @@
         <div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">
             <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
                    x5-video-player-fullscreen="false" x5-video-player-type="h5"
-                   width="100%" height="100%" poster="" src="resource/m.mp4" style="object-fit: fill;"></video>
+                   width="100%" height="100%" poster="" src="resource/m_c.mp4" style="object-fit: fill;"></video>
         </div>
     </div>
     <div id="desc" class="desc_book" style="display:none;">
@@ -59,13 +67,13 @@
             <div class="book_pos">
                 <img id="book_img" src="resource/book.png" >
             </div>
-            <div style="margin-top: 40px">
+            <div style="margin-top: -44px">
                 <img src="resource/hand.png" >
             </div>
-            <div style="margin-top: 20px">
+            <div>
                 <img src="resource/goon_text.png" >
             </div>
-            <div class="next_pos">
+            <div class="next_pos" >
                 <img src="resource/next.png" >
             </div>
         </div>
@@ -109,7 +117,7 @@
 
         </div>
     </div>
-    
+
 </div>
 
 <!-- 第三页 -->
@@ -119,358 +127,12 @@
         <img id="logo_end" src="resource/logo_end.png" style=""  />
     </div>
     <div class="end_foot">
-        <div style="margin-bottom: 100px">
+        <div style="margin-bottom: 73px">
             <img id="exit_btn" src="resource/exit_btn.png" style=""/>
-            <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 100px"/>
+            <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
         </div>
         <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
     </div>
 </div>
 </body>
 </html>
-
-<script>
-
-    var u = navigator.userAgent;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-    var vp = $("head").find("[name='viewport']");
-
-    var offset = u.indexOf('MQQBrowser') >= 0?0.3:0.0;
-
-    if(isAndroid){
-        vp.attr("content",vp.attr("content")+",maximum-scale=0.4");
-    }else{
-        vp.attr("content",vp.attr("content")+",maximum-scale=0.5");
-    }
-
-    var cvWidth = 321;
-    var cvHeight = 406
-    $().ready(function () {
-//在js中设置canvas的宽高时，如果设置方式不正确，或者在cass中设置时，在绘制图像时就会出现拉伸的情况。这是因为canvas的默认宽高为300px*150px，在css中设置canvas的宽高，实际上是把canvas在300px*150px的基础上进行了拉伸。所以绘制出来的图像会发生变形。
-        $("#cv").get(0).width = cvWidth;
-
-        $("#cv").get(0).height = cvHeight;
-
-        $("#video").click(function () {
-            event.preventDefault();//屏蔽事件传递
-        })
-
-        var mycv = document.getElementById("cv");
-
-        var myctx = mycv.getContext("2d");
-
-        var imgs = ["resource/01.png","resource/02.png","resource/03.png","resource/04.png"];
-        var animation = AnimationImages.init(myctx,imgs);
-
-        setInterval(function () {
-            $("#loading_page").hide();
-            $("#start_page").show();
-        },5000)
-
-        //第一题
-        $("#y_btn").click(function () {
-            correct(this,"first_qa"
-                        ,79
-                        ,82.5
-                        ,"second_qa"
-                        ,92.8
-                        ,100);
-        })
-
-        var correct = function (btn,thisId,correctStartTime,correctEndTime,nextId,nextStartTime,nextEndTime) {
-            var $this = $(btn);
-            btn.src = "resource/"+$this.attr("data")+"_highlight.png";
-            setTimeout(function () {
-                //正确
-                var video = document.querySelector("video");
-                video.currentTime = correctStartTime;
-                $("#" + thisId).hide();
-                btn.src = "resource/"+$this.attr("data")+".png";
-                video.play();
-                pauseVideo(video, correctEndTime, function () {
-                    //第一个问题
-                    video.currentTime = nextStartTime;
-                    video.play();
-                    pauseVideo(video, nextEndTime, function () {
-                        //第二个问题
-                        $("#" + nextId).fadeIn();
-                    });
-                });
-            }.bind(this), 500)
-        }
-
-        var fTimes = 0
-
-        $("#n_btn").click(function () {
-            wrong(this,++fTimes,"first_qa"
-                    ,79
-                    ,82.6
-                    ,86
-                    ,86.3
-                    ,92);
-        })
-
-        var wrong = function (btn,times,thiId,questionTime,wrong1startTime,wrong1EndTime,wrong2StartTime,wrong2EndTime) {
-            var $this = $(btn);
-            btn.src = "resource/"+$this.attr("data")+"_highlight.png";
-            setTimeout(function () {
-                //正确
-                var video = document.querySelector("video");
-                if(times<2) {
-                    video.currentTime = wrong1startTime;
-                    $("#"+thiId).hide();
-                    btn.src = "resource/"+$this.attr("data")+".png"
-                    video.play();
-                    pauseVideo(video, wrong1EndTime, function () {
-                        //第一个问题
-                        video.currentTime = questionTime;
-                        $("#"+thiId).fadeIn();
-                    });
-                }else{
-                    video.currentTime = wrong2StartTime;
-                    $("#"+thiId).hide();
-                    btn.src = "resource/"+$this.attr("data")+".png"
-                    video.play();
-                    pauseVideo(video, wrong2EndTime, function () {
-                        //第一个问题
-                        video.currentTime = questionTime;
-                        $("#"+thiId).fadeIn();
-                    });
-                }
-            }.bind(this),500)
-        }
-
-        //第2题
-        $("#y3_btn").click(function () {
-            correct(this,"second_qa"
-                    ,100.5
-                    ,104
-                    ,"third_qa"
-                    ,114.8
-                    ,120);
-        })
-
-        var sTimes = 0
-
-        $("#y4_btn,#y5_btn,#y6_btn").click(function () {
-            wrong(this,++sTimes,"second_qa"
-                    ,100
-                    ,104.5
-                    ,107
-                    ,108.3
-                    ,114);
-        })
-
-
-        //第3题
-        $("#hlwjr_btn").click(function () {
-            correct(this,"third_qa"
-                    ,121
-                    ,124
-                    ,"fourth_qa"
-                    ,135
-                    ,141);
-        })
-
-        var tTimes = 0
-
-        $("#ysly_btn,#qjny_btn,#swkj_btn").click(function () {
-            wrong(this,++tTimes,"third_qa"
-                    ,120.5
-                    ,124.7
-                    ,128
-                    ,128.7
-                    ,134);
-        })
-
-        //第四题
-        var forTimes=0;
-        $("#fourth_choice img").click(function () {
-            var $this = $(this);
-            this.src = "resource/"+$this.attr("data")+"_highlight.png";
-            setTimeout(function () {
-                $this.hide();
-                var data = $this.attr("data");
-                this.src = "resource/"+data+".png";
-                var $img = $("<img id=\""+data+"_answer\" data=\""+$this.attr("data")+"\" src=\"resource/"+$this.attr("data")+".png\" />")
-                var $dom = $("<div class=\"fourth_choice_btn\">"+ "</div>");
-                $dom.append($img);
-                $("#fourth_answer").append($dom);
-                $img.click(function () {
-                    var $thisImg = $(this);
-                    var data = $thisImg.attr("data");
-                    this.src = "resource/"+data+"_highlight.png";
-                    setTimeout(function () {
-                        $thisImg.parent().remove();
-                        $this.show();
-                    }.bind(this), 500);
-                });
-
-            }.bind(this), 500);
-        })
-        $("#submit_btn").click(function () {
-            var corrects = 0;
-            $("#fourth_answer img").each(function () {
-                var data = $(this).attr("data");
-                if(data!="zqjy" && data!="hbjc"){
-                    corrects ++;
-                }else{
-                    corrects --;
-                }
-            });
-            if(corrects==4){
-                setTimeout(function () {
-                    //正确
-                    var video = document.querySelector("video");
-                    video.currentTime = 141.5;
-                    $("#fourth_qa").hide();
-                    video.play();
-                    pauseVideo(video, 144, function () {
-                        //第一个问题
-                        video.currentTime = 155.5;
-                        video.play();
-                    });
-                }.bind(this), 500);
-            }else{
-                wrong(this,++forTimes,"fourth_qa"
-                        ,141
-                        ,145
-                        ,148
-                        ,148.8
-                        ,154);
-            }
-
-            setTimeout(function () {
-                $("#fourth_answer").html("");
-                $("#fourth_choice img").show();
-            },1000);
-
-        })
-
-        $("#go_btn").click(function () {
-            $("#start_page").hide();
-            $("#pageWrap").show();
-            playvideo();
-        });
-
-        $("#desc").click(function () {
-            $(this).hide();
-            var video = document.querySelector("video");
-            video.currentTime = 45;
-            video.play();
-            pauseVideo(video,68,function () {
-                //第一个问题
-                $("#start_qa").fadeIn().find("#light_img").addClass("light_rotate");
-            });
-        })
-        $("#start_qa").click(function () {
-            $(this).hide();
-            $(this).find("#light_img").removeClass("light_rotate")
-            var video = document.querySelector("video");
-            video.currentTime = 71;
-            video.play();
-            pauseVideo(video,79,function () {
-                //第一个问题
-                $("#first_qa").fadeIn();
-            });
-        })
-        
-        var playvideo = function () {
-            var video = document.querySelector("video");
-
-            video.play();
-            video.currentTime = 0;
-            setTimeout(function () {
-                pauseVideo(video,44,function () {
-                    //第一个问题
-                    $("#desc").fadeIn().find("#light_img").addClass("light_rotate")
-                });
-            },1000);
-//            video.play();
-//
-//            setTimeout(function () {
-//                video.currentTime = 119;
-//                pauseVideo(video,120,function () {
-//                    //第一个问题
-//                    $("#third_qa").fadeIn()
-//                });
-//            },1000);
-        }
-        //调整视频大小
-        $(window).on('resize', function () {
-            zoomResize();
-        });
-        zoomResize();
-
-        //视频播放完成事件
-        var video = document.querySelector("video");
-        video.addEventListener("ended",function(){
-            $("#pageWrap").hide();
-            $("#end_page").show();
-        });
-        //重播事件
-        $("#replay_btn").click(function () {
-            $("#pageWrap").show();
-            $("#end_page").hide();
-            playvideo();
-        });
-
-    })
-
-    function pauseVideo(videoId,pauseTime,callback) {
-        var videoTimeInterval = setInterval(function () {
-            if (videoId.currentTime.toFixed(1) == pauseTime) {
-                videoId.pause();
-                callback();
-                clearInterval(videoTimeInterval);
-            }
-        }, 10);
-    }
-
-    var AnimationImages = {
-        init:function (ctx,imgs) {//构造方法
-            var images = new Array();
-            var length = imgs.length;
-            var loadCallBack = function(index){
-                length--;
-                if(length==0){
-                    ctx.drawImage(images[0],0,0,cvWidth,cvHeight,0,0,cvWidth,cvHeight);
-                    var times = 0,count=images.length;
-                    setInterval(function () {
-                        ctx.clearRect(0,0,cvWidth,cvHeight);
-                        ctx.drawImage(images[times%count],0,0,cvWidth,cvHeight,0,0,cvWidth,cvHeight);
-                        times++;
-                    },1000/6);
-                }
-            }
-            for(var i=0;i<imgs.length;++i){
-                images[i] = this.addImage(imgs[i],i,loadCallBack.bind(this));
-            }
-            return {
-
-            };
-        },
-        addImage:function(src,index,loadCallBack){
-            var img = new Image();
-            img.src = src;
-            img.onload = function(){
-                loadCallBack(index);
-            };
-            return img;
-        }
-
-    }
-
-
-    //video屏幕自适应
-    function zoomResize() {
-        var ratio = parseFloat(innerWidth / 810);
-        $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");
-        $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");
-        $(".zoom-page").css("height", innerHeight / ratio + 1);
-//    zoomk();
-    }
-
-</script>
-
