@@ -51,18 +51,16 @@
 </div>
 <!-- 视频 -->
 <div id="pageWrap" style="overflow: hidden; display: none;">
-    <div class="page page-1-1 page-current ">
-        <div class="zoom-page " style="transform: scale(0.444444, 0.444444); height: 1441px;">
-            <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
-                   x5-video-player-fullscreen="false" x5-video-player-type="h5"
-                   width="100%" height="100%" poster="" src="resource/m_c.mp4" style="object-fit: fill;"></video>
-        </div>
-    </div>
+
+    <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+           x5-video-player-fullscreen="true" x5-video-player-type="h5"
+           width="100%" height="100%" poster="" src="resource/m_c.mp4" style="object-fit: fill;"></video>
+
     <div id="desc" class="desc_book" style="display:none;">
         <img src="resource/desc.png" >
     </div>
     <div id="start_qa" class="start_qa" style="display:none;">
-        <div>
+        <div class="light_book">
             <img id="light_img" src="resource/light.png"  >
             <div class="book_pos">
                 <img id="book_img" src="resource/book.png" >
@@ -73,9 +71,9 @@
             <div>
                 <img src="resource/goon_text.png" >
             </div>
-            <div class="next_pos" >
-                <img src="resource/next.png" >
-            </div>
+        </div>
+        <div class="next_pos" >
+            <img src="resource/next.png" >
         </div>
     </div>
     <div id="first_qa" style="display: none" class="question_pos">

@@ -8,17 +8,6 @@ var loadingTime = 5000;//loading最大时间
 
 
 $().ready(function () {
-    //视频调整
-    var resizeStage = function () {
-        // $("#pageWrap").width(document.documentElement.clientWidth).height(document.documentElement.clientHeight);
-        $("#video").width(document.documentElement.clientWidth).height(document.documentElement.clientHeight);
-    }
-    resizeStage();
-
-    $(window).resize(function() {
-        resizeStage();
-    });
-    
     //在js中设置canvas的宽高时，如果设置方式不正确，或者在cass中设置时，在绘制图像时就会出现拉伸的情况。这是因为canvas的默认宽高为300px*150px，在css中设置canvas的宽高，实际上是把canvas在300px*150px的基础上进行了拉伸。所以绘制出来的图像会发生变形。
     $("#cv").get(0).width = cvWidth;
     $("#cv").get(0).height = cvHeight;
@@ -72,7 +61,7 @@ $().ready(function () {
         $("#start_page").hide();
         //场景1
         sm.play();
-        //sm.run2StageEnd(1);
+//            sm.run2StageEnd(5);
     });
 
     //重播事件
@@ -231,7 +220,7 @@ var Stage = {
 
 var VideoStageManager = {
     init:function (managerId,videoId,stages,endCallBack) {
-        // this.zoomResize();
+        this.zoomResize();
         var video = document.getElementById(videoId);
 
         var endVideo = function(){
@@ -329,12 +318,12 @@ var VideoStageManager = {
         return ret;
     },
     //video屏幕自适应
-    // zoomResize : function() {
-    //     var ratio = parseFloat(innerWidth / 810);
-    //     $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");
-    //     $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");
-    //     $(".zoom-page").css("height", innerHeight / ratio + 1);
-    // }
+    zoomResize : function() {
+        var ratio = parseFloat(innerWidth / 810);
+        $(".zoom-page").css("transform", "scale(" + ratio + "," + ratio + ")");
+        $(".zoom-page").css("-webkit-transform", "scale(" + ratio + "," + ratio + ")");
+        $(".zoom-page").css("height", innerHeight / ratio + 1);
+    }
 }
 
 
