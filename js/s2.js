@@ -54,31 +54,91 @@ $().ready(function () {
     },loadingTime);
 
     //构建场景
-    var fs = Stage.init("desc",0,44,function (s) {//初始化
-        $("#desc").click(function () {
+    var fs = Stage.init("view",0,29,function (s) {//初始化
+        $(".goonbtn").click(function () {
+            s.playNext();
+        })
+        setTimeout(function () {
+            $("#office").fadeIn();
+            var leftpush = false;
+            $("#leftarrow").on('touchstart',function (e) {
+                e.preventDefault();
+                leftpush = true;
+                setTimeout(function () {
+                    if(leftpush){
+                        var handle = setInterval(function () {
+                            var left = parseFloat($("#office").css("left"));
+                            if(leftpush && left<0){
+                                left = left+10<0?left+10:0
+                                $("#office").css("left",left+"px");
+                            }else{
+                                clearInterval(handle);
+                            }
+                        },1000/24);
+                    }
+                },500);
+
+            }).on('touchend',function (e) {
+                e.preventDefault();
+                leftpush = false;
+            }).fadeIn();
+
+            var rightpush = false;
+            $("#rightarrow").on('touchstart',function (e) {
+                e.preventDefault();
+                rightpush = true;
+                setTimeout(function () {
+                    if(rightpush){
+                        var handle = setInterval(function () {
+                            var left = parseFloat($("#office").css("left"));
+                            if(rightpush && left>-3390){
+
+                                left = left-10>-3390?left-10:-3390
+                                $("#office").css("left",left+"px");
+                            }else{
+                                clearInterval(handle);
+                            }
+                        },1000/24);
+                    }
+                },500);
+
+            }).on('touchend',function (e) {
+                e.preventDefault();
+                rightpush = false;
+            }).fadeIn();
+
+        },2000)
+    });
+
+    var ss = Stage.init("qa",35,50,function (s) {//初始化
+        $("#qa_no").click(function () {
+            s.run2StageEnd(0,3);
+        })
+        $("#qa_yes").click(function () {
             s.playNext();
         })
     });
 
-    var ss = Stage.init("start_qa",45,68,function (s) {//初始化
-        $("#start_qa").click(function () {
+    var ts = Stage.init("page_1",51,186,function (s) {//初始化
+        $("#p1ToP2").click(function () {
             s.playNext();
         })
-    },function (s) {
-        $("#start_qa").find("#light_img").addClass("light_rotate");
-    },function (s) {
-        $("#start_qa").find("#light_img").removeClass("light_rotate");
     });
 
-    var ts = ChoiceStage.init("first_qa",71,79,$("#y_btn"),$("#n_btn"),79,82.5,82.6,86,86.3,92);
-    var fours = ChoiceStage.init("second_qa",92.8,100,$("#y3_btn"),$("#y4_btn,#y5_btn,#y6_btn"),100.5,104,104.5,107,108.3,114);
-    var fives = ChoiceStage.init("third_qa",114.8,120,$("#hlwjr_btn"),$("#ysly_btn,#qjny_btn,#swkj_btn"),121,124,124.7,128,128.7,134);
-    var sixs = MultiChoiceStage.init("fourth_qa",135,141,$("#submit_btn"),$("#fourth_choice img"),$("#fourth_answer"),["rhyy","xybzbx","zcgl","hjs"],141.5,145,145,148,148.8,154);
+    var fos = Stage.init("page_2",186,189,function (s) {//初始化
+        $("#p2ToP1").click(function () {
+            s.run2StageEnd(2,1);
+        })
+        $("#p2ToP2").click(function () {
+            s.playNext();
+        })
+    });
 
-    var es = Stage.init(null,155.5,0)
+    var es = Stage.init(null,189,0)
+
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
-    var sm = VideoStageManager.init("pageWrap","video",[fs,ss,ts,fours,fives,sixs,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[fs,ss,ts,fos,es],function () {
         $("#end_page").show();
     });
 
@@ -87,7 +147,7 @@ $().ready(function () {
         $("#start_page").hide();
         //场景1
         sm.play();
-        // sm.run2StageEnd(1);
+        // sm.run2StageEnd(2,2);
     });
 
     //重播事件
@@ -234,6 +294,9 @@ var Stage = {
             },
             runByTime:function (starttime,endtime,resumeTime,callback) {
                 this.manager.runByTime(starttime,endtime,resumeTime,callback);
+            },
+            run2StageEnd:function (index,offset) {
+                this.manager.run2StageEnd(index,offset);
             }
 
         }
@@ -272,11 +335,11 @@ var VideoStageManager = {
                 }
                 this.runStage(++this.stageIndex);
             },
-            runStage:function (index) {
+            runStage:function (index,startTime) {
                 if(index<stages.length){
                     this.stageIndex = index;
                     var s = stages[index];
-                    video.currentTime = s.startTime;
+                    video.currentTime = startTime?startTime:s.startTime;
                     video.play();
                     if(s.endTime>0) {
                         setTimeout(function () {
@@ -290,17 +353,21 @@ var VideoStageManager = {
                 }
 
             },
-            run2StageEnd:function(index){//测试专用
+            run2StageEnd:function(index,offset){//测试专用
                 $("#"+managerId).show();
-
+                offset = offset?offset:1;
                 if(index<stages.length){
                     this.stageIndex = index;
                     var s = stages[index];
-                    video.currentTime = s.endTime-2;
+                    video.currentTime = s.endTime-offset;
                     video.play();
                     if(s.endTime>0) {
                         setTimeout(function () {
-                            video.currentTime = s.endTime - 2;
+                            alert(video.currentTime)
+                            if(video.currentTime<s.endTime - offset
+                                || video.currentTime>s.endTime){
+                                video.currentTime = s.endTime - offset;
+                            }
                             this.pauseVideo(video, s.endTime, function () {
                                 s.show();
                             });
