@@ -8,7 +8,8 @@
         //页面适配，根据屏幕的高度自动缩放
         $().ready(function () {
             var vp = $("head").find("[name='viewport']");
-            vp.attr("content",vp.attr("content")+",maximum-scale="+(document.documentElement.clientHeight/1140).toFixed(2));
+            var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
+            vp.attr("content",vp.attr("content")+",maximum-scale="+(h/1140).toFixed(2));
         })
     </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,6 +28,7 @@
 <script src="js/s1.js"></script>
 
 <body>
+<div id="root" style="width: 100%;height: 100%">
 <!-- Loading -->
 <div id="loading_page" class="page_full">
     <img id="bg" src="resource/bg.png" width="100%" height="100%" />
@@ -131,6 +133,7 @@
         </div>
         <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
     </div>
+</div>
 </div>
 </body>
 </html>
