@@ -2,12 +2,49 @@
  * Created by rjt on 2017/7/14.
  */
 
-var loadingTime = 5000;//loading最大时间
+var loadingTime = 500;//loading最大时间
 
 $().ready(function () {
 
     //构建场景
     var fs = Stage.init("view",0,29,function (s) {//初始化
+
+        var oldWebkitCompassHeading = null
+        setInterval(function () {
+            if ($("#view").css("display")!="none") {
+                $("#log").html(webkitCompassHeading);
+                if (oldWebkitCompassHeading != null && Math.abs(oldWebkitCompassHeading - webkitCompassHeading) < 100) {
+                    // $("#log").html(oldWebkitCompassHeading+";"+webkitCompassHeading);
+                    if (webkitCompassHeading < oldWebkitCompassHeading - 1) {
+                        var left = parseFloat($("#office").css("left"));
+                        if (left >= 0) {
+                            $(".goonbtn").fadeIn();
+                        } else {
+                            $(".goonbtn").fadeOut();
+                        }
+                        if (left < 0) {
+                            left = left + 30 < 0 ? left + 30 : 0
+                            $("#office").css("left", left + "px");
+                        }
+                    } else if (webkitCompassHeading > oldWebkitCompassHeading + 1) {
+                        var left = parseFloat($("#office").css("left"));
+
+
+                        if(left<=-3390){
+                            $(".goonbtn").fadeIn();
+                        }else{
+                            $(".goonbtn").fadeOut();
+                        }
+                        if(left>-3390){
+                            left = left-30>-3390?left-30:-3390
+                            $("#office").css("left",left+"px");
+                        }
+                    }
+                }
+                oldWebkitCompassHeading = webkitCompassHeading;
+            }
+        },1000/24)
+
         $(".goonbtn").click(function () {
             var $this = $(this);
             $("#goon_img").attr("src","resource/goon_highlight.png");
@@ -16,6 +53,7 @@ $().ready(function () {
                 $(".goonbtn").hide();
                 $("#office").css("left","-1730px");
                 $("#goon_img").attr("src","resource/goon.png");
+                oldWebkitCompassHeading = null;
             },500)
 
         })
@@ -42,7 +80,7 @@ $().ready(function () {
                                 clearInterval(handle);
                             }
 
-                        },1000/24);
+                        },1000/48);
                     }
                 },500);
             }).on('touchend',function (e) {
@@ -71,7 +109,7 @@ $().ready(function () {
                                 clearInterval(handle);
                             }
 
-                        },1000/24);
+                        },1000/48);
                     }
                 },500);
             }).on('touchend',function (e) {
@@ -79,7 +117,7 @@ $().ready(function () {
                 rightpush = false;
             });
 
-        },2000)
+        },500)
     });
 
     var ss = Stage.init("qa",35,50,function (s) {//初始化
@@ -119,8 +157,8 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        sm.play();
-        // sm.run2StageEnd(2,2);
+        // sm.play();
+        sm.run2StageEnd(0,4);
     });
 
     //重播事件
@@ -128,5 +166,13 @@ $().ready(function () {
         $("#end_page").hide();
         sm.play();
     });
+
+    //陀螺仪
+    var webkitCompassHeading = 0;
+    window.addEventListener('deviceorientation', function(e){
+        webkitCompassHeading = e.webkitCompassHeading?e.webkitCompassHeading:360-e.alpha;//iOS支持webkitCompassHeading，安卓直接用alpha
+        // $("#log").html(webkitCompassHeading);
+    });
+
 
 })
