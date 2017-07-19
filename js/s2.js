@@ -2,7 +2,7 @@
  * Created by rjt on 2017/7/14.
  */
 
-var loadingTime = 500;//loading最大时间
+var loadingTime = 5000;//loading最大时间
 
 $().ready(function () {
 
@@ -157,8 +157,8 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        // sm.play();
-        sm.run2StageEnd(0,4);
+        sm.play();
+        // sm.run2StageEnd(0,4);
     });
 
     //重播事件
