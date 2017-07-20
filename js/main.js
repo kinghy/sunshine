@@ -12,21 +12,35 @@ $().ready(function () {
 
     //视频调整
     var resizeStage = function () {
-        var root = $("#root");
-        $("#root").css('transform', "rotate(0deg)");
-        root.width(innerWidth);
-        root.height(innerHeight);
-        if (root.width() > root.height()) {
-            var angle = window.orientation ? window.orientation : screen.orientation.angle;
-            root.width(innerHeight);
-            root.height(innerWidth);
-            var sub = (innerWidth - innerHeight) / 2
-            if(angle<0){
-                sub *= -1;
+        //调整缩放比
+        var vp = $("head").find("[name='viewport']");
+        var reg = /maximum-scale=\d+.\d+/g;
+        var arr = vp.attr("content").match(reg);
+        var scale = arr?arr[0].replace("maximum-scale=",""):1;
+        var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
+        var rh = h*scale;
+        var newScale = (rh/ 1140).toFixed(2);
+        if(scale!=newScale){
+            vp.attr("content","width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui,maximum-scale="+newScale);
+        }else{
+            var root = $("#root");
+            $("#root").css('transform', "rotate(0deg)");
+            root.width(innerWidth);
+            root.height(innerHeight);
+            if (root.width() > root.height()) {
+                var angle = window.orientation ? window.orientation : screen.orientation.angle;
+                root.width(innerHeight);
+                root.height(innerWidth);
+                var sub = (innerWidth - innerHeight) / 2
+                if(angle<0){
+                    sub *= -1;
+                }
+                $("#root").css('transform', "rotate(" + angle * (-1) + "deg) translate(" + sub + "px," + sub + "px)")
             }
-            $("#root").css('transform', "rotate(" + angle * (-1) + "deg) translate(" + sub + "px," + sub + "px)")
+
         }
     }
+
     resizeStage();
 
     $(window).resize(function () {

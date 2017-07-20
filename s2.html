@@ -4,14 +4,6 @@
     <meta name="format-detection" content="telephone=no">
     <script src="js/jquery-3.1.0.min.js"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
-    <script>
-        //页面适配，根据屏幕的高度自动缩放
-        $().ready(function () {
-            var vp = $("head").find("[name='viewport']");
-            var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
-            vp.attr("content",vp.attr("content")+",maximum-scale="+(h/1140).toFixed(2));
-        })
-    </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="yes" name="apple-touch-fullscreen">

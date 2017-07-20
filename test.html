@@ -7,7 +7,7 @@
 <script src="js/jquery-3.1.0.min.js"></script>
 <style>
     /*屏蔽长按选中文字*/
-    *{
+    *:not(input,textarea){
         -webkit-touch-callout:none;  /*系统默认菜单被禁用*/
         -webkit-user-select:none; /*webkit浏览器*/
         -khtml-user-select:none; /*早期浏览器*/
@@ -15,25 +15,49 @@
         -ms-user-select:none; /*IE10*/
         user-select:none;
     }
+
 </style>
 <body>
-<img src="resource/bg.png">
-<div style="width: 500px;height: 1600px;background-image: url(resource/bg.png)"></div>
-
+<button style="width: 200px;height: 200px;background-color: cornsilk;font-size: 64px">点我</button><br><br>
+<input style="width: 300px;height: 50px;background-color: cornsilk;font-size: 44px"><br><br>
+<div style="width: 300px;height: 150px;background-color: antiquewhite;font-size: 64px">长按测试</div><br><br>
+<div style="width: 300px;height: 150px;background-color: red;font-size: 64px">长按测试</div><br><br>
+<div  style="width: 500px;height: 700px;position: relative;">
+    <img src="resource/bg.png" width="100%" height="100%">
+    <div id="mask" style="position: absolute;top:0;left:0;width: 100%;height: 100%;z-index: 1000"></div>
+</div>
 </body>
 </html>
 
 <script>
-//    屏蔽长按菜单
+    var handle ;
+    $("#mask").on("touchstart",function (e) {
+        e.preventDefault();
+        clearInterval(handle);
+        handle = setInterval(function (e) {
+            console.log("longpress")
+        },500)
+    }).on("touchend",function () {
+        clearInterval(handle);
+    })
+    //屏蔽下拉滑动
+    $(window).on("touchstart",function (e) {
+        e.preventDefault();
+    }).on("touchend",function (e) {
+        e.preventDefault();
+    })
+
+    //屏蔽长按菜单
     document.body.addEventListener('contextmenu', function(e){
         e.preventDefault();
     });
 
-    $("img").on("touchstart",function () {
-//        alert(12333);
-        event.preventDefault();
-        event.stopPropagation();
-    })
+    $("img").on("touchstart",function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
 
-
+    document.querySelector("img").addEventListener('touchstart', function(e){
+        e.preventDefault();
+    });
 </script>
