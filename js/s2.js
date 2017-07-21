@@ -7,56 +7,138 @@ var loadingTime = 5000;//loading最大时间
 $().ready(function () {
 
     //构建场景
+    var fstimes = 0;
     var fs = Stage.init("view",0,29,function (s) {//初始化
 
-        var oldWebkitCompassHeading = null
-        setInterval(function () {
-            if ($("#view").css("display")!="none") {
-                $("#log").html(webkitCompassHeading);
-                if (oldWebkitCompassHeading != null && Math.abs(oldWebkitCompassHeading - webkitCompassHeading) < 100) {
-                    // $("#log").html(oldWebkitCompassHeading+";"+webkitCompassHeading);
-                    if (webkitCompassHeading < oldWebkitCompassHeading - 1) {
-                        var left = parseFloat($("#office").css("left"));
-                        if (left >= 0) {
-                            $(".goonbtn").fadeIn();
-                        } else {
-                            $(".goonbtn").fadeOut();
-                        }
-                        if (left < 0) {
-                            left = left + 30 < 0 ? left + 30 : 0
-                            $("#office").css("left", left + "px");
-                        }
-                    } else if (webkitCompassHeading > oldWebkitCompassHeading + 1) {
-                        var left = parseFloat($("#office").css("left"));
+        //划屏
+        var lastTouch = null;
+        var movetoward = 0;//1超右，2朝左
+        $("#office").on("touchstart",function (e) {
+            e.preventDefault();
+            lastTouch = e.touches[0];
+            movetoward = 0;
+        }).on("touchmove",function (e) {
+            e.preventDefault();
+            if(lastTouch){
+                var curTouch = e.touches[0];
+                if(curTouch.pageX>lastTouch.pageX){
+                    movetoward = 1;
+                    slideRight()
 
+                }else if(curTouch.pageX<lastTouch.pageX){
+                    movetoward = 2;
+                    slideLeft();
 
-                        if(left<=-3390){
-                            $(".goonbtn").fadeIn();
-                        }else{
-                            $(".goonbtn").fadeOut();
-                        }
-                        if(left>-3390){
-                            left = left-30>-3390?left-30:-3390
-                            $("#office").css("left",left+"px");
-                        }
-                    }
                 }
-                oldWebkitCompassHeading = webkitCompassHeading;
+                lastTouch = curTouch;
             }
-        },1000/24)
+        }).on("touchend",function (e) {
+            e.preventDefault();
+            lastTouch = null
+            var times = 0
+            var handle = null;
+            //让手感丝般柔滑
+            // if(movetoward==1){
+            //     handle = setInterval(function () {
+            //         times++
+            //         if(times<15){
+            //             slideRight()
+            //         }else {
+            //             clearInterval(handle)
+            //         }
+            //     },30)
+            // }else if(movetoward==2){
+            //     handle = setInterval(function () {
+            //         times++
+            //         if(times<15){
+            //             slideLeft();
+            //         }else {
+            //             clearInterval(handle)
+            //         }
+            //     },30)
+            // }
+            movetoward = 0;
+        })
 
-        $(".goonbtn").click(function () {
+        function slideRight() {
+            var left = parseFloat($("#office").css("left"));
+            if(fstimes>1) {
+                if (left <= -3390) {
+                    $("#goonSecond").fadeIn();
+                } else {
+                    $("#goonSecond").fadeOut();
+                }
+            }
+            if(left>-3390){
+                left = left-30>-3390?left-30:-3390
+                $("#office").css("left",left+"px");
+            }
+        }
+
+        function slideLeft() {
+            var left = parseFloat($("#office").css("left"));
+            if(fstimes>1){
+                if(left>=0){
+                    $("#goonSecond").fadeIn();
+                }else{
+                    $("#goonSecond").fadeOut();
+                }
+            }
+            if (left < 0) {
+                left = left + 30 < 0 ? left + 30 : 0
+                $("#office").css("left", left + "px");
+            }
+        }
+
+        // var oldWebkitCompassHeading = null
+        // setInterval(function () {
+        //     if ($("#view").css("display")!="none") {
+        //         $("#log").html(webkitCompassHeading);
+        //         if (oldWebkitCompassHeading != null && Math.abs(oldWebkitCompassHeading - webkitCompassHeading) < 100) {
+        //             // $("#log").html(oldWebkitCompassHeading+";"+webkitCompassHeading);
+        //             if (webkitCompassHeading < oldWebkitCompassHeading - 1) {
+        //                 var left = parseFloat($("#office").css("left"));
+        //
+        //                 if(fstimes>1){
+        //                     if(left>=0){
+        //                         $("#goonSecond").fadeIn();
+        //                     }else{
+        //                         $("#goonSecond").fadeOut();
+        //                     }
+        //                 }
+        //                 if (left < 0) {
+        //                     left = left + 30 < 0 ? left + 30 : 0
+        //                     $("#office").css("left", left + "px");
+        //                 }
+        //             } else if (webkitCompassHeading > oldWebkitCompassHeading + 1) {
+        //                 var left = parseFloat($("#office").css("left"));
+        //
+        //
+        //                 if(left<=-3390){
+        //                     $("#goonSecond").fadeIn();
+        //                 }else{
+        //                     $("#goonSecond").fadeOut();
+        //                 }
+        //                 if(left>-3390){
+        //                     left = left-30>-3390?left-30:-3390
+        //                     $("#office").css("left",left+"px");
+        //                 }
+        //             }
+        //         }
+        //         oldWebkitCompassHeading = webkitCompassHeading;
+        //     }
+        // },1000/24)
+        //
+        $(".goon_pos").click(function () {
             var $this = $(this);
             $("#goon_img").attr("src","resource/goon_highlight.png");
             setTimeout(function () {
                 s.playNext();
-                $(".goonbtn").hide();
-                $("#office").css("left","-1730px");
-                $("#goon_img").attr("src","resource/goon.png");
+
                 oldWebkitCompassHeading = null;
             },500)
-
         })
+
         setTimeout(function () {
             // $("#office").fadeIn();
             var leftpush = false;
@@ -67,12 +149,13 @@ $().ready(function () {
                     if(leftpush){
                         var handle = setInterval(function () {
                             var left = parseFloat($("#office").css("left"));
-                            if(left>=0){
-                                $(".goonbtn").fadeIn();
-                            }else{
-                                $(".goonbtn").fadeOut();
+                            if(fstimes>1){
+                                if(left>=0){
+                                    $("#goonSecond").fadeIn();
+                                }else{
+                                    $("#goonSecond").fadeOut();
+                                }
                             }
-
                             if(leftpush && left<0){
                                 left = left+10<0?left+10:0
                                 $("#office").css("left",left+"px");
@@ -96,10 +179,12 @@ $().ready(function () {
                     if(rightpush){
                         var handle = setInterval(function () {
                             var left = parseFloat($("#office").css("left"));
-                            if(left<=-3390){
-                                $(".goonbtn").fadeIn();
-                            }else{
-                                $(".goonbtn").fadeOut();
+                            if(fstimes>1){
+                                if(left>=0){
+                                    $("#goonSecond").fadeIn();
+                                }else{
+                                    $("#goonSecond").fadeOut();
+                                }
                             }
                             if(rightpush && left>-3390){
 
@@ -118,19 +203,32 @@ $().ready(function () {
             });
 
         },500)
+    },function (s) {
+        fstimes++;
+        //初始化
+        if(fstimes>1){
+            $("#goonFirst").hide();
+            $("#tips").show().delay(3000).fadeOut();
+        }else{
+            $("#goonFirst").show();
+            $("#tips").hide();
+        }
+        $(".goonbtn").hide();
+        $("#office").css("left","-1730px");
+        $("#goon_img").attr("src","resource/goon.png");
     });
 
-    var ss = Stage.init("qa",35,50,function (s) {//初始化
+    var ss = Stage.init("qa",36,49,function (s) {//初始化
         $("#qa_no").click(function () {
             s.hide();
-            s.run2StageEnd(0,3);
+            s.run2StageEnd(0,0);
         })
         $("#qa_yes").click(function () {
             s.playNext();
         })
     });
 
-    var ts = Stage.init("page_1",51,186,function (s) {//初始化
+    var ts = Stage.init("page_1",54,186,function (s) {//初始化
         $("#p1ToP2").click(function () {
             s.playNext();
         })

@@ -3,6 +3,14 @@
  */
 var cvWidth = 321;//canvas宽度
 var cvHeight = 406;//canvas高度
+
+//页面适配，根据屏幕的高度自动缩放
+$().ready(function () {
+    var vp = $("head").find("[name='viewport']");
+    var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
+    vp.attr("content",vp.attr("content")+",maximum-scale="+(h/1140).toFixed(2));
+})
+
 $().ready(function () {
 
     //屏蔽右键菜单
@@ -22,9 +30,12 @@ $().ready(function () {
         var newScale = (rh/ 1140).toFixed(2);
         if(scale!=newScale){
             vp.attr("content","width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui,maximum-scale="+newScale);
+
         }else{
             var root = $("#root");
             $("#root").css('transform', "rotate(0deg)");
+            $("body").width(innerWidth)
+            $("body").height(innerHeight)
             root.width(innerWidth);
             root.height(innerHeight);
             if (root.width() > root.height()) {
@@ -268,22 +279,26 @@ var VideoStageManager = {
             },
             run2StageEnd:function(index,offset){//测试专用
                 $("#"+managerId).show();
-                offset = offset?offset:1;
+                offset = offset?offset:0;
                 if(index<stages.length){
                     this.stageIndex = index;
                     var s = stages[index];
                     video.currentTime = s.endTime-offset;
-                    video.play();
-                    if(s.endTime>0) {
-                        setTimeout(function () {
-                            if(video.currentTime<s.endTime - offset
-                                || video.currentTime>s.endTime){
-                                video.currentTime = s.endTime - offset;
-                            }
-                            this.pauseVideo(video, s.endTime, function () {
-                                s.show();
-                            });
-                        }.bind(this), 1000);
+                    if(offset==0){
+                        s.show();
+                    }else{
+                        video.play();
+                        if(s.endTime>0) {
+                            setTimeout(function () {
+                                if(video.currentTime<s.endTime - offset
+                                    || video.currentTime>s.endTime){
+                                    video.currentTime = s.endTime - offset;
+                                }
+                                this.pauseVideo(video, s.endTime, function () {
+                                    s.show();
+                                });
+                            }.bind(this), 1000);
+                        }
                     }
                 }else{
                     endVideo();

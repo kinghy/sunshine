@@ -15,3 +15,69 @@
     text-align: center;
     z-index: 1000;
 }
+
+.page_left{
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:250px;"
+}
+
+.page_right {
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:410px;"
+}
+
+.qa_pos{
+    position: absolute;
+    width: 640px;
+    height: 200px;
+}
+
+.goon_pos{
+    position: absolute;
+    left: 0px;
+    bottom: 20px;
+    width: 100%;
+}
+
+.tips_pos{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    top: 200px;
+}
+
+.leftarrow_pos{
+    position: absolute;
+    top: 466px;
+    left: 6px;
+    width: 120px;
+    height: 110px;
+    z-index: 2000;
+    background-image: url(../resource/leftarrow.png)
+}
+.rightarrow_pos {
+    position: absolute;
+    top: 466px;
+    right: 3px;
+    float: right;
+    width: 120px;
+    height: 110px;
+    z-index: 2000;
+    background-image: url(../resource/rightarrow.png)
+}
+.office_pos {
+    position: absolute;
+    height: 100%;
+    width: 4964px;
+    left: -1730px;
+    text-align: left;
+    background-image: url(../resource/office.png);
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+}
