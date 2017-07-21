@@ -70,7 +70,7 @@ $().ready(function () {
                 }
             }
             if(left>-3390){
-                left = left-30>-3390?left-30:-3390
+                left = left-50>-3390?left-50:-3390
                 $("#office").css("left",left+"px");
             }
         }
@@ -85,7 +85,7 @@ $().ready(function () {
                 }
             }
             if (left < 0) {
-                left = left + 30 < 0 ? left + 30 : 0
+                left = left + 50 < 0 ? left + 50 : 0
                 $("#office").css("left", left + "px");
             }
         }
@@ -218,7 +218,7 @@ $().ready(function () {
         $("#goon_img").attr("src","resource/goon.png");
     });
 
-    var ss = Stage.init("qa",36,49,function (s) {//初始化
+    var ss = Stage.init("qa",35,49,function (s) {//初始化
         $("#qa_no").click(function () {
             s.hide();
             s.run2StageEnd(0,0);
@@ -228,7 +228,7 @@ $().ready(function () {
         })
     });
 
-    var ts = Stage.init("page_1",54,186,function (s) {//初始化
+    var ts = Stage.init("page_1",53,186,function (s) {//初始化
         $("#p1ToP2").click(function () {
             s.playNext();
         })
