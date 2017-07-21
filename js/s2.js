@@ -236,6 +236,7 @@ $().ready(function () {
 
     var fos = Stage.init("page_2",187,189,function (s) {//初始化
         $("#p2ToP1").click(function () {
+            s.hide();
             s.run2StageEnd(2,1);
         })
         $("#p2ToP2").click(function () {
@@ -256,7 +257,7 @@ $().ready(function () {
         $("#start_page").hide();
         //场景1
         sm.play();
-        // sm.run2StageEnd(0,4);
+        // sm.run2StageEnd(3,4);
     });
 
     //重播事件
