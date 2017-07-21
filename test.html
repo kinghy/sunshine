@@ -32,19 +32,20 @@
 <script>
     var handle ;
     $("#mask").on("touchstart",function (e) {
-        e.preventDefault();
+//        e.preventDefault();
         clearInterval(handle);
         handle = setInterval(function (e) {
             console.log("longpress")
         },500)
     }).on("touchend",function () {
-        clearInterval(handle);
+        console.log("mask touchend")
+//        clearInterval(handle);
     })
     //屏蔽下拉滑动
     $(window).on("touchstart",function (e) {
-        e.preventDefault();
-    }).on("touchend",function (e) {
-        e.preventDefault();
+        if(e.touches[0].target.nodeName!="BUTTON" && e.touches[0].target.nodeName!="INPUT"){
+            e.preventDefault();
+        }
     })
 
     //屏蔽长按菜单
