@@ -38,14 +38,11 @@
             console.log("longpress")
         },500)
     }).on("touchend",function () {
-        console.log("mask touchend")
-//        clearInterval(handle);
+        clearInterval(handle);
     })
     //屏蔽下拉滑动
-    $(window).on("touchstart",function (e) {
-        if(e.touches[0].target.nodeName!="BUTTON" && e.touches[0].target.nodeName!="INPUT"){
-            e.preventDefault();
-        }
+    $(window).on("touchmove",function (e) {
+        e.preventDefault();
     })
 
     //屏蔽长按菜单
