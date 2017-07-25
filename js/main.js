@@ -74,8 +74,8 @@ $().ready(function () {
     var myctx = mycv.getContext("2d");
     var imgs = ["resource/01.png","resource/02.png","resource/03.png","resource/04.png"];
     AnimationImages.init(myctx,imgs);
-
-    setInterval(function () {
+    
+    setTimeout(function () {
         $("#loading_page").hide();
         $("#start_page").show();
     },loadingTime);
