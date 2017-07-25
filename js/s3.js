@@ -97,8 +97,8 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        sm.play();
-        // sm.run2StageEnd(5,2);
+        // sm.play();
+        sm.run2StageEnd(1,2);
     });
 
     //重播事件
