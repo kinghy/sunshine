@@ -13,11 +13,12 @@ $().ready(function () {
             s.playNext();
         })
     });
-    var ctimes = 1;
+
     var fs = Stage.init("choice",123,126,function (s) {//初始化
         $(".choice_pos").click(function (e) {
             $("#choice").hide();
-            s.runStage(++ctimes)
+            var $t = $(e.target)
+            s.runStage(parseInt($t.attr("data"))+1)
         })
     });
     
@@ -31,13 +32,12 @@ $().ready(function () {
     })
 
     var ss = Stage.init("choice_wrong",127,129);
-    // var ts = Stage.init("choice_wrong",130,132);
+    var ts = Stage.init("choice_wrong",130,132);
     var fours = Stage.init("choice_wrong",133.5,135);
 
     var fives = Stage.init("book_4",137,143,function (s) {//初始化
         $("#page2Next_4").click(function () {
             s.playNext();
-            ctimes = 1;
         })
     });
 
@@ -53,8 +53,6 @@ $().ready(function () {
                 viewH =$this.height(),//可见高度
                 contentH =$this.get(0).scrollHeight,//内容高度
                 scrollTop =$this.scrollTop();//滚动高度
-            //if(contentH - viewH - scrollTop <= 100) { //到达底部100px时,加载新内容
-            console.log(viewH+";"+contentH+";"+scrollTop+";")
             if(contentH==viewH+scrollTop){
                 $("#tips").hide();
                 $("#goon").fadeIn();
@@ -77,7 +75,7 @@ $().ready(function () {
     var ns = Stage.init("book_3",338,340,function (s) {//初始化
         $("#p2ToP1").click(function () {
             s.hide();
-            s.run2StageEnd(7,1);
+            s.run2StageEnd(8,1);
         })
         $("#p2ToP2").click(function () {
             s.playNext();
@@ -89,7 +87,7 @@ $().ready(function () {
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,fours,fives,sixs,sevens,eights,ns,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,eights,ns,es],function () {
         $("#end_page").show();
     });
 
@@ -97,8 +95,8 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        // sm.play();
-        sm.run2StageEnd(1,2);
+        sm.play();
+        // sm.run2StageEnd(7,2);
     });
 
     //重播事件
@@ -107,10 +105,4 @@ $().ready(function () {
         sm.play();
     });
 
-    //陀螺仪
-    var webkitCompassHeading = 0;
-    window.addEventListener('deviceorientation', function(e){
-        webkitCompassHeading = e.webkitCompassHeading?e.webkitCompassHeading:360-e.alpha;//iOS支持webkitCompassHeading，安卓直接用alpha
-        // $("#log").html(webkitCompassHeading);
-    });
 })
