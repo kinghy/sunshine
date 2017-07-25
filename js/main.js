@@ -221,6 +221,9 @@ var Stage = {
             },
             run2StageEnd:function (index,offset) {
                 this.manager.run2StageEnd(index,offset);
+            },
+            runStage:function (index,startTime) {
+                this.manager.runStage(index,startTime);
             }
 
         }

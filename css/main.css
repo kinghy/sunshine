@@ -178,3 +178,13 @@ div {
     bottom: 93px;
     width: 100%;
 }
+
+.view_mask{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    z-index: 1000;
+}

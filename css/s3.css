@@ -1,0 +1,51 @@
+* {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.choice_pos{
+    position: absolute;
+    left: 205px;
+    height: 85px;
+    width: 280px;
+    /*background-color: red*/
+}
+
+.start_pos{
+    position: absolute;
+    top:350px;
+    left: 205px;
+    height: 85px;
+    width: 280px;
+    /*background-color: red*/
+}
+
+.back_pos{
+    position: absolute;
+    top: 900px;
+    left: 0;
+    text-align: center;
+}
+
+.page_left{
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:280px;
+    /*background-color: red*/
+}
+
+.page_right {
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:440px;
+    /*background-color: red*/
+}
+
