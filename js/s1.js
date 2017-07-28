@@ -1,9 +1,17 @@
 /**
  * Created by rjt on 2017/7/14.
  */
-    //常量定义
 
-var loadingTime = 5000;//loading最大时间
+//常量定义
+
+var loadingTime = $.getUrlParam("loading")?$.getUrlParam("loading"):5000;//loading最大时间
+var startstage = $.getUrlParam("stage");
+var startpos = $.getUrlParam("pos")?$.getUrlParam("pos"):"start";//start?end?
+$().ready(function () {
+    if ($.getUrlParam("hot")=="true") {
+        $(".hot_pos").css("background-color", "red");
+    }
+});
 
 
 $().ready(function () {
@@ -41,8 +49,16 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        sm.play();
-        // sm.run2StageEnd(1);
+        if(startstage){
+            if(startpos=="start"){
+                sm.runStage(startstage);
+            }else{
+                sm.run2StageEnd(startstage,2);
+            }
+        }else{
+            sm.play();
+        }
+
     });
 
     //重播事件

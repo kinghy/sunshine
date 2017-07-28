@@ -36,6 +36,10 @@
     width: 100%;
 }
 
+.goon_pos_f{
+    animation: start 1.5s infinite ease-in-out;
+}
+
 .tips_pos{
     position: absolute;
     left: 0px;
@@ -71,4 +75,34 @@
     background-image: url(../resource/office.png);
     background-repeat: repeat-x;
     background-size: 50% 100%;
+}
+
+@-webkit-keyframes start {
+    0%, 30% {
+        opacity: 0;
+        -webkit-transform: translateY(8px)
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: translate(0)
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: translateY(-20px)
+    }
+}
+
+@keyframes start {
+    0%, 30% {
+        opacity: 0;
+        transform: translateY(8px)
+    }
+    60% {
+        opacity: 1;
+        transform: translate(0)
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px)
+    }
 }

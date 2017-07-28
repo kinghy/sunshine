@@ -4,6 +4,15 @@
 var cvWidth = 321;//canvas宽度
 var cvHeight = 406;//canvas高度
 
+//扩展js方法用于获取url参数
+(function ($) {
+    $.getUrlParam = function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+})(jQuery);
+
 //页面适配，根据屏幕的高度自动缩放
 $().ready(function () {
     var vp = $("head").find("[name='viewport']");
@@ -28,7 +37,7 @@ $().ready(function () {
         var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
         var rh = h*scale;
         var newScale = (rh/ 1140).toFixed(2);
-        if(scale!=newScale){
+        if(scale<=newScale+0.1 && scale>=newScale-0.1){
             vp.attr("content","width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui,maximum-scale="+newScale);
 
         }else{
@@ -251,7 +260,7 @@ var VideoStageManager = {
         var ret = {
             stageIndex:0,
             play : function(){
-                $("#"+managerId).show();
+                // $("#"+managerId).show();
                 this.stageIndex = 0;
                 this.runStage(this.stageIndex);
             },
@@ -263,6 +272,7 @@ var VideoStageManager = {
                 this.runStage(++this.stageIndex);
             },
             runStage:function (index,startTime) {
+                $("#"+managerId).show();
                 if(index<stages.length){
                     this.stageIndex = index;
                     var s = stages[index];

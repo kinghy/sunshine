@@ -2,7 +2,14 @@
  * Created by rjt on 2017/7/14.
  */
 
-var loadingTime = 5000;//loading最大时间
+var loadingTime = $.getUrlParam("loading")?$.getUrlParam("loading"):5000;//loading最大时间
+var startstage = $.getUrlParam("stage");
+var startpos = $.getUrlParam("pos")?$.getUrlParam("pos"):"start";//start?end?
+$().ready(function () {
+    if ($.getUrlParam("hot")=="true") {
+        $(".hot_pos").css("background-color", "red");
+    }
+});
 
 $().ready(function () {
 
@@ -58,6 +65,21 @@ $().ready(function () {
             //     },30)
             // }
             movetoward = 0;
+        })
+
+        var lastTouch2 = null;
+        $("#goonFirst").on("touchstart",function (e) {
+            e.preventDefault();
+            lastTouch2 = e.touches[0];
+        }).on("touchend",function (e) {
+            e.preventDefault();
+            if(lastTouch2){
+                var curTouch = e.changedTouches[0];
+                if(curTouch.pageY<lastTouch2.pageY-100){
+                    s.playNext();
+                }
+            }
+            lastTouch2 = null
         })
 
         function slideRight() {
@@ -129,13 +151,13 @@ $().ready(function () {
         //     }
         // },1000/24)
         //
-        $(".goon_pos").click(function () {
+        $("#goonSecond").click(function () {
             var $this = $(this);
             $("#goon_img").attr("src","resource/goon_highlight.png");
             setTimeout(function () {
-                s.playNext();
-
-                oldWebkitCompassHeading = null;
+                s.hide();
+                s.runStage(2,0);
+                $("#goon_img").attr("src","resource/goon.png");
             },500)
         })
 
@@ -256,8 +278,15 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        sm.play();
-        // sm.run2StageEnd(3,4);
+        if(startstage){
+            if(startpos=="start"){
+                sm.runStage(startstage);
+            }else{
+                sm.run2StageEnd(startstage,2);
+            }
+        }else{
+            sm.play();
+        }
     });
 
     //重播事件

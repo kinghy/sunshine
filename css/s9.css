@@ -1,0 +1,29 @@
+* {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.start_pos{
+    position: absolute;
+    top:350px;
+    left: 205px;
+    height: 185px;
+    width: 280px;
+}
+
+.question_pos{
+    position: absolute;
+    text-align: center;
+    top: 60%;
+    width: 100%;
+    z-index:1000;
+}
+
+.question_pos img{
+    margin-bottom: 50px;
+}
+
