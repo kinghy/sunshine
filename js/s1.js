@@ -50,14 +50,15 @@ $().ready(function () {
         $("#start_page").hide();
         //场景1
         if(startstage){
-            if(startpos=="start"){
-                sm.runStage(startstage);
-            }else{
-                sm.run2StageEnd(startstage,2);
-            }
-        }else{
-            sm.play();
+            setTimeout(function () {
+                if(startpos=="start"){
+                    sm.runStage(startstage);
+                }else{
+                    sm.run2StageEnd(startstage,2);
+                }
+            },1000)
         }
+        sm.play();
 
     });
 

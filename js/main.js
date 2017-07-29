@@ -37,9 +37,10 @@ $().ready(function () {
         var h = document.documentElement.clientHeight>document.documentElement.clientWidth?document.documentElement.clientHeight:document.documentElement.clientWidth
         var rh = h*scale;
         var newScale = (rh/ 1140).toFixed(2);
-        if(scale<=newScale+0.1 && scale>=newScale-0.1){
+        // if(scale!=newScale){
+        if(scale>=newScale+0.05 || scale<=newScale-0.05){
             vp.attr("content","width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui,maximum-scale="+newScale);
-
+        //
         }else{
             var root = $("#root");
             $("#root").css('transform', "rotate(0deg)");
@@ -89,6 +90,54 @@ $().ready(function () {
         $("#start_page").show();
     },loadingTime);
 });
+
+var SimpleMultiChoiceStage = {
+    init:function(stageId,startTime,endTime,$submitBtn,$answerBtns,$answerArea,answers,correctedSTime,correctedETime,wrong1STime,wrong1ETime,wrong2STime,wrong2ETime,initCallBack,showCallBack,hideCallBack){
+        var cs = ChoiceStage.init(stageId,startTime,endTime,null,null,correctedSTime,correctedETime,wrong1STime,wrong1ETime,wrong2STime,wrong2ETime,initCallBack,showCallBack,hideCallBack);
+        $answerBtns.click(function () {
+            var $this = $(this);
+            if($this.hasClass("selected")){
+                this.src = "resource/"+$this.attr("data")+".png";
+                $this.removeClass("selected");
+            }else{
+                this.src = "resource/"+$this.attr("data")+"_highlight.png";
+                $this.addClass("selected");
+            }
+        });
+        var etimes = 0;
+        $submitBtn.click(function () {
+            var corrects = 0;
+            $answerArea.find(".selected").each(function () {
+
+                var $this = $(this)
+                setTimeout(function () {
+                    $this.get(0).src = "resource/"+$this.attr("data")+".png";
+                    $this.removeClass("selected");
+                },600)
+                var data = $this.attr("data");
+                var isCorrect = false;
+                for(var i in answers){
+                    if(answers[i]==data){
+                        isCorrect = true;
+                        break;
+                    }
+                }
+                if(isCorrect){
+                    ++corrects;
+                }else{
+                    --corrects;
+                }
+            });
+            if(corrects==answers.length){
+                cs.correct(this,stageId,cs,correctedSTime,correctedETime);
+            }else{
+                cs.wrong(this, ++etimes, stageId, cs, endTime, wrong1STime, wrong1ETime, wrong2STime, wrong2ETime);
+            }
+
+        });
+        return cs;
+    }
+}
 
 
 var MultiChoiceStage = {
