@@ -32,14 +32,20 @@ $().ready(function () {
     var sevens = SimpleMultiChoiceStage.init("seven_qa",201,204,$("#submit_4_btn"),$("#seven_qa .answer"),$("#seven_qa"),
         ["rrjt","whsh"],205,207,208.5,213,214,218);
 
-    var es = Stage.init(null,219,0)
+    var eights = Stage.init("book",219,328,function (s) {//初始化
+        $("#p1ToP2").click(function (e) {
+            s.playNext();
+        })
+    });
+
+    var es = Stage.init(null,329,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
 //     var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,es],function () {
 //         $("#end_page").show();
 //     });
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,eights,es],function () {
         $("#end_page").show();
     });
 

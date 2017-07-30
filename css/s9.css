@@ -31,4 +31,12 @@
     margin-bottom: 30px;
 }
 
+.page_right {
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:400px;
+    /*background-color: red*/
+}
 
