@@ -202,7 +202,7 @@ $().ready(function () {
                         var handle = setInterval(function () {
                             var left = parseFloat($("#office").css("left"));
                             if(fstimes>1){
-                                if(left>=0){
+                                if(left <= -3390){
                                     $("#goonSecond").fadeIn();
                                 }else{
                                     $("#goonSecond").fadeOut();

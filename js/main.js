@@ -304,7 +304,7 @@ var VideoStageManager = {
             }
         }
 
-
+        var videoTimeInterval = null;
         video.addEventListener("ended",endVideo);
         var ret = {
             stageIndex:0,
@@ -385,7 +385,8 @@ var VideoStageManager = {
             },
 
             pauseVideo : function(videoId,pauseTime,callback) {
-                var videoTimeInterval = setInterval(function () {
+                 clearInterval(videoTimeInterval);
+                 videoTimeInterval = setInterval(function () {
                     if (videoId.currentTime.toFixed(1) == pauseTime) {
                         videoId.pause();
                         callback();
