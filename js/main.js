@@ -195,7 +195,60 @@ var MultiChoiceStage = {
     }
 }
 
+var CustomChoiceStage = {
+    init:function(stageId,startTime,endTime,$submitBtn,submitCallBack,correctedSTime,correctedETime,wrong1STime,wrong1ETime,wrong2STime,wrong2ETime,initCallBack,showCallBack,hideCallBack){
+        var s = Stage.init(stageId,startTime,endTime,initCallBack,showCallBack,hideCallBack);
+        var ret = {
+            correct : function(btn,thisId,ret,correctStartTime,correctEndTime) {
+                var $this = $(btn);
+                btn.src = "resource/"+$this.attr("data")+"_highlight.png";
+                setTimeout(function () {
+                    //正确
+                    $("#" + thisId).hide();
+                    btn.src = "resource/"+$this.attr("data")+".png";
+                    ret.runByTime(correctStartTime,correctEndTime,correctEndTime,function () {
+                        ret.playNext();
+                    })
+                }.bind(this), 500)
+            },
+            wrong : function (btn,times,thiId,ret,questionTime,wrong1StartTime,wrong1EndTime,wrong2StartTime,wrong2EndTime) {
+                var $this = $(btn);
+                btn.src = "resource/"+$this.attr("data")+"_highlight.png";
+                setTimeout(function () {
+                    //正确
+                    var video = document.querySelector("video");
+                    if(times<2) {
+                        $("#"+thiId).hide();
+                        btn.src = "resource/"+$this.attr("data")+".png"
+                        ret.runByTime(wrong1StartTime,wrong1EndTime,questionTime,function () {
+                            $("#"+thiId).fadeIn();
+                        })
+                    }else{
+                        $("#"+thiId).hide();
+                        btn.src = "resource/"+$this.attr("data")+".png"
+                        ret.runByTime(wrong2StartTime,wrong2EndTime,questionTime,function () {
+                            $("#"+thiId).fadeIn();
+                        })
+                    }
+                }.bind(this),500)
+            }
+        }
+        ret = $.extend({},s,ret);
+        var etimes = 0;
+        $submitBtn.click(function () {
+            if(submitCallBack && typeof(submitCallBack)=="function") {
+                if(submitCallBack()){
+                    ret.correct(this,stageId,ret,correctedSTime,correctedETime);
+                }else {
+                    ret.wrong(this, ++etimes, stageId, ret, endTime, wrong1STime, wrong1ETime, wrong2STime, wrong2ETime);
+                }
+            }
+        })
 
+        return ret;
+    },
+
+}
 
 var ChoiceStage = {
     init:function(stageId,startTime,endTime,$correctBtns,$wrongBtns,correctedSTime,correctedETime,wrong1STime,wrong1ETime,wrong2STime,wrong2ETime,initCallBack,showCallBack,hideCallBack){
