@@ -37,3 +37,15 @@
     line-height: 85px;
 
 }
+.letter{
+    float: left;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.letterInput{
+    border-bottom: solid 3px red;
+    color:red;
+}
