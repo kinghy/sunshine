@@ -49,3 +49,22 @@
     border-bottom: solid 3px red;
     color:red;
 }
+
+.qaPos{
+    width: 581px;
+    height: 135px;
+    margin:0 auto;
+    margin-top:250px;
+    text-align: center;
+    font-size: 36px;
+}
+.answerPos{
+    padding:5px;
+    text-align: center;
+    width: 581px;
+    background-color: rgba(0,0,0,0.4);
+    margin:0 auto;
+    margin-top:50px;
+    border-radius: 10px;
+
+}

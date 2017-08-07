@@ -64,8 +64,14 @@ $().ready(function () {
 
     var ss = CustomChoiceStage.init("second_qa",72,124,$("#q1_submit"),function () {
         var str = "";
-        $("#second_qa .letterPos").each(function () {
-            str += this.innerHTML;
+        $("#second_qa .letterPos").each(function (index) {
+            var $this = $(this)
+            str += $this.text();
+            $this.html("&nbsp;&nbsp;&nbsp;");
+            $this.removeClass("letterInput")
+            if(index==0){
+                $this.addClass("letterInput")
+            }
         })
         return str=="众家自我";
     },126,129,130,133,134,140.5,function () {
@@ -73,6 +79,13 @@ $().ready(function () {
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
         $("#second_qa .letter img").click(function () {
+            $letterPos.each(function (index) {
+                var $this = $(this);
+                if($this.hasClass("letterInput")){
+                    $selectedPos = $this;
+                    selectIndex = index;
+                }
+            })
             var $this = $(this);
             this.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
@@ -89,8 +102,14 @@ $().ready(function () {
 
     var ts = CustomChoiceStage.init("third_qa",141,143,$("#q2_submit"),function () {
         var str = "";
-        $("#third_qa .letterPos").each(function () {
-            str += this.innerHTML;
+        $("#third_qa .letterPos").each(function (index) {
+            var $this = $(this)
+            str += $this.text();
+            $this.html("&nbsp;&nbsp;&nbsp;");
+            $this.removeClass("letterInput")
+            if(index==0){
+                $this.addClass("letterInput")
+            }
         })
         return str=="业内业外";
     },145,148,148,152,152,160,function () {
@@ -99,6 +118,13 @@ $().ready(function () {
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
 
         $("#third_qa .letter img").click(function () {
+            $letterPos.each(function (index) {
+                var $this = $(this);
+                if($this.hasClass("letterInput")){
+                    $selectedPos = $this;
+                    selectIndex = index;
+                }
+            })
             var $this = $(this);
             this.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
@@ -114,8 +140,14 @@ $().ready(function () {
     });
     var fours = CustomChoiceStage.init("fourth_qa",161,162,$("#q3_submit"),function () {
         var str = "";
-        $("#fourth_qa .letterPos").each(function () {
-            str += this.innerHTML;
+        $("#fourth_qa .letterPos").each(function (index) {
+            var $this = $(this)
+            str += $this.text();
+            $this.html("&nbsp;&nbsp;&nbsp;");
+            $this.removeClass("letterInput")
+            if(index==0){
+                $this.addClass("letterInput")
+            }
         })
         return str=="高远";
     },164,167,167.5,171,171,179,function () {
@@ -124,6 +156,13 @@ $().ready(function () {
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
 
         $("#fourth_qa .letter img").click(function () {
+            $letterPos.each(function (index) {
+                var $this = $(this);
+                if($this.hasClass("letterInput")){
+                    $selectedPos = $this;
+                    selectIndex = index;
+                }
+            })
             var $this = $(this);
             this.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
@@ -139,16 +178,28 @@ $().ready(function () {
     });
     var fives = CustomChoiceStage.init("fifth_qa",179,181,$("#q4_submit"),function () {
         var str = "";
-        $("#fifth_qa .letterPos").each(function () {
-            str += this.innerHTML;
+        $("#fifth_qa .letterPos").each(function (index) {
+            var $this = $(this)
+            str += $this.text();
+            $this.html("&nbsp;&nbsp;&nbsp;");
+            $this.removeClass("letterInput")
+            if(index==0){
+                $this.addClass("letterInput")
+            }
         })
         return str=="做事做人";
     },182,185,186,189,190,197,function () {
         var $letterPos = $("#fifth_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
-
         $("#fifth_qa .letter img").click(function () {
+            $letterPos.each(function (index) {
+                var $this = $(this);
+                if($this.hasClass("letterInput")){
+                    $selectedPos = $this;
+                    selectIndex = index;
+                }
+            })
             var $this = $(this);
             this.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
@@ -164,29 +215,41 @@ $().ready(function () {
     });
     var sixs = CustomChoiceStage.init("sixth_qa",198,200,$("#q5_submit"),function () {
         var str = "";
-        $("#sixth_qa .letterPos").each(function () {
-            str += this.innerHTML;
+        $("#sixth_qa .letterPos").each(function (index) {
+            var $this = $(this)
+            str += $this.text();
+            $this.html("&nbsp;&nbsp;&nbsp;");
+            $this.removeClass("letterInput")
+            if(index==0){
+                $this.addClass("letterInput")
+            }
         })
         return str=="精英阳光";
     },201,204,204,208,208,215,function () {
-        var $letterPos = $("#sixth_qa .letterPos")
-        var selectIndex = 0;
-        var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
-
-        $("#sixth_qa .letter img").click(function () {
-            var $this = $(this);
-            this.src = "resource/"+$this.attr("data")+"_highlight.png";
-            setTimeout(function () {
-                this.src = "resource/"+$this.attr("data")+".png"
-                $selectedPos.html($this.attr("letter"))
+            var $letterPos = $("#sixth_qa .letterPos")
+            var selectIndex = 0;
+            var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+            $("#sixth_qa .letter img").click(function () {
+                $letterPos.each(function (index) {
+                    var $this = $(this);
+                    if($this.hasClass("letterInput")){
+                        $selectedPos = $this;
+                        selectIndex = index;
+                    }
+                })
+                var $this = $(this);
+                this.src = "resource/"+$this.attr("data")+"_highlight.png";
                 setTimeout(function () {
-                    $selectedPos.removeClass("letterInput")
-                    selectIndex = selectIndex+1<$letterPos.length?selectIndex+1:0;
-                    $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
-                },300)
-            }.bind(this),500)
-        })
-    });
+                    this.src = "resource/"+$this.attr("data")+".png"
+                    $selectedPos.html($this.attr("letter"))
+                    setTimeout(function () {
+                        $selectedPos.removeClass("letterInput")
+                        selectIndex = selectIndex+1<$letterPos.length?selectIndex+1:0;
+                        $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+                    },300)
+                }.bind(this),500)
+            })
+        });
 
     var es = Stage.init(null,216,0)
     var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,es],function () {
