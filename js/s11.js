@@ -14,12 +14,16 @@ $().ready(function () {
 $().ready(function () {
     //构建场景
     var zs = Stage.init("start",0,52,function (s) {//初始化
-        $(".start_pos").click(function (e) {
-            s.playNext();
+        $("#start_confirm").click(function (e) {
+            this.src = "resource/confirm_highlight.png";
+            setTimeout(function () {
+                this.src = "resource/confirm.png"
+                s.playNext();
+            }.bind(this),500)
         })
     });
 
-    var fs = CustomChoiceStage.init("first_qa",53,56,$("#submit"),function () {
+    var fs = CustomChoiceStage.init("first_qa",53,54,$("#submit"),function () {
         var str = "";
         $("input.fifty").each(function () {
             str += this.value;
@@ -62,7 +66,25 @@ $().ready(function () {
             })
     })
 
-    var ss = CustomChoiceStage.init("second_qa",72,124,$("#q1_submit"),function () {
+    var bs = Stage.init("book",72,99,function (s) {//初始化
+        var lastTouch2 = null;
+        $("#goonFirst").on("touchstart",function (e) {
+            e.preventDefault();
+            lastTouch2 = e.touches[0];
+        }).on("touchend",function (e) {
+            e.preventDefault();
+            if(lastTouch2){
+                var curTouch = e.changedTouches[0];
+                if(curTouch.pageY<lastTouch2.pageY-100){
+                    s.playNext();
+                }
+            }
+            lastTouch2 = null
+        })
+
+    });
+
+    var ss = CustomChoiceStage.init("second_qa",99,124,$("#q1_submit"),function () {
         var str = "";
         $("#second_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -74,7 +96,7 @@ $().ready(function () {
             }
         })
         return str=="众家自我";
-    },126,129,130,133,134,140.5,function () {
+    },128,130,131,134,135,142,function () {
         var $letterPos = $("#second_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -100,7 +122,7 @@ $().ready(function () {
         })
     });
 
-    var ts = CustomChoiceStage.init("third_qa",141,143,$("#q2_submit"),function () {
+    var ts = CustomChoiceStage.init("third_qa",143,144,$("#q2_submit"),function () {
         var str = "";
         $("#third_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -112,7 +134,7 @@ $().ready(function () {
             }
         })
         return str=="业内业外";
-    },145,148,148,152,152,160,function () {
+    },146,149,150,153,154,161,function () {
         var $letterPos = $("#third_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -138,7 +160,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var fours = CustomChoiceStage.init("fourth_qa",161,162,$("#q3_submit"),function () {
+    var fours = CustomChoiceStage.init("fourth_qa",162,163,$("#q3_submit"),function () {
         var str = "";
         $("#fourth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -150,7 +172,7 @@ $().ready(function () {
             }
         })
         return str=="高远";
-    },164,167,167.5,171,171,179,function () {
+    },165,168,169,172,173,180,function () {
         var $letterPos = $("#fourth_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -176,7 +198,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var fives = CustomChoiceStage.init("fifth_qa",179,181,$("#q4_submit"),function () {
+    var fives = CustomChoiceStage.init("fifth_qa",181,182,$("#q4_submit"),function () {
         var str = "";
         $("#fifth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -188,7 +210,7 @@ $().ready(function () {
             }
         })
         return str=="做事做人";
-    },182,185,186,189,190,197,function () {
+    },184,187,188,191,192,199,function () {
         var $letterPos = $("#fifth_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -213,7 +235,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var sixs = CustomChoiceStage.init("sixth_qa",198,200,$("#q5_submit"),function () {
+    var sixs = CustomChoiceStage.init("sixth_qa",199,200,$("#q5_submit"),function () {
         var str = "";
         $("#sixth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -225,7 +247,7 @@ $().ready(function () {
             }
         })
         return str=="精英阳光";
-    },201,204,204,208,208,215,function () {
+    },202,205,206,209,210,217,function () {
             var $letterPos = $("#sixth_qa .letterPos")
             var selectIndex = 0;
             var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -251,8 +273,8 @@ $().ready(function () {
             })
         });
 
-    var es = Stage.init(null,216,0)
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,es],function () {
+    var es = Stage.init(null,218,0)
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,bs,ss,ts,fours,fives,sixs,es],function () {
         $("#end_page").show();
     });
 
