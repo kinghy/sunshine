@@ -1,0 +1,170 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s6.css">
+<script src="js/main.js"></script>
+<script src="js/s6.js"></script>
+
+<body style="overflow: hidden">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s6.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s6.mp4" style="object-fit: fill;"></video>
+
+        <div id="first_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="margin-bottom: 10px;">公司的一切价值源于<span class="letterPos letterInput">&nbsp;</span>，</div>
+                <div style="margin-bottom: 10px;">没有<span class="letterPos">&nbsp;</span>便没有一切。</div>
+            </div>
+            <div class="answerPos">
+                <div class="answer anum0"><img data="kh" letter="客户" src="resource/kh.png"></div>
+                <div class="answer anum0"><img data="kf" letter="客服" src="resource/kf.png"></div>
+                <div class="answer anum0"><img data="gl" letter="管理" src="resource/gl.png"></div>
+                <div class="answer anum1"><img data="kh" letter="客户" src="resource/kh.png"></div>
+                <div class="answer anum1"><img data="yg" letter="员工" src="resource/yg.png"></div>
+                <div class="answer anum1"><img data="zz" letter="组织" src="resource/zz.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 900px;text-align:center">
+                <img id="q1_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+
+        <div id="second_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="margin-bottom: 10px;">客户是阳光的<span class="letterPos letterInput letterFour">&nbsp;</span>，所有员工必须</div>
+                <div style="margin-bottom: 10px;">无条件的尊重客户、服务客户。</div>
+            </div>
+            <div class="answerPos">
+                <div class="answer anum0"><img data="jzhb" letter="竞争伙伴" src="resource/jzhb.png"></div>
+                <div class="answer anum0"><img data="zjhy" letter="知己好友" src="resource/zjhy.png"></div>
+                <div class="answer anum0"><img data="ysfm" letter="衣食父母" src="resource/ysfm.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 900px;text-align:center">
+                <img id="q2_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="third_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="margin-bottom: 10px;">全心全意为客户服务是阳光生存和发展</div>
+                <div style="margin-bottom: 10px;">的根本，要体悟客户<span class="letterPos letterInput">&nbsp;</span>，尊重客户</div>
+                <div style="margin-bottom: 10px;"><span class="letterPos">&nbsp;</span>，创造客户<span class="letterPos">&nbsp;</span>，注重客户</div>
+                <div style="margin-bottom: 10px;"><span class="letterPos">&nbsp;</span>。</div>
+
+            </div>
+            <div class="answerPos" style="margin-top: 200px;">
+                <div class="answer anum0"><img data="rx" letter="人性" src="resource/rx.png"></div>
+                <div class="answer anum0"><img data="xl" letter="心里" src="resource/xl.png"></div>
+                <div class="answer anum0"><img data="xq" letter="需求" src="resource/xq.png"></div>
+                <div class="answer anum1"><img data="ah" letter="爱好" src="resource/ah.png"></div>
+                <div class="answer anum1"><img data="gx" letter="个性" src="resource/gx.png"></div>
+                <div class="answer anum1"><img data="ph" letter="偏好" src="resource/ph.png"></div>
+                <div class="answer anum2"><img data="ty" letter="体验" src="resource/ty.png"></div>
+                <div class="answer anum2"><img data="jz" letter="价值" src="resource/jz.png"></div>
+                <div class="answer anum2"><img data="sy" letter="收益" src="resource/sy.png"></div>
+                <div class="answer anum3"><img data="xj" letter="细节" src="resource/xj.png"></div>
+                <div class="answer anum3"><img data="yx" letter="影响" src="resource/yx.png"></div>
+                <div class="answer anum3"><img data="ty" letter="体验" src="resource/ty.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q3_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="fourth_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="margin-bottom: 10px;">坚持“让我们的<span class="letterPos letterInput">&nbsp;</span>成为客户选</div>
+                <div style="margin-bottom: 10px;">择阳光的理由”的服务格言导向。</div>
+            </div>
+            <div class="answerPos">
+                <div class="answer anum0"><img data="pp" letter="品牌" src="resource/pp.png"></div>
+                <div class="answer anum0"><img data="yg" letter="员工" src="resource/yg.png"></div>
+                <div class="answer anum0"><img data="fw" letter="服务" src="resource/fw.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 900px;text-align:center">
+                <img id="q4_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+
+        <div id="fifth_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="margin-bottom: 10px;">通过服务<span class="letterPos letterInput">&nbsp;</span>、关注<span class="letterPos">&nbsp;</span>，</div>
+                <div style="margin-bottom: 10px;"><span class="letterPos letterFour">&nbsp;</span>提供统一、规范的全程服务，</div>
+                <div style="margin-bottom: 10px;">获得客户的信赖。</div>
+            </div>
+            <div class="answerPos" style="margin-top: 200px;">
+                <div class="answer anum0"><img data="qz" letter="前置" src="resource/qz.png"></div>
+                <div class="answer anum0"><img data="hz" letter="后置" src="resource/hz.png"></div>
+                <div class="answer anum1"><img data="ty" letter="体验" src="resource/ty.png"></div>
+                <div class="answer anum1"><img data="xj" letter="细节" src="resource/xj.png"></div>
+                <div class="answer anum2"><img data="yjfw" letter="一键服务" src="resource/yjfw.png"></div>
+                <div class="answer anum2"><img data="hlzt" letter="互联直通" src="resource/hlzt.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 900px;text-align:center">
+                <img id="q5_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s6.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>
+<script>
+
+</script>

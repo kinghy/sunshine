@@ -198,13 +198,22 @@ var MultiChoiceStage = {
 var CustomChoiceStage = {
     init:function(stageId,startTime,endTime,$submitBtn,submitCallBack,correctedSTime,correctedETime,wrong1STime,wrong1ETime,wrong2STime,wrong2ETime,initCallBack,showCallBack,hideCallBack){
         var s = Stage.init(stageId,startTime,endTime,initCallBack,showCallBack,hideCallBack);
+        var submitClicked = function () {
+            if(submitCallBack && typeof(submitCallBack)=="function") {
+                if(submitCallBack(ret)){
+                    ret.correct(this,stageId,ret,correctedSTime,correctedETime);
+                }else {
+                    ret.wrong(this, ++etimes, stageId, ret, endTime, wrong1STime, wrong1ETime, wrong2STime, wrong2ETime);
+                }
+            }
+        }
         var ret = {
             correct : function(btn,thisId,ret,correctStartTime,correctEndTime) {
                 var $this = $(btn);
                 btn.src = "resource/"+$this.attr("data")+"_highlight.png";
                 setTimeout(function () {
                     //正确
-                    $("#" + thisId).hide();
+                    s.hide();
                     btn.src = "resource/"+$this.attr("data")+".png";
                     ret.runByTime(correctStartTime,correctEndTime,correctEndTime,function () {
                         ret.playNext();
@@ -218,32 +227,27 @@ var CustomChoiceStage = {
                     //正确
                     var video = document.querySelector("video");
                     if(times<2) {
-                        $("#"+thiId).hide();
+                        s.hide()
                         btn.src = "resource/"+$this.attr("data")+".png"
                         ret.runByTime(wrong1StartTime,wrong1EndTime,questionTime,function () {
-                            $("#"+thiId).fadeIn();
+                            s.show();
                         })
                     }else{
-                        $("#"+thiId).hide();
+                        s.hide()
                         btn.src = "resource/"+$this.attr("data")+".png"
                         ret.runByTime(wrong2StartTime,wrong2EndTime,questionTime,function () {
-                            $("#"+thiId).fadeIn();
+                            s.show();
                         })
                     }
                 }.bind(this),500)
-            }
+            },
+            submit : submitClicked
         }
         ret = $.extend({},s,ret);
+        s = ret;
         var etimes = 0;
-        $submitBtn.click(function () {
-            if(submitCallBack && typeof(submitCallBack)=="function") {
-                if(submitCallBack()){
-                    ret.correct(this,stageId,ret,correctedSTime,correctedETime);
-                }else {
-                    ret.wrong(this, ++etimes, stageId, ret, endTime, wrong1STime, wrong1ETime, wrong2STime, wrong2ETime);
-                }
-            }
-        })
+
+        $submitBtn.click(submitClicked);
 
         return ret;
     },
@@ -259,7 +263,7 @@ var ChoiceStage = {
                 btn.src = "resource/"+$this.attr("data")+"_highlight.png";
                 setTimeout(function () {
                     //正确
-                    $("#" + thisId).hide();
+                    s.hide();
                     btn.src = "resource/"+$this.attr("data")+".png";
                     ret.runByTime(correctStartTime,correctEndTime,correctEndTime,function () {
                         ret.playNext();
@@ -273,22 +277,23 @@ var ChoiceStage = {
                     //正确
                     var video = document.querySelector("video");
                     if(times<2) {
-                        $("#"+thiId).hide();
+                        s.hide();
                         btn.src = "resource/"+$this.attr("data")+".png"
                         ret.runByTime(wrong1StartTime,wrong1EndTime,questionTime,function () {
-                            $("#"+thiId).fadeIn();
+                            s.show();
                         })
                     }else{
-                        $("#"+thiId).hide();
+                        s.hide();
                         btn.src = "resource/"+$this.attr("data")+".png"
                         ret.runByTime(wrong2StartTime,wrong2EndTime,questionTime,function () {
-                            $("#"+thiId).fadeIn();
+                            s.show();
                         })
                     }
                 }.bind(this),500)
             }
         }
         ret = $.extend({},s,ret);
+        s = ret;
         var etimes = 0;
         if($correctBtns){
             $correctBtns.click(function () {

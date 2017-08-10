@@ -8,7 +8,7 @@
 body {
     width: 100%;
     font-size: 14px;
-    color: #878787;
+    /*color: #878787;*/
     -ms-touch-action: inherit;
     touch-action: inherit;
     -webkit-user-select: auto;
