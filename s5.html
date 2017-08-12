@@ -1,0 +1,107 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s5.css">
+<script src="js/main.js"></script>
+<script src="js/s5.js"></script>
+
+<body style="overflow: hidden">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s5.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s5.mp4" style="object-fit: fill;"></video>
+        <div id="start" class="view_mask" style="display:none;">
+            <div id="start_div" class="start_pos"><img src="resource/start.png"></div>
+        </div>
+
+        <div id="first_qa" style="display: none" class="question_pos">
+            <img id="zljczx_btn" data="zljczx" class="answer" src="resource/zljczx.png" /><br>
+            <img id="ytylzx_btn" data="ytylzx" class="answer" src="resource/ytylzx.png" /><br>
+            <img id="zyzhzx_btn" data="zyzhzx" class="answer" src="resource/zyzhzx.png" /><br>
+            <img id="yyglzx_btn" data="yyglzx" class="answer" src="resource/yyglzx.png" /><br>
+            <br><img id="submit_1_btn" width="100px" height="100px" data="submit" src="resource/submit.png" style="">
+        </div>
+        <div id="second_qa" style="display: none" class="question_pos">
+            <img id="jyjczx_btn" data="jyjczx" class="answer" src="resource/jyjczx.png" /><br>
+            <img id="yyglzx_b_btn" data="yyglzx_b" class="answer" src="resource/yyglzx_b.png" /><br>
+            <img id="ytcxzx_btn" data="ytcxzx" class="answer" src="resource/ytcxzx.png" /><br>
+            <img id="jzlrzx_btn" data="jzlrzx" class="answer" src="resource/jzlrzx.png" /><br>
+            <br><img id="submit_2_btn" width="100px" height="100px" data="submit" src="resource/submit.png" style="">
+        </div>
+        <div id="third_qa" style="display: none" class="question_pos">
+            <img id="xsjyjcq_btn" data="xsjyjcq" class="answer" src="resource/xsjyjcq.png" /><br>
+            <img id="xsjyglq_btn" data="xsjyglq" class="answer" src="resource/xsjyglq.png" /><br>
+            <img id="cdjzlrhsczr_btn" data="cdjzlrhsczr" class="answer" src="resource/cdjzlrhsczr.png" /><br>
+            <img id="zcgszlmbdsx_btn" data="zcgszlmbdsx" class="answer" src="resource/zcgszlmbdsx.png" /><br>
+            <br><img id="submit_3_btn" width="100px" height="100px" data="submit" src="resource/submit.png" style="">
+        </div>
+        <div id="book" class="view_mask" style="display:none;">
+            <div id="p1ToP2"  class="page_right hot_pos"></div>
+        </div>
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s5.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>
+<script>
+
+</script>
