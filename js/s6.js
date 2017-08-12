@@ -12,10 +12,10 @@ $().ready(function () {
 });
 
 $().ready(function () {
-    var handle = null;
+    // var handle = null;
     //构建场景
     var submitCallback = function(s,answer){
-        clearInterval(handle);
+        // clearInterval(handle);
         var str = "";
         $("#"+s.stageId+" .letterPos").each(function (index) {
             var $this = $(this)
@@ -44,13 +44,20 @@ $().ready(function () {
             this.src = "resource/"+$this.attr("data")+"_highlight.png";
             setTimeout(function () {
                 this.src = "resource/"+$this.attr("data")+".png"
+
                 $selectedPos.html($this.attr("letter"))
+                $selectedPos.removeClass("letterInput")
+                $("#"+s.stageId+" .answer.anum"+selectIndex).hide();
+
+                selectIndex = selectIndex+1<$letterPos.length?selectIndex+1:0;
+                $("#"+s.stageId+" .answer.anum"+selectIndex).fadeIn();
+                $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
             }.bind(this),500)
         })
     }
 
     var showCallback = function (s) {
-        clearInterval(handle);
+        // clearInterval(handle);
         $("#"+s.stageId+" .letterPos").each(function(){
             $(this).html("&nbsp;");
         })
@@ -58,27 +65,27 @@ $().ready(function () {
         var index = 0;
         $("#"+s.stageId+" .answer.anum"+index).show();
 
-        handle = setInterval(function () {
-            $("#"+s.stageId+" .answer.anum"+index++).hide();
-            $("#"+s.stageId+" .answer.anum"+index).fadeIn();
-            var $letterPos = $("#"+s.stageId+" .letterPos")
-            var selectIndex=0;
-            var $selectedPos=null;
-            $letterPos.each(function (index) {
-                var $this = $(this);
-                if($this.hasClass("letterInput")){
-                    $selectedPos = $this;
-                    selectIndex = index;
-                }
-            })
-            if(selectIndex+1<$letterPos.length){
-                $selectedPos.removeClass("letterInput")
-                $selectedPos = $($letterPos[selectIndex+1]).addClass("letterInput")
-            }else{
-                s.submit();
-                clearInterval(handle);
-            }
-        },3000);
+        // handle = setInterval(function () {
+        //     $("#"+s.stageId+" .answer.anum"+index++).hide();
+        //     $("#"+s.stageId+" .answer.anum"+index).fadeIn();
+        //     var $letterPos = $("#"+s.stageId+" .letterPos")
+        //     var selectIndex=0;
+        //     var $selectedPos=null;
+        //     $letterPos.each(function (index) {
+        //         var $this = $(this);
+        //         if($this.hasClass("letterInput")){
+        //             $selectedPos = $this;
+        //             selectIndex = index;
+        //         }
+        //     })
+        //     if(selectIndex+1<$letterPos.length){
+        //         $selectedPos.removeClass("letterInput")
+        //         $selectedPos = $($letterPos[selectIndex+1]).addClass("letterInput")
+        //     }else{
+        //         s.submit();
+        //         clearInterval(handle);
+        //     }
+        // },3000);
     }
 
     var fs = CustomChoiceStage.init("first_qa",0,147,$("#q1_submit"),function (s) {
