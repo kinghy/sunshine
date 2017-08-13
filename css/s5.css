@@ -10,9 +10,8 @@
 .start_pos{
     position: absolute;
     top: 440px;
-    left: 185px;
     height: 185px;
-    width: 280px;
+    width: 100%;
 }
 
 .question_pos{
