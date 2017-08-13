@@ -278,16 +278,7 @@ $().ready(function () {
     $("#go_btn").click(function () {
         $("#start_page").hide();
         //场景1
-        if(startstage){
-            setTimeout(function () {
-                if(startpos=="start"){
-                    sm.runStage(startstage);
-                }else{
-                    sm.run2StageEnd(startstage,2);
-                }
-            },1000)
-        }
-        sm.play();
+        sm.play(startstage,startpos);
 
     });
 

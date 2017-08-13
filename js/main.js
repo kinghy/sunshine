@@ -332,6 +332,9 @@ var Stage = {
             playNext: function () {
                 this.manager.playNext();
             },
+            resume: function () {
+                this.manager.resume();
+            },
             runByTime:function (starttime,endtime,resumeTime,callback) {
                 this.manager.runByTime(starttime,endtime,resumeTime,callback);
             },
@@ -354,23 +357,44 @@ var VideoStageManager = {
     init:function (managerId,videoId,stages,endCallBack) {
         // this.zoomResize();
         var video = document.getElementById(videoId);
-
         var endVideo = function(){
             $("#"+managerId).hide();
+            ret.stageIndex = 0
+            $.cookie('stageIndex',ret.stageIndex);
             if(endCallBack && typeof(endCallBack)=="function") {
                 endCallBack()
             }
         }
 
+
         var videoTimeInterval = null;
         video.addEventListener("ended",endVideo);
         var ret = {
+            playVideo:function () {
+                video.play();
+                $.cookie('stageIndex', this.stageIndex, { expires: 1 });
+            },
             stageIndex:0,
-            play : function(){
+            play : function(startstage,startpos){
                 // $("#"+managerId).show();
                 this.stageIndex = 0;
+                var cacheStageIndex = $.cookie('stageIndex');
+                if(startstage){
+                    setTimeout(function () {
+                        if(startpos=="start"){
+                            this.runStage(startstage);
+                        }else{
+                            this.run2StageEnd(startstage,2);
+                        }
+                    }.bind(this),1000)
+                }else if(cacheStageIndex!=null && cacheStageIndex!=0){
+                    setTimeout(function () {
+                        this.runStage(cacheStageIndex);
+                    }.bind(this), 1000);
+                }
                 this.runStage(this.stageIndex);
             },
+
             playNext : function () {
                 var s = stages[this.stageIndex];
                 if(s){
@@ -384,7 +408,7 @@ var VideoStageManager = {
                     this.stageIndex = index;
                     var s = stages[index];
                     video.currentTime = startTime?startTime:s.startTime;
-                    video.play();
+                    this.playVideo();
                     if(s.endTime>0) {
                         setTimeout(function () {
                             this.pauseVideo(video,s.endTime,function () {
@@ -407,7 +431,7 @@ var VideoStageManager = {
                     if(offset==0){
                         s.show();
                     }else{
-                        video.play();
+                        this.playVideo();
                         if(s.endTime>0) {
                             setTimeout(function () {
                                 if(video.currentTime<s.endTime - offset
@@ -428,7 +452,7 @@ var VideoStageManager = {
 
             runByTime:function (starttime,endtime,resumeTime,callback) {
                 video.currentTime = starttime;
-                video.play();
+                this.playVideo();
                 if(endtime>0){
                     setTimeout(function () {
                         this.pauseVideo(video,endtime,function () {
@@ -443,14 +467,22 @@ var VideoStageManager = {
             },
 
             pauseVideo : function(videoId,pauseTime,callback) {
+                 var times = 0;
                  clearInterval(videoTimeInterval);
+                 $.cookie('stageIndex', this.stageIndex, { expires: 1 });
                  videoTimeInterval = setInterval(function () {
                     if (videoId.currentTime.toFixed(1) == pauseTime) {
                         videoId.pause();
                         callback();
                         clearInterval(videoTimeInterval);
                     }
-                }, 10);
+                    // if(times!=videoId.currentTime.toFixed(0)){
+                    //     times=videoId.currentTime.toFixed(0)
+                    //     console.log(times);
+                    //     $.cookie('stageIndex', this.stageIndex, { expires: 1 });
+                    //     $.cookie('currentTime', times, { expires: 1 });
+                    // }
+                }.bind(this), 10);
             }
         }
         $(stages).each(function () {
