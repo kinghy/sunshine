@@ -32,6 +32,19 @@ $().ready(function () {
         var $letterPos = $("#"+s.stageId+" .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+
+        $letterPos.each(function (index) {
+            $(this).click(function () {
+                if(index!=selectIndex){
+                    $selectedPos.removeClass("letterInput")
+                    $("#"+s.stageId+" .answer.anum"+selectIndex).hide();
+                    selectIndex = index;
+                    $("#"+s.stageId+" .answer.anum"+selectIndex).fadeIn();
+                    $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+                }
+            })
+        })
+
         $("#"+s.stageId+" .answerPos img").click(function () {
             $letterPos.each(function (index) {
                 var $this = $(this);
@@ -46,12 +59,14 @@ $().ready(function () {
                 this.src = "resource/"+$this.attr("data")+".png"
 
                 $selectedPos.html($this.attr("letter"))
-                $selectedPos.removeClass("letterInput")
-                $("#"+s.stageId+" .answer.anum"+selectIndex).hide();
+                if(selectIndex+1<$letterPos.length){
+                    $selectedPos.removeClass("letterInput")
+                    $("#"+s.stageId+" .answer.anum"+selectIndex).hide();
 
-                selectIndex = selectIndex+1<$letterPos.length?selectIndex+1:0;
-                $("#"+s.stageId+" .answer.anum"+selectIndex).fadeIn();
-                $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+                    selectIndex = selectIndex+1;
+                    $("#"+s.stageId+" .answer.anum"+selectIndex).fadeIn();
+                    $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
+                }
             }.bind(this),500)
         })
     }
