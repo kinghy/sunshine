@@ -20,6 +20,8 @@ $().ready(function () {
     vp.attr("content",vp.attr("content")+",maximum-scale="+(h/1140).toFixed(2));
 })
 
+var resizeStage = null;
+
 $().ready(function () {
 
     //屏蔽右键菜单
@@ -28,7 +30,7 @@ $().ready(function () {
     });
 
     //视频调整
-    var resizeStage = function () {
+    resizeStage = function () {
         //调整缩放比
         var vp = $("head").find("[name='viewport']");
         var reg = /maximum-scale=\d+.\d+/g;
@@ -364,6 +366,9 @@ var VideoStageManager = {
             if(endCallBack && typeof(endCallBack)=="function") {
                 endCallBack()
             }
+            setTimeout(function () {
+                resizeStage();
+            },2000)
         }
 
 
