@@ -249,7 +249,7 @@ $().ready(function () {
         $("#goon_img").attr("src","resource/goon.png");
     });
 
-    var ss = Stage.init("qa",35,49,function (s) {//初始化
+    var ss = Stage.init("qa",35.5,49,function (s) {//初始化
         $("#qa_no").click(function () {
             s.hide();
             s.run2StageEnd(0,0);
