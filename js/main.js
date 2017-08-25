@@ -384,6 +384,7 @@ var VideoStageManager = {
                 // $("#"+managerId).show();
                 this.stageIndex = 0;
                 var cacheStageIndex = $.cookie('stageIndex');
+
                 if(startstage){
                     setTimeout(function () {
                         if(startpos=="start"){
@@ -393,9 +394,11 @@ var VideoStageManager = {
                         }
                     }.bind(this),1000)
                 }else if(cacheStageIndex!=null && cacheStageIndex!=0){
-                    setTimeout(function () {
-                        this.runStage(cacheStageIndex);
-                    }.bind(this), 1000);
+                    if(confirm("检测到您曾经浏览过此教程，是否要继续上次的进度？")){
+                        setTimeout(function () {
+                            this.runStage(cacheStageIndex);
+                        }.bind(this), 1000);
+                    }
                 }
                 this.runStage(this.stageIndex);
             },

@@ -1,0 +1,151 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s12.css">
+<script src="js/main.js"></script>
+<script src="js/s12.js"></script>
+
+<body style="overflow: hidden">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s12.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s12.mp4" style="object-fit: fill;"></video>
+        <div id="qa" class="view_mask" style="display:none;">
+            <div id="qa_yes" class="qa_pos hot_pos" style="top: 400px;"></div>
+            <div id="qa_no" class="qa_pos hot_pos" style="top: 600px;"></div>
+        </div>
+        <div id="first_qa" style="display: none" class="question_pos">
+            <div class="qaPos" style="width: 530px">
+                <div class="textPos">世界上没有不劳而获的成果。农民<br>
+                    懂得<span class="letterPos letterEight">&nbsp;</span>；农民践<br>
+                    行<span class="letterPos letterFour">&nbsp;</span>、埋头苦干；农民知道<br>
+                    敬畏自然、<span class="letterPos letterFour">&nbsp;</span>。</div>
+            </div>
+            <div class="answerPos" style="margin-top: 170px;">
+                <div class="answer "><img data="jtsd" letter="脚踏实地" src="resource/jtsd.png"></div>
+                <div class="answer "><img data="yfgyyfsh" letter="一分耕耘一分收获" src="resource/yfgyyfsh.png"></div>
+                <div class="answer "><img data="zzgl" letter="尊重规律" src="resource/zzgl.png"></div>
+                <div class="answer "><img data="mctd" letter="面朝土地" src="resource/mctd.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 980px;text-align:center">
+                <img id="q1_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+
+        <div id="second_qa" style="display: none" class="question_pos">
+            <div class="qaPos" style="width: 590px;margin-top: 250px">
+                <div class="textPos">农民从来都是心地善良<span class="letterPos letterFour">&nbsp;</span>。阳光<br>
+                    崇尚<span class="letterPos letterEight">&nbsp;</span>的农民心态，像<br>
+                    农民种庄稼一样扎扎实实的工作……</div>
+            </div>
+            <div class="answerPos" style="margin-top: 150px;">
+
+                <div class="answer "><img data="gxzr" letter="感谢自然" src="resource/gxzr.png"></div>
+                <div class="answer "><img data="qltssl" letter="勤劳、踏实、善良" src="resource/qltssl.png"></div>
+                <div class="answer "><img data="getd" letter="感恩土地" src="resource/getd.png"></div>
+                <div class="answer "><img data="dhls" letter="敦厚老实" src="resource/dhls.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 980px;text-align:center">
+                <img id="q2_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="third_qa" style="display: none" class="question_pos">
+            <div class="qaPos" style="width: 540px;margin-top: 250px">
+                <div class="textPos">世界上没有<span class="letterPos letterFour">&nbsp;</span>的成功，没有<br>
+                    努力之外的捷径。只有<span class="letterPos letterFour">&nbsp;</span>、<br>
+                    <span class="letterPos letterFour">&nbsp;</span>，像匠人一样……</div>
+            </div>
+            <div class="answerPos" style="margin-top: 150px;">
+                <div class="answer "><img data="bwcx" letter="不忘初心" src="resource/bwcx.png"></div>
+                <div class="answer "><img data="jyqj" letter="精益求精" src="resource/jyqj.png"></div>
+                <div class="answer "><img data="ycej" letter="一蹴而就" src="resource/ycej.png"></div>
+                <div class="answer "><img data="byfq" letter="不言放弃" src="resource/byfq.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 980px;text-align:center">
+                <img id="q3_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="fourth_qa" style="display: none" class="question_pos">
+            <div class="qaPos" style="width: 590px;margin-top: 255px">
+                <div class="textPos">像匠人一样<span class="letterPos letterFour">&nbsp;</span>、专心致志，才能<br>
+                    打造精湛的产品……阳光倡导工匠精神<br>
+                    ，追求<span class="letterPos letterFour">&nbsp;</span>、行稳致远，打造百年品牌老店。<br>
+                </div>
+            </div>
+            <div class="answerPos" style="margin-top: 145px;">
+                <div class="answer "><img data="yxyy" letter="一心一意" src="resource/yxyy.png"></div>
+                <div class="answer "><img data="xwpj" letter="心无旁骛" src="resource/xwpj.png"></div>
+                <div class="answer "><img data="cjcx" letter="长久持续" src="resource/cjcx.png"></div>
+                <div class="answer "><img data="wzwd" letter="稳扎稳打" src="resource/wzwd.png"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 980px;text-align:center">
+                <img id="q4_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s12.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>
+<script>
+
+</script>
