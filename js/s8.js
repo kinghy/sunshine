@@ -13,35 +13,74 @@ $().ready(function () {
 
 $().ready(function () {
     //构建场景
-    var memoryJson = {"memory1":false,"memory2":false,"memory3":false,"memory4":false}
+    var memoryJson = {"1":false,"2":false,"3":false,"4":false}
+    var $mStage = $(".memory_stage")
     var zs = Stage.init("start",0,100,function (s) {//初始化
         $("#"+s.stageId+" .memory").click(function () {
             s.hide();
             s.runStage($(this).attr("data"))
-            memoryJson[this.id] = true;
+            // memoryJson[this.id] = true;
         });
-    },function () {
-        for(var key in memoryJson){
-            if(memoryJson[key]){
-                $("#"+key).attr("src","resource/"+key+"_read.png");
-            }else{
-                $("#"+key).attr("src","resource/"+key+".png");
-            }
-        }
-    });
-
-    var initCallBack = function (s) {
-        $("#"+s.stageId+" .goon").click(function () {
+        $("#"+s.stageId+" .s_goon").click(function () {
             var $this = $(this);
             $this.attr("src","resource/goon_rect_highlight.png");
             setTimeout(function () {
                 s.hide();
                 s.runStage(5)
+                for(var key in memoryJson){
+                    memoryJson[key] = false;
+                }
+
                 $this.attr("src","resource/goon_rect.png");
             },500)
-            for(var key in memoryJson){
-                memoryJson[key] = false;
+        })
+    },function (s) {
+        var flg = true;
+        for(var key in memoryJson){
+            if(memoryJson[key]){
+                $("#memory"+key).attr("src","resource/memory"+key+"_read.png");
+            }else{
+                $("#memory"+key).attr("src","resource/memory"+key+".png");
+                flg=false;
             }
+        }
+        if(flg){
+            $("#"+s.stageId+" .s_goon").show();
+        }else{
+            $("#"+s.stageId+" .s_goon").hide();
+        }
+    });
+
+    var initCallBack = function (s) {
+        var data = parseInt($("#"+s.stageId).attr("data"));
+        $("#"+s.stageId+" .goon").click(function () {
+            var $this = $(this);
+            $this.attr("src","resource/goon_rect_highlight.png");
+            setTimeout(function () {
+                s.hide();
+                var flg = true;
+                for(var key in memoryJson){
+                    if(!memoryJson[key]){
+                        flg = memoryJson[key];
+                        break
+                    }
+                }
+                if(flg){
+                    s.runStage(5)
+                    for(var key in memoryJson){
+                        memoryJson[key] = false;
+                    }
+                }else{
+                    while(memoryJson[data]){
+                        data = data+1>$mStage.length?1:data+1
+                    }
+
+                    s.runStage(data);
+                }
+
+                $this.attr("src","resource/goon_rect.png");
+            },500)
+
         })
 
         $("#"+s.stageId+" .back").click(function () {
@@ -56,18 +95,8 @@ $().ready(function () {
     }
 
     var showCallBack = function (s) {
-        var flg = true;
-        for(var key in memoryJson){
-            if(!memoryJson[key]){
-                flg = memoryJson[key];
-                break
-            }
-        }
-        if(flg){
-            $("#"+s.stageId+" .goon").show();
-        }else{
-            $("#"+s.stageId+" .goon").hide();
-        }
+        var id = $("#"+s.stageId).attr("data")
+        memoryJson[id] = true;
     }
 
     var fs = Stage.init("m1_stage",103,111,initCallBack,showCallBack);

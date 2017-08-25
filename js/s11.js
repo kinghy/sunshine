@@ -67,21 +67,28 @@ $().ready(function () {
     })
 
     var bs = Stage.init("book",72,99,function (s) {//初始化
-        var lastTouch2 = null;
-        $("#goonFirst").on("touchstart",function (e) {
-            e.preventDefault();
-            lastTouch2 = e.touches[0];
-        }).on("touchend",function (e) {
-            e.preventDefault();
-            if(lastTouch2){
-                var curTouch = e.changedTouches[0];
-                if(curTouch.pageY<lastTouch2.pageY-100){
-                    s.playNext();
-                }
-            }
-            lastTouch2 = null
+        // var lastTouch2 = null;
+        // $("#goonFirst").on("touchstart",function (e) {
+        //     e.preventDefault();
+        //     lastTouch2 = e.touches[0];
+        // }).on("touchend",function (e) {
+        //     e.preventDefault();
+        //     if(lastTouch2){
+        //         var curTouch = e.changedTouches[0];
+        //         if(curTouch.pageY<lastTouch2.pageY-100){
+        //             s.playNext();
+        //         }
+        //     }
+        //     lastTouch2 = null
+        // })
+        $("#goonFirst").click(function () {
+            var $this = $(this);
+            $this.find("img").attr("src","resource/goon_highlight.png");
+            setTimeout(function () {
+                s.playNext();
+                $this.find("img").attr("src","resource/goon.png");
+            },500)
         })
-
     });
 
     var ss = CustomChoiceStage.init("second_qa",99,124,$("#q1_submit"),function () {
