@@ -1,0 +1,33 @@
+* {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.letterAnswer{
+    margin: 25px;
+}
+
+.answerArea{
+    margin-top: 75%;
+}
+
+.page_left{
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:250px;"
+}
+
+.page_right {
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:410px;"
+}
+
