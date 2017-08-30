@@ -67,13 +67,13 @@ $().ready(function () {
         })
     });
 
-    var fives = ChoiceStage.init("qa_1",168,173,$("#yuan_green_1_btn"),
+    var fives = ChoiceStage.init("qa_1",168,173.5,$("#yuan_green_1_btn"),
         $("#gao_yellow_1_btn,#xi_blue_1_btn,#zhun_violet_1_btn,#yi_pink_1_btn,#hun_yellow_1_btn"),
-        174,177,177.5,180.5,181,184);
+        174,176.5,177,180.5,181,184);
 
     var sixs = ChoiceStage.init("qa_2",185,186.5,$("#zhun_violet_2_btn"),
         $("#gao_yellow_2_btn,#xi_blue_2_btn,#yuan_green_2_btn,#yi_pink_2_btn,#hun_yellow_2_btn"),
-        187,190,190.5,193.5,194,197);
+        187,189.5,190,193.5,194,197);
     var sevens = ChoiceStage.init("qa_3",198,199.5,$("#gao_yellow_3_btn"),
         $("#zhun_violet_3_btn,#xi_blue_3_btn,#yuan_green_3_btn,#yi_pink_3_btn,#hun_yellow_3_btn"),
         200,202.5,203,206.5,207,210);
