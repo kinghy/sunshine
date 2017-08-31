@@ -18,9 +18,8 @@
 .start_pos{
     position: absolute;
     top:350px;
-    left: 205px;
-    height: 85px;
-    width: 280px;
+
+    width: 100%;
     /*background-color: red*/
 }
 

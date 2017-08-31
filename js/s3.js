@@ -15,13 +15,18 @@ $().ready(function () {
 
     //构建场景
 
-    var zs = Stage.init("start",0,122,function (s) {//初始化
+    var zs = Stage.init("start",0,118,function (s) {//初始化
         $(".start_pos").click(function (e) {
-            s.playNext();
+            $(this).find("img").attr("src","resource/goon_highlight.png");
+            setTimeout(function () {
+                s.playNext();
+                $(this).find("img").attr("src","resource/goon.png");
+            }.bind(this),500)
+
         })
     });
 
-    var fs = Stage.init("choice",123,126,function (s) {//初始化
+    var fs = Stage.init("choice",119,122,function (s) {//初始化
         $(".choice_pos").click(function (e) {
             $("#choice").hide();
             var $t = $(e.target)
@@ -38,23 +43,23 @@ $().ready(function () {
         },500)
     })
 
-    var ss = Stage.init("choice_wrong",127,129);
-    var ts = Stage.init("choice_wrong",130,132);
-    var fours = Stage.init("choice_wrong",133.5,135);
+    var ss = Stage.init("choice_wrong",123,125);
+    var ts = Stage.init("choice_wrong",126,128);
+    var fours = Stage.init("choice_wrong",129.5,131);
 
-    var fives = Stage.init("book_4",137,143,function (s) {//初始化
+    var fives = Stage.init("book_4",133,139,function (s) {//初始化
         $("#page2Next_4").click(function () {
             s.playNext();
         })
     });
 
-    var sixs = Stage.init("book_1",144,279,function (s) {//初始化
+    var sixs = Stage.init("book_1",140,275,function (s) {//初始化
         $("#page2Next").click(function () {
             s.playNext();
         })
     });
 
-    var sevens = Stage.init("iphone",280,286,function (s) {//初始化
+    var sevens = Stage.init("iphone",276,282,function (s) {//初始化
         $("#article").scroll(function(e){
             var $this =$(this),
                 viewH =$this.height(),//可见高度
@@ -73,13 +78,13 @@ $().ready(function () {
         $("#goon").hide();
     });
 
-    var eights = Stage.init("book_2",288,337,function (s) {//初始化
+    var eights = Stage.init("book_2",284,333,function (s) {//初始化
         $("#p1ToP2").click(function () {
             s.playNext();
         })
     });
 
-    var ns = Stage.init("book_3",338,340,function (s) {//初始化
+    var ns = Stage.init("book_3",334,336,function (s) {//初始化
         $("#p2ToP1").click(function () {
             s.hide();
             s.run2StageEnd(8,1);
@@ -90,7 +95,7 @@ $().ready(function () {
     });
 
 
-    var es = Stage.init(null,340,0)
+    var es = Stage.init(null,337,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
