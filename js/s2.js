@@ -176,6 +176,7 @@ $().ready(function () {
             $("#leftarrow").on('touchstart',function (e) {
                 e.preventDefault();
                 leftpush = true;
+                $("#longPressTips").hide();
                 setTimeout(function () {
                     if(leftpush){
                         var handle = setInterval(function () {
@@ -206,6 +207,7 @@ $().ready(function () {
             $("#rightarrow").on('touchstart',function (e) {
                 e.preventDefault();
                 rightpush = true;
+                $("#longPressTips").hide();
                 setTimeout(function () {
                     if(rightpush){
                         var handle = setInterval(function () {
@@ -247,25 +249,36 @@ $().ready(function () {
         $(".goonbtn").hide();
         $("#office").css("left","-1730px");
         $("#goon_img").attr("src","resource/goon.png");
+        $("#longPressTips").show();
     });
 
     var ss = Stage.init("qa",35.5,49,function (s) {//初始化
         $("#qa_no").click(function () {
-            s.hide();
-            s.run2StageEnd(0,0);
+            $("#qa_no").find("img").attr("src","resource/nosee_highlight.png");
+            setTimeout(function () {
+                s.hide();
+                s.run2StageEnd(0,0);
+                $("#qa_no").find("img").attr("src","resource/nosee.png");
+            },500)
+
         })
         $("#qa_yes").click(function () {
-            s.playNext();
+            $("#qa_yes").find("img").attr("src","resource/isee_highlight.png");
+            setTimeout(function () {
+                s.playNext();
+                $("#qa_yes").find("img").attr("src","resource/isee.png");
+            },500)
+
         })
     });
 
-    var ts = Stage.init("page_1",53,186,function (s) {//初始化
+    var ts = Stage.init("page_1",53,267,function (s) {//初始化
         $("#p1ToP2").click(function () {
             s.playNext();
         })
     });
 
-    var fos = Stage.init("page_2",187,189,function (s) {//初始化
+    var fos = Stage.init("page_2",268,269,function (s) {//初始化
         $("#p2ToP1").click(function () {
             s.hide();
             s.run2StageEnd(2,1);
@@ -275,7 +288,7 @@ $().ready(function () {
         })
     });
 
-    var es = Stage.init(null,189,0)
+    var es = Stage.init(null,270,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
