@@ -272,13 +272,13 @@ $().ready(function () {
         })
     });
 
-    var ts = Stage.init("page_1",53,267,function (s) {//初始化
+    var ts = Stage.init("page_1",51.5,266,function (s) {//初始化
         $("#p1ToP2").click(function () {
             s.playNext();
         })
     });
 
-    var fos = Stage.init("page_2",268,269,function (s) {//初始化
+    var fos = Stage.init("page_2",267,268,function (s) {//初始化
         $("#p2ToP1").click(function () {
             s.hide();
             s.run2StageEnd(2,1);
@@ -288,7 +288,7 @@ $().ready(function () {
         })
     });
 
-    var es = Stage.init(null,270,0)
+    var es = Stage.init(null,269,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
