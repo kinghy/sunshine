@@ -13,8 +13,7 @@ $().ready(function () {
 
 $().ready(function () {
     //构建场景
-
-    var zs = Stage.init("butterfly",0,71,function (s) {//初始化
+    function initJigsaw(s) {//初始化
         var lastTouch = null;
         var $this = $("#"+s.stageId)
         $this.find(".jigsaw").on("touchstart",function (e) {
@@ -38,7 +37,7 @@ $().ready(function () {
                 var $timg = $this.find('.a_'+data);
 
                 if(Math.abs(curTouch.clientY-$timg.height()/2-parseFloat($timg.css("top")))<30
-                &&Math.abs(curTouch.clientX-$timg.width()/2-parseFloat($timg.css("left")))<30){
+                    &&Math.abs(curTouch.clientX-$timg.width()/2-parseFloat($timg.css("left")))<30){
                     $timg.show();
                     $timg.css("opacity",0.5)
                 }else{
@@ -62,21 +61,43 @@ $().ready(function () {
                 s.playNext();
             }
         })
-    },function (s) {
+    }
+
+    function showJigsaw(s) {
         var $this = $("#"+s.stageId);
         $this.find(".jigsaw").show()
         $this.find(".j").hide()
         $this.find(".a").hide()
+    }
+    var zs = Stage.init("butterfly",0,71,initJigsaw,showJigsaw);
+
+    var fs = Stage.init("page_1",72,76,function (s) {//初始化
+        $("#p1ToP2").click(function () {
+            s.playNext();
+        })
     });
 
-    var es = Stage.init(null,72,0)
+    var ss = Stage.init("page_2",77,79,function (s) {//初始化
+        $("#p2ToP1").click(function () {
+            s.hide();
+            s.run2StageEnd(1,1);
+        })
+        $("#p2ToP2").click(function () {
+            s.playNext();
+        })
+    });
+
+    var ts = Stage.init("engine",80,122,initJigsaw,showJigsaw);
+    var fours = Stage.init("engine",122.5,123.5,initJigsaw,showJigsaw);
+
+    var es = Stage.init(null,123,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
 //     var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,es],function () {
 //         $("#end_page").show();
 //     });
-    var sm = VideoStageManager.init("pageWrap","video",[zs,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,es],function () {
         $("#end_page").show();
     });
 

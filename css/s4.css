@@ -9,13 +9,19 @@
 
 .butterfly-pos{
     position: absolute;
-    top: 265px;
-    left: 95px;
+    top: 205px;
+    left: 80px;
 }
 
 .butterfly-jigsaw{
     position: absolute;
     top: 705px;
+    width: 100%;
+}
+
+.engine-pos{
+    position: absolute;
+    top: 313px;
     width: 100%;
 }
 
@@ -25,5 +31,30 @@
     margin-top: 5px;
     margin-bottom: 25px;
 }
+.engine-jigsaw{
+    position: absolute;
+    top: 705px;
+    width: 100%;
+}
+.engine-jigsaw img{
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
 
+.page_left{
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:250px;"
+}
 
+.page_right {
+    position: absolute;
+    top: 920px;
+    width: 150px;
+    height: 210px;
+    left:410px;"
+}
