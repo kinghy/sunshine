@@ -21,7 +21,16 @@
 <link type="text/css" rel="stylesheet" href="css/s4.css">
 <script src="js/main.js"></script>
 <script src="js/s4.js"></script>
-
+<style>
+    body {
+        height: 100%;
+        overflow: hidden;
+    }
+    body, div, p, ul {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 <body style="overflow: hidden">
 <div id="root" style="width: 100%;height: 100%;overflow: hidden;">
      <!--Loading -->
@@ -51,8 +60,21 @@
         <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
                x5-video-player-fullscreen="true" x5-video-player-type="h5"
                width="100%" height="100%" poster="" src="resource/s4.mp4" style="object-fit: fill;"></video>
-        <div id="butterfly" class="view_mask" style="display:none;">
-            <div id="butterfly_div" class="butterfly-pos"><img src="resource/butterfly.png"></div>
+        <div id="butterfly" class="view_mask" style="display:none;margin: 0 auto;">
+            <div id="butterfly_div" class="butterfly-pos">
+                <img src="resource/butterfly.png">
+                <div style="position: absolute;left: 31px;top: 83px;width: 425px;height: 335px;">
+                    <div style="position: relative;width: 100%;height: 100%">
+                        <img style="z-index:3000;position: absolute;top: 0px;right: 0px;" class="a a_p5" data="p5" src="resource/aj_p5.png">
+                        <img style="z-index:3000;position: absolute;top: 170px;left: 223px;" class="a a_p3" data="p3" src="resource/aj_p3.png">
+                        <img style="z-index:3000;position: absolute;top: 26px;left: 146px;" class="a a_p4" data="p4" src="resource/aj_p4.png">
+                        <img style="z-index:3000;position: absolute;bottom: 0px;left: 77px;" class="a a_p2" data="p2" src="resource/aj_p2.png">
+                        <img style="z-index:3000;position: absolute;left: 0;top: 0;" class="a a_p1" data="p1" src="resource/aj_p1.png">
+                    </div>
+
+                </div>
+
+            </div>
             <div id="jigsaw_div" class="butterfly-jigsaw">
                 <img class="jigsaw p5" data="p5" src="resource/butterfly_p5.png">
                 <img class="jigsaw p3" data="p3" src="resource/butterfly_p3.png">
@@ -65,11 +87,6 @@
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p4" data="p4" src="resource/bj_p4.png">
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p2" data="p2" src="resource/bj_p2.png">
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p1" data="p1" src="resource/bj_p1.png">
-            <img style="z-index:3000;position: absolute;top: 287px;left: 349px;" class="a a_p5" data="p5" src="resource/aj_p5.png">
-            <img style="z-index:3000;position: absolute;top: 458px;left: 333px;" class="a a_p3" data="p3" src="resource/aj_p3.png">
-            <img style="z-index:3000;position: absolute;top: 314px;left: 256px;" class="a a_p4" data="p4" src="resource/aj_p4.png">
-            <img style="z-index:3000;position: absolute;top: 456px;left: 187px;" class="a a_p2" data="p2" src="resource/aj_p2.png">
-            <img style="z-index:3000;position: absolute;top: 288px;left: 110px;" class="a a_p1" data="p1" src="resource/aj_p1.png">
 
         </div>
 
@@ -82,9 +99,20 @@
         </div>
 
         <div id="engine" class="view_mask" style="display:none;">
-            <div id="engine_div" class="engine-pos"><img src="resource/engine.png"></div>
+            <div id="engine_div" class="engine-pos">
+                <img src="resource/engine.png">
+                <div style="position: absolute;left: 43px;top: 38px;width: 470px;height: 300px;">
+                    <div style="position: relative;width: 100%;height: 100%">
+                        <img style="z-index:3000;position: absolute;top: 0px;left: 147px;" class="a a_p5" data="p5" src="resource/eaj_p5.png">
+                        <img style="z-index:3000;position: absolute;bottom: 0px;left: 146px;" class="a a_p3" data="p3" src="resource/eaj_p3.png">
+                        <img style="z-index:3000;position: absolute;top: 139px;left: 0px;" class="a a_p4" data="p4" src="resource/eaj_p4.png">
+                        <img style="z-index:3000;position: absolute;top: 29px;left: 0px;" class="a a_p2" data="p2" src="resource/eaj_p2.png">
+                        <img style="z-index:3000;position: absolute;top: 0px;left: 312px;" class="a a_p1" data="p1" src="resource/eaj_p1.png">
+                        <img style="z-index:3000;position: absolute;top: 139px;right: 0px;" class="a a_p6" data="p6" src="resource/eaj_p6.png">
+                    </div>
+                </div>
+            </div>
             <div id="jigsaw_div_2" class="engine-jigsaw">
-
                 <img class="jigsaw p1" data="p1" src="resource/ebj_p1.png">
                 <img class="jigsaw p2" data="p2" src="resource/ebj_p2.png">
                 <img class="jigsaw p3" data="p3" src="resource/ebj_p3.png">
@@ -99,14 +127,35 @@
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p2" data="p2" src="resource/eaj_p2.png">
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p1" data="p1" src="resource/eaj_p1.png">
             <img style="z-index:3001;display: none;position: absolute;" class="j j_p6" data="p6" src="resource/eaj_p6.png">
-            <img style="z-index:3000;position: absolute;top: 353px;left: 235px;" class="a a_p5" data="p5" src="resource/eaj_p5.png">
-            <img style="z-index:3000;position: absolute;top: 492px;left: 237px;" class="a a_p3" data="p3" src="resource/eaj_p3.png">
-            <img style="z-index:3000;position: absolute;top: 490px;left: 90px;" class="a a_p4" data="p4" src="resource/eaj_p4.png">
-            <img style="z-index:3000;position: absolute;top: 380px;left: 90px;" class="a a_p2" data="p2" src="resource/eaj_p2.png">
-            <img style="z-index:3000;position: absolute;top: 353px;left: 400px;" class="a a_p1" data="p1" src="resource/eaj_p1.png">
-            <img style="z-index:3000;position: absolute;top: 490px;left: 401px;" class="a a_p6" data="p6" src="resource/eaj_p6.png">
+
         </div>
-        <div></div>
+        <div id="engine_desc" class="view_mask" style="display:none;">
+            <div id="d_p1" data="1" class="dp" style="top: 340px;left: 90px;"></div>
+            <div id="d_p4" data="4" class="dp" style="left: 90px;top: 490px;"></div>
+            <div id="d_p2" data="2" class="dp" style="left: 243px;top: 340px;"></div>
+            <div id="d_p5" data="5" class="dp" style="left: 243px;top: 490px;"></div>
+            <div id="d_p3" data="3" class="dp" style="left: 401px;top: 340px;"></div>
+            <div id="d_p6" data="6" class="dp" style="left: 401px;top: 490px;"></div>
+            <div id="fly" class="back"><img src="resource/fly.png"></div>
+        </div>
+        <div id="engine_desc_0" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_1" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_2" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_3" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_4" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_5" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
     </div>
 
     <!-- 第三页 -->

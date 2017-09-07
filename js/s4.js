@@ -35,13 +35,11 @@ $().ready(function () {
                 lastTouch = curTouch;
 
                 var $timg = $this.find('.a_'+data);
-
-                if(Math.abs(curTouch.clientY-$timg.height()/2-parseFloat($timg.css("top")))<30
-                    &&Math.abs(curTouch.clientX-$timg.width()/2-parseFloat($timg.css("left")))<30){
-                    $timg.show();
+                if(Math.abs(curTouch.clientY-$timg.height()/2-$timg.offset().top)<30
+                    &&Math.abs(curTouch.clientX-$timg.width()/2-$timg.offset().left)<30){
                     $timg.css("opacity",0.5)
                 }else{
-                    $timg.hide();
+                    $timg.css("opacity",0);
                 }
             }
         }).on("touchend",function (e) {
@@ -49,7 +47,7 @@ $().ready(function () {
             var data = $(this).attr("data")
             lastTouch = null
             var $timg = $this.find('.a_'+data);
-            if($timg.is(':hidden')){
+            if($timg.css("opacity")==0){
                 $(this).css("opacity",1);
                 $this.find('.j_'+data).hide()
             }else{
@@ -57,7 +55,14 @@ $().ready(function () {
                 $this.find('.j_'+data).hide();
             }
 
-            if($this.find('.a:hidden').length==0){
+            var flg = true;
+            $this.find('.a').each(function () {
+                if($(this).css("opacity")=="0"){
+                    return flg=false;
+                }
+            })
+
+            if(flg){
                 s.playNext();
             }
         })
@@ -65,9 +70,9 @@ $().ready(function () {
 
     function showJigsaw(s) {
         var $this = $("#"+s.stageId);
-        $this.find(".jigsaw").show()
+        $this.find(".jigsaw").show().css("opacity",1)
         $this.find(".j").hide()
-        $this.find(".a").hide()
+        $this.find(".a").show().css("opacity",0)
     }
     var zs = Stage.init("butterfly",0,71,initJigsaw,showJigsaw);
 
@@ -88,16 +93,53 @@ $().ready(function () {
     });
 
     var ts = Stage.init("engine",80,122,initJigsaw,showJigsaw);
-    var fours = Stage.init("engine",122.5,123.5,initJigsaw,showJigsaw);
+    var fours = Stage.init("engine_desc",122.5,124,function (s) {
+        var offset = 4;
+        $("#"+s.stageId).find(".dp").click(function () {
+            var data = $(this).attr("data");
+            s.hide();
+            s.runStage(4+parseInt(data));
+        })
+        $("#fly").click(function () {
+            var $i = $(this).find("img");
+            $i.attr("src","resource/fly_highlight.png");
+            setTimeout(function () {
+                $i.attr("src","resource/fly.png");
+                s.hide();
+                s.runStage(11);
+            },500)
+        })
 
-    var es = Stage.init(null,123,0)
+    });
+
+    function back(s) {
+        $("#"+s.stageId).find(".back").click(function () {
+            var $i = $(this).find("img");
+            $i.attr("src","resource/back_highlight.png");
+            setTimeout(function () {
+                $i.attr("src","resource/back.png");
+                s.hide();
+                s.run2StageEnd(4);
+            },500)
+        })
+
+    }
+
+    var fives = Stage.init("engine_desc_0",125,128,back);
+    var sixs = Stage.init("engine_desc_1",128.5,131,back);
+    var sevens = Stage.init("engine_desc_2",131.5,134,back);
+    var eights = Stage.init("engine_desc_3",134.5,137,back);
+    var nines = Stage.init("engine_desc_4",137.5,140,back);
+    var tens = Stage.init("engine_desc_5",140.7,143,back);
+
+    var es = Stage.init(null,144,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
 //     var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,es],function () {
 //         $("#end_page").show();
 //     });
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,eights,nines,tens,es],function () {
         $("#end_page").show();
     });
 

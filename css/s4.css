@@ -8,9 +8,11 @@
 }
 
 .butterfly-pos{
-    position: absolute;
-    top: 205px;
-    left: 80px;
+    position: relative;
+    width: 488px;
+    height: 488px;
+    margin: 0 auto;
+    margin-top: 205px;
 }
 
 .butterfly-jigsaw{
@@ -20,9 +22,11 @@
 }
 
 .engine-pos{
-    position: absolute;
-    top: 313px;
-    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 313px;
+    width: 552px;
+    height: 381px;
 }
 
 .butterfly-jigsaw img{
@@ -57,4 +61,14 @@
     width: 150px;
     height: 210px;
     left:410px;"
+}
+
+.dp{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+}
+
+.back{
+    margin-top: 950px;
 }
