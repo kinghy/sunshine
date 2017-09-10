@@ -1,0 +1,30 @@
+*:not(input,textarea){
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.start_pos {
+    position: absolute;
+    top: 50%;
+    margin-top: -123px;
+    width: 100%;
+}
+.question_pos{
+    position: absolute;
+    text-align: center;
+    top: 45%;
+    width: 100%;
+    z-index:1000;
+}
+
+.question_pos img{
+    margin-bottom: 40px;
+}
+
+.question_pos img.answer{
+    margin-bottom: 30px;
+}
