@@ -13,60 +13,60 @@ $().ready(function () {
 
 $().ready(function () {
     //构建场景
-    var zs = Stage.init("start",0,52,function (s) {//初始化
-        $("#start_confirm").click(function (e) {
-            this.src = "resource/confirm_highlight.png";
-            setTimeout(function () {
-                this.src = "resource/confirm.png"
-                s.playNext();
-            }.bind(this),500)
-        })
-    });
-
-    var fs = CustomChoiceStage.init("first_qa",53,54,$("#submit"),function () {
-        var str = "";
-        $("input.fifty").each(function () {
-            str += this.value;
-        })
-        return str=="五十字箴言";
-    },57,59,60,63,64,71,function () {
-            //绑定按键输入
-            var $is = $("input.fifty")
-
-            var inputHandle = function (e,index) {
-                console.log(index+":"+this.value)
-                if(this.value.length==0 || $(this).attr("composition")=="true") return;
-                var str = this.value.replace($(this).attr("oldInput"),"")
-                this.value = str[0];
-                this.blur();
-                if(index+1>=$is.length) return;
-                var pos = index+1;
-                var next = $is.get(pos);
-                next.focus();
-                var input = $is.get(pos);
-                if(str.length>1){
-                    input.value = str.substring(1);
-                    inputHandle.call(next,e,pos)
-                }
-            }
-
-            $is.each(function (index) {
-                $(this).on("focus",function () {
-                    this.value = "";
-                }).on("input",function (e) {
-                    inputHandle.call(this,e,index)
-                }).on('compositionstart', function (e) {
-                    $(this).attr("composition",true);
-                }).on('compositionend', function (e) {
-                    $(this).attr("composition",false);
-                    inputHandle.call(this,e,index)
-                }).on("click",function () {
-                    this.value = "";
-                });
-            })
-    })
-
-    var bs = Stage.init("book",72,99,function (s) {//初始化
+    // var zs = Stage.init("start",0,52,function (s) {//初始化
+    //     $("#start_confirm").click(function (e) {
+    //         this.src = "resource/confirm_highlight.png";
+    //         setTimeout(function () {
+    //             this.src = "resource/confirm.png"
+    //             s.playNext();
+    //         }.bind(this),500)
+    //     })
+    // });
+    //
+    // var fs = CustomChoiceStage.init("first_qa",53,54,$("#submit"),function () {
+    //     var str = "";
+    //     $("input.fifty").each(function () {
+    //         str += this.value;
+    //     })
+    //     return str=="五十字箴言";
+    // },57,59,60,63,64,71,function () {
+    //         //绑定按键输入
+    //         var $is = $("input.fifty")
+    //
+    //         var inputHandle = function (e,index) {
+    //             console.log(index+":"+this.value)
+    //             if(this.value.length==0 || $(this).attr("composition")=="true") return;
+    //             var str = this.value.replace($(this).attr("oldInput"),"")
+    //             this.value = str[0];
+    //             this.blur();
+    //             if(index+1>=$is.length) return;
+    //             var pos = index+1;
+    //             var next = $is.get(pos);
+    //             next.focus();
+    //             var input = $is.get(pos);
+    //             if(str.length>1){
+    //                 input.value = str.substring(1);
+    //                 inputHandle.call(next,e,pos)
+    //             }
+    //         }
+    //
+    //         $is.each(function (index) {
+    //             $(this).on("focus",function () {
+    //                 this.value = "";
+    //             }).on("input",function (e) {
+    //                 inputHandle.call(this,e,index)
+    //             }).on('compositionstart', function (e) {
+    //                 $(this).attr("composition",true);
+    //             }).on('compositionend', function (e) {
+    //                 $(this).attr("composition",false);
+    //                 inputHandle.call(this,e,index)
+    //             }).on("click",function () {
+    //                 this.value = "";
+    //             });
+    //         })
+    // })
+    //99
+    var bs = Stage.init("book",0,75.5,function (s) {//初始化
         // var lastTouch2 = null;
         // $("#goonFirst").on("touchstart",function (e) {
         //     e.preventDefault();
@@ -91,7 +91,7 @@ $().ready(function () {
         })
     });
 
-    var ss = CustomChoiceStage.init("second_qa",99,124,$("#q1_submit"),function () {
+    var ss = CustomChoiceStage.init("second_qa",76,101,$("#q1_submit"),function () {
         var str = "";
         $("#second_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -103,7 +103,7 @@ $().ready(function () {
             }
         })
         return str=="众家自我";
-    },128,130,131,134,135,142,function () {
+    },104.5,106.5,107,110.5,111,118.5,function () {
         var $letterPos = $("#second_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -129,7 +129,7 @@ $().ready(function () {
         })
     });
 
-    var ts = CustomChoiceStage.init("third_qa",143,144,$("#q2_submit"),function () {
+    var ts = CustomChoiceStage.init("third_qa",119,120.5,$("#q2_submit"),function () {
         var str = "";
         $("#third_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -141,7 +141,7 @@ $().ready(function () {
             }
         })
         return str=="业内业外";
-    },146,149,150,153,154,161,function () {
+    },122.5,125.5,126,129.5,130,137.5,function () {
         var $letterPos = $("#third_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -167,7 +167,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var fours = CustomChoiceStage.init("fourth_qa",162,163,$("#q3_submit"),function () {
+    var fours = CustomChoiceStage.init("fourth_qa",138.5,139.5,$("#q3_submit"),function () {
         var str = "";
         $("#fourth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -179,7 +179,7 @@ $().ready(function () {
             }
         })
         return str=="高远";
-    },165,168,169,172,173,180,function () {
+    },141.5,144.5,145,148.5,149,156.5,function () {
         var $letterPos = $("#fourth_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -205,7 +205,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var fives = CustomChoiceStage.init("fifth_qa",181,182,$("#q4_submit"),function () {
+    var fives = CustomChoiceStage.init("fifth_qa",157.5,158.5,$("#q4_submit"),function () {
         var str = "";
         $("#fifth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -217,7 +217,7 @@ $().ready(function () {
             }
         })
         return str=="做事做人";
-    },184,187,188,191,192,199,function () {
+    },160.5,163.5,164,167.5,168,175,function () {
         var $letterPos = $("#fifth_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -242,7 +242,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var sixs = CustomChoiceStage.init("sixth_qa",199,200,$("#q5_submit"),function () {
+    var sixs = CustomChoiceStage.init("sixth_qa",175.5,176.5,$("#q5_submit"),function () {
         var str = "";
         $("#sixth_qa .letterPos").each(function (index) {
             var $this = $(this)
@@ -254,7 +254,7 @@ $().ready(function () {
             }
         })
         return str=="精英阳光";
-    },202,205,206,209,210,217,function () {
+    },178.5,181.5,182,185.5,186,193,function () {
             var $letterPos = $("#sixth_qa .letterPos")
             var selectIndex = 0;
             var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")
@@ -280,8 +280,8 @@ $().ready(function () {
             })
         });
 
-    var es = Stage.init(null,218,0)
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,bs,ss,ts,fours,fives,sixs,es],function () {
+    var es = Stage.init(null,193.5,0)
+    var sm = VideoStageManager.init("pageWrap","video",[bs,ss,ts,fours,fives,sixs,es],function () {
         $("#end_page").show();
     });
 
