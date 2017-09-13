@@ -13,7 +13,7 @@ $().ready(function () {
 
 $().ready(function () {
     //构建场景
-    var zs = Stage.init("start_1",0,137,function (s) {//初始化
+    var zs = Stage.init("start_1",0,136.5,function (s) {//初始化
         $("#start_qd_1").click(function (e) {
             this.src = "resource/qd_highlight.png";
             setTimeout(function () {
@@ -23,8 +23,8 @@ $().ready(function () {
         })
     });
 
-    var fs = ChoiceStage.init("first_qa",138,144,$("#zl_btn"),$("#jz_long_btn,#yj_btn"),145.5,149.5,150.3,154,154.5,160);
-    var ss = Stage.init("start_2",161,169,function (s) {//初始化
+    var fs = ChoiceStage.init("first_qa",138,143,$("#zl_btn"),$("#jz_long_btn,#yj_btn"),145.5,149.5,150.3,154,154.5,160);
+    var ss = Stage.init("start_2",161,168.5,function (s) {//初始化
         $("#start_qd_2").click(function (e) {
             this.src = "resource/qd_highlight.png";
             setTimeout(function () {
@@ -33,7 +33,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var ts = ChoiceStage.init("second_qa",170,175,$("#yqwlkh_btn"),$("#jjlyzs_btn,#zszwcxbg_btn"),176.5,185,186,190,190.5,196);
+    var ts = ChoiceStage.init("second_qa",170,174.5,$("#yqwlkh_btn"),$("#jjlyzs_btn,#zszwcxbg_btn"),176.5,185,186,190,190.5,196);
     var fours = Stage.init("start_3",197,205,function (s) {//初始化
         $("#start_qd_3").click(function (e) {
             this.src = "resource/qd_highlight.png";
@@ -43,7 +43,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var fives = ChoiceStage.init("third_qa",206,211.5,$("#glsczjz_btn"),$("#whsygzh_btn,#khsgszb_btn"),213,222.5,223,227,227.5,233);
+    var fives = ChoiceStage.init("third_qa",206,211,$("#glsczjz_btn"),$("#whsygzh_btn,#khsgszb_btn"),213,222.5,223,227,227.5,233);
     var sixs = Stage.init("start_4",234,240.5,function (s) {//初始化
         $("#start_qd_4").click(function (e) {
             this.src = "resource/qd_highlight.png";
@@ -59,7 +59,7 @@ $().ready(function () {
     var $g2 = null;
     var $g1Sel = null;
     var $g2Sel = null;
-    var sevens = CustomChoiceStage.init("fourth_qa",241,247,$("#q4_submit"),function () {
+    var sevens = CustomChoiceStage.init("fourth_qa",241,246.8,$("#q4_submit"),function () {
         return (lineAnswer["cxs"]=="bjdl" && lineAnswer["gls"]=="czjz" && lineAnswer["whs"] == "ygzh")
     },249,259.5,260.5,264,264.5,270,function (s) {//初始化
         var $s = $("#"+s.stageId);
@@ -153,7 +153,7 @@ $().ready(function () {
             }.bind(this),500)
         })
     });
-    var nights = ChoiceStage.init("fifth_qa",285,291,$("#zysy_2_btn"),$("#gwdx_btn,#qyyq_btn"),292,307,308,311,311.5,317);
+    var nights = ChoiceStage.init("fifth_qa",285,290.8,$("#zysy_2_btn"),$("#gwdx_btn,#qyyq_btn"),292,307,308,311,311.5,317);
 
 
     var es = Stage.init(null,317.5,0)
