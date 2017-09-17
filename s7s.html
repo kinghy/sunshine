@@ -1,0 +1,137 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s7.css">
+<script src="js/main.js"></script>
+<script src="js/s7.js"></script>
+
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/APIWrapper.js"></SCRIPT>
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/SCOFunctions.js"></SCRIPT>
+<body style="overflow: hidden" ONLOAD="setLocation( 's7s.html' )" onunload="return unloadPage()">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s7.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s7.mp4" style="object-fit: fill;"></video>
+        <div id="start" class="view_mask" style="display: none;">
+            <div style="margin-top: 65%"><img id="shuxi" src="resource/shuxi.png"/></div>
+            <div style="margin-top: 50px"><img id="bushuxi" src="resource/bushuxi.png"/></div>
+        </div>
+        <div id="page_1" class="view_mask" style="display:none;">
+            <div id="p1ToP2"  class="page_right" ></div>
+        </div>
+        <div id="page_2" class="view_mask" style="display:none;">
+            <div id="p2ToP1"  class="page_left"></div>
+            <div id="p2ToP3"  class="page_right"></div>
+        </div>
+        <div id="page_3" class="view_mask" style="display:none;">
+            <div id="p3ToP2"  class="page_left"></div>
+            <div id="p3ToP4"  class="page_right"></div>
+        </div>
+        <div id="page_4" class="view_mask" style="display:none;">
+            <div id="p4ToP3"  class="page_left"></div>
+            <div id="p4ToP4"  class="page_right"></div>
+        </div>
+        <div id="qa_1" class="view_mask" style="display:none;">
+            <div class="answerArea">
+                <img class="letterAnswer" id="gao_yellow_1_btn" data="gao_yellow" src="resource/gao_yellow.png"  />
+                <img class="letterAnswer" id="yuan_green_1_btn" data="yuan_green" src="resource/yuan_green.png"  />
+                <img class="letterAnswer" id="xi_blue_1_btn" data="xi_blue" src="resource/xi_blue.png" /><br>
+                <img class="letterAnswer" id="zhun_violet_1_btn" data="zhun_violet" src="resource/zhun_violet.png" />
+                <img class="letterAnswer" id="yi_pink_1_btn" data="yi_pink" src="resource/yi_pink.png"  />
+                <img class="letterAnswer" id="hun_yellow_1_btn" data="hun_yellow" src="resource/hun_yellow.png" />
+            </div>
+        </div>
+        <div id="qa_2" class="view_mask" style="display:none;">
+            <div class="answerArea">
+                <img class="letterAnswer" id="gao_yellow_2_btn" data="gao_yellow" src="resource/gao_yellow.png"  />
+                <img class="letterAnswer" id="yuan_green_2_btn" data="yuan_green" src="resource/yuan_green.png"  />
+                <img class="letterAnswer" id="xi_blue_2_btn" data="xi_blue" src="resource/xi_blue.png" /><br>
+                <img class="letterAnswer" id="zhun_violet_2_btn" data="zhun_violet" src="resource/zhun_violet.png" />
+                <img class="letterAnswer" id="yi_pink_2_btn" data="yi_pink" src="resource/yi_pink.png"  />
+                <img class="letterAnswer" id="hun_yellow_2_btn" data="hun_yellow" src="resource/hun_yellow.png" />
+            </div>
+        </div>
+        <div id="qa_3" class="view_mask" style="display:none;">
+            <div class="answerArea">
+                <img class="letterAnswer" id="gao_yellow_3_btn" data="gao_yellow" src="resource/gao_yellow.png"  />
+                <img class="letterAnswer" id="yuan_green_3_btn" data="yuan_green" src="resource/yuan_green.png"  />
+                <img class="letterAnswer" id="xi_blue_3_btn" data="xi_blue" src="resource/xi_blue.png" /><br>
+                <img class="letterAnswer" id="zhun_violet_3_btn" data="zhun_violet" src="resource/zhun_violet.png" />
+                <img class="letterAnswer" id="yi_pink_3_btn" data="yi_pink" src="resource/yi_pink.png"  />
+                <img class="letterAnswer" id="hun_yellow_3_btn" data="hun_yellow" src="resource/hun_yellow.png" />
+            </div>
+        </div>
+        <div id="page_5" class="view_mask" style="display:none;">
+            <div id="p5ToP6"  class="page_right"></div>
+        </div>
+        <div id="page_6" class="view_mask" style="display:none;">
+            <div id="p6ToP7"  class="page_right"></div>
+        </div>
+        <div id="page_7" class="view_mask" style="display:none;">
+            <div id="p7ToP8"  class="page_right"></div>
+        </div>
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s7.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>

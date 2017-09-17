@@ -1,0 +1,336 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s11.css">
+<script src="js/main.js"></script>
+<script src="js/s11.js"></script>
+
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/APIWrapper.js"></SCRIPT>
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/SCOFunctions.js"></SCRIPT>
+<body style="overflow: hidden" ONLOAD="setLocation( 's11s.html' )" onunload="return unloadPage()">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s11.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s11.mp4" style="object-fit: fill;"></video>
+
+        <div id="start" class="view_mask" style="display:none;">
+            <div id="start_div" class="start_pos">
+                <img id="start_confirm" src="resource/confirm.png">
+            </div>
+        </div>
+        <div id="book" class="view_mask" style="display:none;overflow:hidden;">
+            <div id="goonFirst" class="goon_pos goon_pos_f" ><img id="next_img" src="./resource/goon.png" style=""></div>
+        </div>
+        <div id="first_qa" style="display: none" class="question_pos">
+            <div style="width: 100%;position: absolute;top: 140px;z-index: 100;">
+                <img src="resource/bg_guess_text.png" style="width: 447px;height: 97px;">
+            </div>
+            <div style="position: absolute;top: 190px;text-align: center;width: 100%;">
+                <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+            </div>
+            <div style="width: 581px;height: 125px;left: 32px;position: absolute;top: 260px;text-align:right">
+                <input  class="fifty">
+                <input  class="fifty">
+                <input  class="fifty">
+                <input  class="fifty">
+                <input  class="fifty">
+                <img src="resource/pen.png" style="margin-right: 30px;margin-left: 20px;">
+            </div>
+            <div style="width: 100%;position: absolute;top: 450px;text-align:center">
+                <img src="resource/t1.png"><br><br><br>
+                <img src="resource/t2.png"><br><br><br>
+                <img src="resource/t3.png"><br><br><br>
+            </div>
+            <div style="width: 100%;position: absolute;top: 830px;text-align:center">
+                <img id="submit" data="submit" src="resource/submit.png"><br><br><br>
+            </div>
+            <div style="width: 100%;position: absolute;bottom: 0px;z-index:1000">
+                <img src="resource/bottom_pk.png" style="width: 100%;margin-left: -65px;">
+            </div>
+            <div style="width: 100%;position: absolute;bottom: 0px;">
+                <img src="resource/bottom_left.png" style="width: 100%;">
+            </div>
+        </div>
+        <div id="second_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="width: 100%;position: absolute;top: 0;z-index: 100;">
+                    <img src="resource/title1.png" style="width: 439px;height: 70px;margin-left:-40px">
+                </div>
+                <div style="position: absolute;top: 35px;text-align: center;width: 100%;">
+                    <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+                </div>
+                <div style="position: absolute;bottom: 20px;text-align: center;width:100%">
+                    <div style="margin-bottom: 10px;">集（&nbsp;<span class="letterPos letterInput">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）之长，</div>
+                    <div style="margin-bottom: 10px;">取（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）之道。</div>
+                </div>
+            </div>
+            <div class="answerPos">
+                <div class="letter"><img id="wo_img" data="wo" letter="我" src="resource/wo.png"></div>
+                <div class="letter"><img id="zhong_img" data="zhong" letter="众" src="resource/zhong.png"></div>
+                <div class="letter"><img id="duo_img" data="duo" letter="多" src="resource/duo.png"></div>
+                <div class="letter"><img id="yang_img" data="yang" letter="阳" src="resource/yang.png"></div>
+                <div class="letter"><img id="yin_img" data="yin" letter="英" src="resource/yin.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="jia_img" data="jia" letter="家"src="resource/jia.png"></div>
+                <div class="letter"><img id="ren_img" data="ren" letter="人" src="resource/ren.png"></div>
+                <div class="letter"><img id="yan_img" data="yuan" letter="远" src="resource/yuan.png"></div>
+                <div class="letter"><img id="ye_img" data="ye" letter="业" src="resource/ye.png"></div>
+                <div class="letter"><img id="nei_img" data="nei" letter="内" src="resource/nei.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="wai_img" data="wai" letter="外" src="resource/wai.png"></div>
+                <div class="letter"><img id="zuo_img" data="zuo" letter="做"src="resource/zuo.png"></div>
+                <div class="letter"><img id="shi_img" data="shi" letter="时" src="resource/shi.png"></div>
+                <div class="letter"><img id="jing_img" data="jing" letter="精" src="resource/jing.png"></div>
+                <div class="letter"><img id="zi_img" data="zi" letter="自" src="resource/zi.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="dai_img" data="gao" letter="高" src="resource/gao.png"></div>
+                <div class="letter"><img id="si_img" data="si" letter="事" src="resource/si.png"></div>
+                <div class="letter"><img id="jin_img" data="jin" letter="经" src="resource/jin.png"></div>
+                <div class="letter"><img id="cai_img" data="cai" letter="才" src="resource/cai.png"></div>
+                <div class="letter"><img id="guang_img" data="guang" letter="光" src="resource/guang.png"></div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q1_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="third_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="width: 100%;position: absolute;top: 0;z-index: 100;">
+                    <img src="resource/title2.png" style="width: 439px;height: 70px;margin-left:-40px">
+                </div>
+                <div style="position: absolute;top: 35px;text-align: center;width: 100%;">
+                    <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+                </div>
+                <div style="position: absolute;bottom: 20px;text-align: center;width:100%">
+                    <div style="margin-bottom: 10px;">聚（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）人才，</div>
+                    <div style="margin-bottom: 10px;">纳（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）贤士。</div>
+                </div>
+            </div>
+            <div class="answerPos">
+                <div class="letter"><img id="wo_img" data="wo" letter="我" src="resource/wo.png"></div>
+                <div class="letter"><img id="zhong_img" data="zhong" letter="众" src="resource/zhong.png"></div>
+                <div class="letter"><img id="duo_img" data="duo" letter="多" src="resource/duo.png"></div>
+                <div class="letter"><img id="yang_img" data="yang" letter="阳" src="resource/yang.png"></div>
+                <div class="letter"><img id="yin_img" data="yin" letter="英" src="resource/yin.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="jia_img" data="jia" letter="家"src="resource/jia.png"></div>
+                <div class="letter"><img id="ren_img" data="ren" letter="人" src="resource/ren.png"></div>
+                <div class="letter"><img id="yan_img" data="yuan" letter="远" src="resource/yuan.png"></div>
+                <div class="letter"><img id="ye_img" data="ye" letter="业" src="resource/ye.png"></div>
+                <div class="letter"><img id="nei_img" data="nei" letter="内" src="resource/nei.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="wai_img" data="wai" letter="外" src="resource/wai.png"></div>
+                <div class="letter"><img id="zuo_img" data="zuo" letter="做"src="resource/zuo.png"></div>
+                <div class="letter"><img id="shi_img" data="shi" letter="时" src="resource/shi.png"></div>
+                <div class="letter"><img id="jing_img" data="jing" letter="精" src="resource/jing.png"></div>
+                <div class="letter"><img id="zi_img" data="zi" letter="自" src="resource/zi.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="dai_img" data="gao" letter="高" src="resource/gao.png"></div>
+                <div class="letter"><img id="si_img" data="si" letter="事" src="resource/si.png"></div>
+                <div class="letter"><img id="jin_img" data="jin" letter="经" src="resource/jin.png"></div>
+                <div class="letter"><img id="cai_img" data="cai" letter="才" src="resource/cai.png"></div>
+                <div class="letter"><img id="guang_img" data="guang" letter="光" src="resource/guang.png"></div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q2_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="fourth_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="width: 100%;position: absolute;top: 0;z-index: 100;">
+                    <img src="resource/title3.png" style="width: 439px;height: 70px;margin-left:-40px">
+                </div>
+                <div style="position: absolute;top: 35px;text-align: center;width: 100%;">
+                    <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+                </div>
+                <div style="position: absolute;bottom: 20px;text-align: center;width:100%">
+                    <div style="margin-bottom: 10px;">（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）起点组建，</div>
+                    <div style="margin-bottom: 10px;">（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）战略发展。</div>
+                </div>
+            </div>
+            <div class="answerPos">
+                <div class="letter"><img id="wo_img" data="wo" letter="我" src="resource/wo.png"></div>
+                <div class="letter"><img id="zhong_img" data="zhong" letter="众" src="resource/zhong.png"></div>
+                <div class="letter"><img id="duo_img" data="duo" letter="多" src="resource/duo.png"></div>
+                <div class="letter"><img id="yang_img" data="yang" letter="阳" src="resource/yang.png"></div>
+                <div class="letter"><img id="yin_img" data="yin" letter="英" src="resource/yin.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="jia_img" data="jia" letter="家"src="resource/jia.png"></div>
+                <div class="letter"><img id="ren_img" data="ren" letter="人" src="resource/ren.png"></div>
+                <div class="letter"><img id="yan_img" data="yuan" letter="远" src="resource/yuan.png"></div>
+                <div class="letter"><img id="ye_img" data="ye" letter="业" src="resource/ye.png"></div>
+                <div class="letter"><img id="nei_img" data="nei" letter="内" src="resource/nei.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="wai_img" data="wai" letter="外" src="resource/wai.png"></div>
+                <div class="letter"><img id="zuo_img" data="zuo" letter="做"src="resource/zuo.png"></div>
+                <div class="letter"><img id="shi_img" data="shi" letter="时" src="resource/shi.png"></div>
+                <div class="letter"><img id="jing_img" data="jing" letter="精" src="resource/jing.png"></div>
+                <div class="letter"><img id="zi_img" data="zi" letter="自" src="resource/zi.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="dai_img" data="gao" letter="高" src="resource/gao.png"></div>
+                <div class="letter"><img id="si_img" data="si" letter="事" src="resource/si.png"></div>
+                <div class="letter"><img id="jin_img" data="jin" letter="经" src="resource/jin.png"></div>
+                <div class="letter"><img id="cai_img" data="cai" letter="才" src="resource/cai.png"></div>
+                <div class="letter"><img id="guang_img" data="guang" letter="光" src="resource/guang.png"></div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q3_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="fifth_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="width: 100%;position: absolute;top: 0;z-index: 100;">
+                    <img src="resource/title4.png" style="width: 439px;height: 70px;margin-left:-40px">
+                </div>
+                <div style="position: absolute;top: 35px;text-align: center;width: 100%;">
+                    <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+                </div>
+                <div style="position: absolute;bottom: 20px;text-align: center;width:100%">
+                    <div style="margin-bottom: 10px;">风雨中（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;），</div>
+                    <div style="margin-bottom: 10px;">阳光下（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）。</div>
+                </div>
+            </div>
+            <div class="answerPos">
+                <div class="letter"><img id="wo_img" data="wo" letter="我" src="resource/wo.png"></div>
+                <div class="letter"><img id="zhong_img" data="zhong" letter="众" src="resource/zhong.png"></div>
+                <div class="letter"><img id="duo_img" data="duo" letter="多" src="resource/duo.png"></div>
+                <div class="letter"><img id="yang_img" data="yang" letter="阳" src="resource/yang.png"></div>
+                <div class="letter"><img id="yin_img" data="yin" letter="英" src="resource/yin.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="jia_img" data="jia" letter="家"src="resource/jia.png"></div>
+                <div class="letter"><img id="ren_img" data="ren" letter="人" src="resource/ren.png"></div>
+                <div class="letter"><img id="yan_img" data="yuan" letter="远" src="resource/yuan.png"></div>
+                <div class="letter"><img id="ye_img" data="ye" letter="业" src="resource/ye.png"></div>
+                <div class="letter"><img id="nei_img" data="nei" letter="内" src="resource/nei.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="wai_img" data="wai" letter="外" src="resource/wai.png"></div>
+                <div class="letter"><img id="zuo_img" data="zuo" letter="做"src="resource/zuo.png"></div>
+                <div class="letter"><img id="shi_img" data="shi" letter="时" src="resource/shi.png"></div>
+                <div class="letter"><img id="jing_img" data="jing" letter="精" src="resource/jing.png"></div>
+                <div class="letter"><img id="zi_img" data="zi" letter="自" src="resource/zi.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="dai_img" data="gao" letter="高" src="resource/gao.png"></div>
+                <div class="letter"><img id="si_img" data="si" letter="事" src="resource/si.png"></div>
+                <div class="letter"><img id="jin_img" data="jin" letter="经" src="resource/jin.png"></div>
+                <div class="letter"><img id="cai_img" data="cai" letter="才" src="resource/cai.png"></div>
+                <div class="letter"><img id="guang_img" data="guang" letter="光" src="resource/guang.png"></div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q4_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+        <div id="sixth_qa" style="display: none" class="question_pos">
+            <div class="qaPos">
+                <div style="width: 100%;position: absolute;top: 0;z-index: 100;">
+                    <img src="resource/title5.png" style="width: 439px;height: 70px;margin-left:-40px">
+                </div>
+                <div style="position: absolute;top: 35px;text-align: center;width: 100%;">
+                    <img src="resource/bg_guess.png" style="width: 581px;height: 205px;">
+                </div>
+                <div style="position: absolute;bottom: 20px;text-align: center;width:100%">
+                    <div style="margin-bottom: 10px;">走（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）之路，</div>
+                    <div style="margin-bottom: 10px;">创（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）（&nbsp;<span class="letterPos">&nbsp;&nbsp;&nbsp;</span>&nbsp;）品牌。</div>
+                </div>
+            </div>
+            <div class="answerPos">
+                <div class="letter"><img id="wo_img" data="wo" letter="我" src="resource/wo.png"></div>
+                <div class="letter"><img id="zhong_img" data="zhong" letter="众" src="resource/zhong.png"></div>
+                <div class="letter"><img id="duo_img" data="duo" letter="多" src="resource/duo.png"></div>
+                <div class="letter"><img id="yang_img" data="yang" letter="阳" src="resource/yang.png"></div>
+                <div class="letter"><img id="yin_img" data="yin" letter="英" src="resource/yin.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="jia_img" data="jia" letter="家"src="resource/jia.png"></div>
+                <div class="letter"><img id="ren_img" data="ren" letter="人" src="resource/ren.png"></div>
+                <div class="letter"><img id="yan_img" data="yuan" letter="远" src="resource/yuan.png"></div>
+                <div class="letter"><img id="ye_img" data="ye" letter="业" src="resource/ye.png"></div>
+                <div class="letter"><img id="nei_img" data="nei" letter="内" src="resource/nei.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="wai_img" data="wai" letter="外" src="resource/wai.png"></div>
+                <div class="letter"><img id="zuo_img" data="zuo" letter="做"src="resource/zuo.png"></div>
+                <div class="letter"><img id="shi_img" data="shi" letter="时" src="resource/shi.png"></div>
+                <div class="letter"><img id="jing_img" data="jing" letter="精" src="resource/jing.png"></div>
+                <div class="letter"><img id="zi_img" data="zi" letter="自" src="resource/zi.png"></div>
+                <div style="clear: left"></div>
+                <div class="letter"><img id="dai_img" data="gao" letter="高" src="resource/gao.png"></div>
+                <div class="letter"><img id="si_img" data="si" letter="事" src="resource/si.png"></div>
+                <div class="letter"><img id="jin_img" data="jin" letter="经" src="resource/jin.png"></div>
+                <div class="letter"><img id="cai_img" data="cai" letter="才" src="resource/cai.png"></div>
+                <div class="letter"><img id="guang_img" data="guang" letter="光" src="resource/guang.png"></div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="width: 100%;position: absolute;top: 1000px;text-align:center">
+                <img id="q5_submit" data="submit" src="resource/submit.png">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s11.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>
+<script>
+
+</script>

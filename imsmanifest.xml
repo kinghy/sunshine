@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is a Reload version 2.5.6 SCORM 1.2 Content Package document-->
+<!--Spawned from the Reload Content Package Generator - http://www.reload.ac.uk-->
+<manifest xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" identifier="MANIFEST-845CFD44D52392318C09B086DFF37849" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <organizations default="ORG-0E6170F5404D03211C688BB9350746FE">
+    <organization identifier="ORG-0E6170F5404D03211C688BB9350746FE" structure="hierarchical">
+      <title>第1集</title>
+      <item identifier="ITEM-331ABCD618778F8448D5E03457669219" isvisible="true" identifierref="RES-CF2D0189DAB4DED1420C6330B73A1993">
+        <title>小M驾到</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-320F7133B82C50AEAE2A859BB5D1EFA6" structure="hierarchical">
+      <title>第2集</title>
+      <item identifier="ITEM-DAD1E41DD3BD3669423320A8FACE61A8" isvisible="true" identifierref="RES-5175BA17121A25277730B5346762A8D0">
+        <title>第1天</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-7FCD58E4A01D60700FCCB19F73AF5265" structure="hierarchical">
+      <title>第3集</title>
+      <item identifier="ITEM-D15CA4FFF715EF3E8D670D35D17BE7CF" isvisible="true" identifierref="RES-B6537B3A08CC90F992AC2BA54341F87F">
+        <title>阳光之道</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-C0F616614733A59E868631094334C847" structure="hierarchical">
+      <title>第4集</title>
+      <item identifier="ITEM-CDD805F2481885D68035D05E2DB3A5A9" isvisible="true" identifierref="RES-E534758903E6FF84DC3783DE3F45D901">
+        <title>一身四翼强力起飞</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-7B9236299F874586D36A85E1C477F3D7" structure="hierarchical">
+      <title>第5集</title>
+      <item identifier="ITEM-EEFFDD11BAF1C69FE8A9E8C11DAD1E86" isvisible="true" identifierref="RES-243496F4B0C485E7422ACDF523656320">
+        <title>公司大门常打开</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-2AF56B02A7CA42BA1EB50E91F7828629" structure="hierarchical">
+      <title>第6集</title>
+      <item identifier="ITEM-197CA83EFB5F471FC43CC88260F7198D" isvisible="true" identifierref="RES-6456D3E70C7A38365D7028754247AF01">
+        <title>恋爱高手养成记</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-523D436C1EF66DE8370CF2F91FCF6B3D" structure="hierarchical">
+      <title>第7集</title>
+      <item identifier="ITEM-AE37239AB384220A20CE6A4C46567BA3" isvisible="true" identifierref="RES-23B6BE509D002928EBC6BEC14A9E3E29">
+        <title>爱的升温</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-DC34BB02C6229D30F3FC2B6112AF8DE9" structure="hierarchical">
+      <title>第8集</title>
+      <item identifier="ITEM-91E5952689BC208B1D3EFEF8797AE2E7" isvisible="true" identifierref="RES-4CFE606D73552366ABE52B5B80122849">
+        <title>表彰记</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-AD7EAB9AB9671F5D596E344812A744B4" structure="hierarchical">
+      <title>第9集</title>
+      <item identifier="ITEM-FB781F1F73BD51900981236D5589A93B" isvisible="true" identifierref="RES-7540E88833D7A0193CE246BD58B4B695">
+        <title>职业行为之十要十不要</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-D115C73EFFB6E660F713EB21AB2353FE" structure="hierarchical">
+      <title>第10集</title>
+      <item identifier="ITEM-68E7DB4A43F5C0473F53ECCDC4629A78" isvisible="true" identifierref="RES-447B940B8ADD98C94AE0B99CF8B06430">
+        <title>晨会里的故事</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-E04F63232587C1043F0AF5AF79ACB4DA" structure="hierarchical">
+      <title>第11集</title>
+      <item identifier="ITEM-BEC4194706FEBF6DCFA3879C081F1BD5" isvisible="true" identifierref="RES-D4AB22CC519454407A8875B7BE5F82EB">
+        <title>五十字箴言</title>
+      </item>
+    </organization>
+    <organization identifier="ORG-27199FC1C2D4F95A779D4708AED21B14" structure="hierarchical">
+      <title>第12集</title>
+      <item identifier="ITEM-6953AACA02F55F9D1E9ED001FE23D3F5" isvisible="true" identifierref="RES-30E8535727DBEF6E13CE8D81B4309951">
+        <title>农民心态工匠精神</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES-CF2D0189DAB4DED1420C6330B73A1993" type="webcontent" href="s1s.html">
+      <file href="s1s.html" />
+    </resource>
+    <resource identifier="RES-5175BA17121A25277730B5346762A8D0" type="webcontent" href="s2s.html">
+      <file href="s2s.html" />
+    </resource>
+    <resource identifier="RES-B6537B3A08CC90F992AC2BA54341F87F" type="webcontent" href="s3s.html">
+      <file href="s3s.html" />
+    </resource>
+    <resource identifier="RES-E534758903E6FF84DC3783DE3F45D901" type="webcontent" href="s4s.html">
+      <file href="s4s.html" />
+    </resource>
+    <resource identifier="RES-243496F4B0C485E7422ACDF523656320" type="webcontent" href="s5s.html">
+      <file href="s5s.html" />
+    </resource>
+    <resource identifier="RES-6456D3E70C7A38365D7028754247AF01" type="webcontent" href="s6s.html">
+      <file href="s6s.html" />
+    </resource>
+    <resource identifier="RES-23B6BE509D002928EBC6BEC14A9E3E29" type="webcontent" href="s7s.html">
+      <file href="s7s.html" />
+    </resource>
+    <resource identifier="RES-4CFE606D73552366ABE52B5B80122849" type="webcontent" href="s8s.html">
+      <file href="s8s.html" />
+    </resource>
+    <resource identifier="RES-7540E88833D7A0193CE246BD58B4B695" type="webcontent" href="s9s.html">
+      <file href="s9s.html" />
+    </resource>
+    <resource identifier="RES-447B940B8ADD98C94AE0B99CF8B06430" type="webcontent" href="s10s.html">
+      <file href="s10s.html" />
+    </resource>
+    <resource identifier="RES-D4AB22CC519454407A8875B7BE5F82EB" type="webcontent" href="s11s.html">
+      <file href="s11s.html" />
+    </resource>
+    <resource identifier="RES-30E8535727DBEF6E13CE8D81B4309951" type="webcontent" href="s12s.html">
+      <file href="s12s.html" />
+    </resource>
+  </resources>
+</manifest>
+

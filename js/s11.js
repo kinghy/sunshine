@@ -103,7 +103,7 @@ $().ready(function () {
             }
         })
         return str=="众家自我";
-    },104.5,106.5,107.5,110.5,111.5,118.5,function () {
+    },104.5,106.5,107,110.5,111,118.5,function () {
         var $letterPos = $("#second_qa .letterPos")
         var selectIndex = 0;
         var $selectedPos = $($letterPos[selectIndex]).addClass("letterInput")

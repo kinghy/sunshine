@@ -20,15 +20,15 @@ $().ready(function () {
         })
     });
 
-    var fs = ChoiceStage.init("first_qa",96,98,$("#jjlg_btn"),$("#zqpb_btn,#zjld_btn"),99,102,103,107,108,112.5);
+    var fs = ChoiceStage.init("first_qa",96,98,$("#jjlg_btn"),$("#xjby_btn,#zjld_btn"),99,102,103,107,108,112.5);
     var ss = SimpleMultiChoiceStage.init("second_qa",114,115,$("#submit_2_btn"),$("#second_qa .answer"),$("#second_qa"),
         ["zctd","zjld_d"],117,119,120,124,125,130);
 
-    var ts = ChoiceStage.init("third_qa",130.5,133,$("#yjzs_btn"),$("#zctd_b_btn,#jtsd_a_btn"),134,137,138,142,143,148);
+    var ts = ChoiceStage.init("third_qa",130.5,133,$("#yjzs_btn"),$("#zctd_b_btn,#mmhh_btn"),134,137,138,142,143,148);
     var fours = SimpleMultiChoiceStage.init("four_qa",149,151,$("#submit_3_btn"),$("#four_qa .answer"),$("#four_qa"),
         ["xhge","rxzr_c"],152,155,156,160,161,165);
-    var fives = ChoiceStage.init("five_qa",165.7,168,$("#hwsk_1_btn"),$("#sscd_btn,#rxzr_btn"),169,172,173,177,178,183);
-    var sixs = ChoiceStage.init("six_qa",184,186,$("#bcxr_btn"),$("#gdxz_btn,#hwsk_btn"),187,190,191,195,196,200);
+    var fives = ChoiceStage.init("five_qa",165.7,168,$("#hwsk_1_btn"),$("#wjtr_btn,#rxzr_btn"),169,172,173,177,178,183);
+    var sixs = ChoiceStage.init("six_qa",184,186,$("#bcxr_btn"),$("#xhcy_btn,#hwsk_btn"),187,190,191,195,196,200);
     var sevens = SimpleMultiChoiceStage.init("seven_qa",201,204,$("#submit_4_btn"),$("#seven_qa .answer"),$("#seven_qa"),
         ["rrjt","whsh"],205,207,208.5,213,214,218);
 

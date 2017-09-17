@@ -1,0 +1,187 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s4.css">
+<script src="js/main.js"></script>
+<script src="js/s4.js"></script>
+<style>
+    body {
+        height: 100%;
+        overflow: hidden;
+    }
+    body, div, p, ul {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/APIWrapper.js"></SCRIPT>
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/SCOFunctions.js"></SCRIPT>
+<body style="overflow: hidden" ONLOAD="setLocation( 's4s.html' )" onunload="return unloadPage()">
+<div id="root" style="width: 100%;height: 100%;overflow: hidden;">
+     <!--Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none;" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start_s4.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s4.mp4" style="object-fit: fill;"></video>
+        <div id="butterfly" class="view_mask" style="display:none;margin: 0 auto;">
+            <div id="butterfly_div" class="butterfly-pos">
+                <img src="resource/butterfly.png">
+                <div style="position: absolute;left: 31px;top: 83px;width: 425px;height: 335px;">
+                    <div style="position: relative;width: 100%;height: 100%">
+                        <img style="z-index:3000;position: absolute;top: 0px;right: 0px;" class="a a_p5" data="p5" src="resource/aj_p5.png">
+                        <img style="z-index:3000;position: absolute;top: 170px;left: 223px;" class="a a_p3" data="p3" src="resource/aj_p3.png">
+                        <img style="z-index:3000;position: absolute;top: 26px;left: 146px;" class="a a_p4" data="p4" src="resource/aj_p4.png">
+                        <img style="z-index:3000;position: absolute;bottom: 0px;left: 77px;" class="a a_p2" data="p2" src="resource/aj_p2.png">
+                        <img style="z-index:3000;position: absolute;left: 0;top: 0;" class="a a_p1" data="p1" src="resource/aj_p1.png">
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="jigsaw_div" class="butterfly-jigsaw">
+                <img class="jigsaw p5" data="p5" src="resource/butterfly_p5.png">
+                <img class="jigsaw p3" data="p3" src="resource/butterfly_p3.png">
+                <img class="jigsaw p4" data="p4" src="resource/butterfly_p4.png"><br>
+                <img class="jigsaw p2" data="p2" src="resource/butterfly_p2.png">
+                <img class="jigsaw p1" data="p1" src="resource/butterfly_p1.png">
+            </div>
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p5" data="p5" src="resource/bj_p5.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p3" data="p3" src="resource/bj_p3.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p4" data="p4" src="resource/bj_p4.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p2" data="p2" src="resource/bj_p2.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p1" data="p1" src="resource/bj_p1.png">
+
+        </div>
+
+        <div id="page_1" class="view_mask" style="display:none;">
+            <div id="p1ToP2"  class="page_right" ></div>
+        </div>
+        <div id="page_2" class="view_mask" style="display:none;">
+            <div id="p2ToP1"  class="page_left"></div>
+            <div id="p2ToP2"  class="page_right"></div>
+        </div>
+
+        <div id="engine" class="view_mask" style="display:none;">
+            <div id="engine_div" class="engine-pos">
+                <img src="resource/engine.png">
+                <div style="position: absolute;left: 43px;top: 38px;width: 470px;height: 300px;">
+                    <div style="position: relative;width: 100%;height: 100%">
+                        <img style="z-index:3000;position: absolute;top: 0px;left: 147px;" class="a a_p5" data="p5" src="resource/eaj_p5.png">
+                        <img style="z-index:3000;position: absolute;bottom: 0px;left: 146px;" class="a a_p3" data="p3" src="resource/eaj_p3.png">
+                        <img style="z-index:3000;position: absolute;top: 139px;left: 0px;" class="a a_p4" data="p4" src="resource/eaj_p4.png">
+                        <img style="z-index:3000;position: absolute;top: 29px;left: 0px;" class="a a_p2" data="p2" src="resource/eaj_p2.png">
+                        <img style="z-index:3000;position: absolute;top: 0px;left: 312px;" class="a a_p1" data="p1" src="resource/eaj_p1.png">
+                        <img style="z-index:3000;position: absolute;top: 139px;right: 0px;" class="a a_p6" data="p6" src="resource/eaj_p6.png">
+                    </div>
+                </div>
+            </div>
+            <div id="jigsaw_div_2" class="engine-jigsaw">
+                <img class="jigsaw p1" data="p1" src="resource/ebj_p1.png">
+                <img class="jigsaw p2" data="p2" src="resource/ebj_p2.png">
+                <img class="jigsaw p3" data="p3" src="resource/ebj_p3.png">
+                <br>
+                <img class="jigsaw p4" data="p4" src="resource/ebj_p4.png">
+                <img class="jigsaw p5" data="p5" src="resource/ebj_p5.png">
+                <img class="jigsaw p6" data="p6" src="resource/ebj_p6.png">
+            </div>
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p5" data="p5" src="resource/eaj_p5.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p3" data="p3" src="resource/eaj_p3.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p4" data="p4" src="resource/eaj_p4.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p2" data="p2" src="resource/eaj_p2.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p1" data="p1" src="resource/eaj_p1.png">
+            <img style="z-index:3001;display: none;position: absolute;" class="j j_p6" data="p6" src="resource/eaj_p6.png">
+
+        </div>
+        <div id="engine_desc" class="view_mask" style="display:none;">
+            <div id="d_p1" data="1" class="dp" style="top: 340px;left: 90px;"></div>
+            <div id="d_p4" data="4" class="dp" style="left: 90px;top: 490px;"></div>
+            <div id="d_p2" data="2" class="dp" style="left: 243px;top: 340px;"></div>
+            <div id="d_p5" data="5" class="dp" style="left: 243px;top: 490px;"></div>
+            <div id="d_p3" data="3" class="dp" style="left: 401px;top: 340px;"></div>
+            <div id="d_p6" data="6" class="dp" style="left: 401px;top: 490px;"></div>
+            <div id="fly" class="back"><img src="resource/fly.png"></div>
+        </div>
+        <div id="engine_desc_0" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_1" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_2" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_3" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_4" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+        <div id="engine_desc_5" class="view_mask" style="display:none;">
+            <div class="back"><img src="resource/back.png"></div>
+        </div>
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end_s4.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+
+
+</div>
+<!--<div  id="log"  style="background-color:antiquewhite;position: absolute;left: 0;top: 0;width: 400px;height: 300px;z-index: 2000">-->
+
+</div>
+</body>
+</html>
+<script>
+
+</script>
