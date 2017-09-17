@@ -18,18 +18,7 @@
 
 </style>
 <body>
-<canvas id="f_canvas" width="500px" height="400px" ></canvas>
+<video src="resource/inertia.mp4" controls></video>
 </body>
 </html>
 
-<script>
-    var canvas = document.getElementById("f_canvas");//获取到canvas元素
-    var context = canvas.getContext("2d");//获取上下文的环境
-    context.beginPath();
-    context.moveTo(0,0);
-    context.lineTo(300,300);
-    context.strokeStyle = "#36D9FF"
-    context.lineWidth = 5;//线条的宽度
-    context.stroke();//绘制
-    context.closePath();
-</script>
