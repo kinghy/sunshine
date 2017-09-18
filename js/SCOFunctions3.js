@@ -41,25 +41,35 @@
 ** POSSIBILITY OF SUCH DAMAGES.
 **
 *******************************************************************************/
+
+
 var startDate;
 var exitPageStatus;
-
-var curScore;
-
+var currentstatus;
+var scormflag=true;
+var thisframe="";
+var suspendstr="";
+currentstatus="incomplete";
 function loadPage()
 {
-   var result = doLMSInitialize();
-
-   var status = doLMSGetValue( "cmi.core.lesson_status" );
-
-   if (status == "not attempted")
-   {
-	  // the student is now attempting the lesson
-	  doLMSSetValue( "cmi.core.lesson_status", "incomplete" );
-   }
-
-   exitPageStatus = false;
-   startTimer();
+	   var result = doLMSInitialize();
+	
+	   var status = doLMSGetValue( "cmi.core.lesson_status" );
+	   thisframe = doLMSGetValue("cmi.core.lesson_location");
+           suspendstr = doLMSGetValue("cmi.suspend_data");
+	   if (status == "not attempted")
+	   {
+		doLMSSetValue( "cmi.core.lesson_status", "incomplete" );
+	   }else if  (status == "incomplete")
+           {
+                currentstatus="incomplete";
+           }else if  (status == "completed")
+           {
+                currentstatus="completed";
+		doLMSSetValue( "cmi.core.lesson_status", "completed" );
+           }
+	   exitPageStatus = false;
+	   startTimer();
 }
 
 
@@ -132,16 +142,21 @@ function doQuit( status )
 {
    computeTime();
    exitPageStatus = true;
-   
+   //currentstatus="incomplete";
    var result;
 
-   result = doLMSSetValue("cmi.core.lesson_status", status);
    result = doLMSCommit();
+   //alert(document.movie.TCurrentFrame("Moviebox")+1);
+   result = doLMSSetValue("cmi.core.lesson_status", status);
+   //doLMSSetValue("cmi.core.lesson_location", document.movie.TCurrentFrame("Moviebox")+1);
+   
 	// NOTE: LMSFinish will unload the current SCO.  All processing
 	//       relative to the current page must be performed prior
 	//		 to calling LMSFinish.   
 
    result = doLMSFinish();
+   //window.opener=null;
+   //window.top.close();
 }
 
 /*******************************************************************************
@@ -156,9 +171,30 @@ function doQuit( status )
 ** button on the browser.  We'll handle this situation the same way we 
 ** would handle a "quit" - as in the user pressing the SCO's quit button.
 *******************************************************************************/
-function unloadPage( status )
+function doQuitClose( status )
 {
+   computeTime();
+   exitPageStatus = true;
+   
+   var result;
 
+   result = doLMSCommit();
+
+   result = doLMSSetValue("cmi.core.lesson_status", status);
+   
+	// NOTE: LMSFinish will unload the current SCO.  All processing
+	//       relative to the current page must be performed prior
+	//		 to calling LMSFinish.   
+
+   result = doLMSFinish();
+   //window.top.opener=null;
+   //window.top.close();
+}
+
+function unloadPage( status )
+{         //computeTime();
+	//alert(status);
+	//alert(document.movie.getVariable("/:cframe"));
 	if (exitPageStatus != true)
 	{
 		doQuit( status );
@@ -225,19 +261,3 @@ function convertTotalSeconds(ts)
    return rtnVal;
 }
 
-
-//设置分数
-function setScore(score)
-{
-	//存储当前分数
-	curScore = score;
-	//只有当平台没有分数或当前分数大于平台分数时，才上传分数（这个功能可以通过平台进行配置）
-	var lmsScore = doLMSGetValue( "cmi.core.score.raw" );
-	if ( lmsScore == "" || score > lmsScore) 
-	{
-		doLMSSetValue( "cmi.core.score.raw", score );
-		if(score>60){
-			doQuit('completed');
-		}
-	}
-}

@@ -1,128 +1,90 @@
-/****************************************************************************
-SCORM_12_APIWrapper.js
-� 2000, 2011 Advanced Distributed Learning (ADL). Some Rights Reserved.
-*****************************************************************************
-
-Advanced Distributed Learning ("ADL") grants you ("Licensee") a  non-exclusive,
-royalty free, license to use and redistribute this  software in source and binary
-code form, provided that i) this copyright  notice and license appear on all
-copies of the software; and ii) Licensee does not utilize the software in a
-manner which is disparaging to ADL.
-
-This software is provided "AS IS," without a warranty of any kind.
-ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING
-ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
-NON-INFRINGEMENT, ARE HEREBY EXCLUDED.  ADL AND ITS LICENSORS SHALL NOT BE LIABLE
-FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR
-DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES.  IN NO EVENT WILL ADL OR ITS LICENSORS
-BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT, INDIRECT, SPECIAL,
-CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE
-THEORY OF LIABILITY, ARISING OUT OF THE USE OF OR INABILITY TO USE SOFTWARE, EVEN IF
-ADL HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-
-*****************************************************************************
-*SCORM_12_APIwrapper.js code is licensed under the Creative Commons
-Attribution-ShareAlike 3.0 Unported License.
-
-To view a copy of this license:
-
-     - Visit http://creativecommons.org/licenses/by-sa/3.0/
-     - Or send a letter to
-            Creative Commons, 444 Castro Street,  Suite 900, Mountain View,
-            California, 94041, USA.
-
-The following is a summary of the full license which is available at:
-
-      - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-
-*****************************************************************************
-
-Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
-
-You are free to:
-
-     - Share : to copy, distribute and transmit the work
-     - Remix : to adapt the work
-
-Under the following conditions:
-
-     - Attribution: You must attribute the work in the manner specified by
-       the author or licensor (but not in any way that suggests that they
-       endorse you or your use of the work).
-
-     - Share Alike: If you alter, transform, or build upon this work, you
-       may distribute the resulting work only under the same or similar
-       license to this one.
-
-With the understanding that:
-
-     - Waiver: Any of the above conditions can be waived if you get permission
-       from the copyright holder.
-
-     - Public Domain: Where the work or any of its elements is in the public
-       domain under applicable law, that status is in no way affected by the license.
-
-     - Other Rights: In no way are any of the following rights affected by the license:
-
-           * Your fair dealing or fair use rights, or other applicable copyright
-             exceptions and limitations;
-
-           * The author's moral rights;
-
-           * Rights other persons may have either in the work itself or in how the
-             work is used, such as publicity or privacy rights.
-
-     - Notice: For any reuse or distribution, you must make clear to others the
-               license terms of this work.
-
-****************************************************************************/
 /*******************************************************************************
+**
+** FileName: APIWrapper.js
+**
+*******************************************************************************/
+
+/*******************************************************************************
+**
+** Concurrent Technologies Corporation (CTC) grants you ("Licensee") a non-
+** exclusive, royalty free, license to use, modify and redistribute this
+** software in source and binary code form, provided that i) this copyright
+** notice and license appear on all copies of the software; and ii) Licensee does
+** not utilize the software in a manner which is disparaging to CTC.
+**
+** This software is provided "AS IS," without a warranty of any kind.  ALL
+** EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY
+** IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-
+** INFRINGEMENT, ARE HEREBY EXCLUDED.  CTC AND ITS LICENSORS SHALL NOT BE LIABLE
+** FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR
+** DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES.  IN NO EVENT WILL CTC  OR ITS
+** LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT,
+** INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER
+** CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF THE USE OF
+** OR INABILITY TO USE SOFTWARE, EVEN IF CTC  HAS BEEN ADVISED OF THE POSSIBILITY
+** OF SUCH DAMAGES.
+**
+*******************************************************************************/
+
+/*******************************************************************************
+** This file is part of the ADL Sample API Implementation intended to provide
+** an elementary example of the concepts presented in the ADL Sharable
+** Content Object Reference Model (SCORM).
+**
+** The purpose in wrapping the calls to the API is to (1) provide a
+** consistent means of finding the LMS API implementation within the window
+** hierarchy and (2) to validate that the data being exchanged via the
+** API conforms to the defined CMI data types.
+**
+** This is just one possible example for implementing the API guidelines for
+** runtime communication between an LMS and executable content components.
+** There are several other possible implementations.
+**
 ** Usage: Executable course content can call the API Wrapper
 **      functions as follows:
 **
 **    javascript:
 **          var result = doLMSInitialize();
-**          if (result != true)
+**          if (result != true) 
 **          {
 **             // handle error
 **          }
 **
-**    authorware:
+**    authorware
 **          result := ReadURL("javascript:doLMSInitialize()", 100)
-**
-**    director:
-**          result = externalEvent("javascript:doLMSInitialize()")
-**
 **
 *******************************************************************************/
 
-var debug = true;  // set this to false to turn debugging off
-
-var output = window.console; // output can be set to any object that has a log(string) function
-                             // such as: var output = { log: function(str){alert(str);} };
+var _Debug = false;  // set this to false to turn debugging off
+                     // and get rid of those annoying alert boxes.
 
 // Define exception/error codes
-var _NoError = {"code":"0","string":"No Error","diagnostic":"No Error"};
-var _GeneralException = {"code":"101","string":"General Exception","diagnostic":"General Exception"};
+var _NoError = 0;
+var _GeneralException = 101;
+var _ServerBusy = 102;
+var _InvalidArgumentError = 201;
+var _ElementCannotHaveChildren = 202;
+var _ElementIsNotAnArray = 203;
+var _NotInitialized = 301;
+var _NotImplementedError = 401;
+var _InvalidSetValue = 402;
+var _ElementIsReadOnly = 403;
+var _ElementIsWriteOnly = 404;
+var _IncorrectDataType = 405;
 
-var initialized = false;
 
 // local variable definitions
 var apiHandle = null;
+var API = null;
+var findAPITries = 0;
 
-// xAPI Extention helper >
-// Pass-throughs to handle other common SCORM 1.2 wrapper versions.
-initializeCommunication = doLMSInitialize;
-terminateCommunication = doLMSFinish;
-storeDataValue = doLMSSetValue;
-retrieveDataValue = doLMSGetValue;
 
 /*******************************************************************************
 **
 ** Function: doLMSInitialize()
 ** Inputs:  None
-** Return:  true if the initialization was successful, or
-**          false if the initialization failed.
+** Return:  CMIBoolean true if the initialization was successful, or
+**          CMIBoolean false if the initialization failed.
 **
 ** Description:
 ** Initialize communication with LMS by calling the LMSInitialize
@@ -131,39 +93,18 @@ retrieveDataValue = doLMSGetValue;
 *******************************************************************************/
 function doLMSInitialize()
 {
-   if (initialized) return "true";
-
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSInitialize was not successful.");
+     // alert("Unable to locate the LMS's API Implementation.\nLMSInitialize was not successful.");
       return "false";
    }
 
    var result = api.LMSInitialize("");
+
    if (result.toString() != "true")
    {
       var err = ErrorHandler();
-      message("LMSInitialize failed with error code: " + err.code);
-   }
-   else
-   {
-	   initialized = true;
-
-    // xAPI Extensions
-    var config = {
-        lrs:{
-           endpoint:"<LRS Endpoint>",
-           user:"<LRS User>",
-           password:"<LRS Password>"
-        },
-        courseId:"<Course IRI>",
-        lmsHomePage:"<LMS Home Page>",
-        isScorm2004:false
-    }; // isSCORM2004:true above - to convert SCORM 2004 courses
-    xapi.setConfig(config);
-    xapi.initializeAttempt();
-
    }
 
    return result.toString();
@@ -173,8 +114,8 @@ function doLMSInitialize()
 **
 ** Function doLMSFinish()
 ** Inputs:  None
-** Return:  true if successful
-**          false if failed.
+** Return:  CMIBoolean true if successful
+**          CMIBoolean false if failed.
 **
 ** Description:
 ** Close communication with LMS by calling the LMSFinish
@@ -183,29 +124,23 @@ function doLMSInitialize()
 *******************************************************************************/
 function doLMSFinish()
 {
-   if (! initialized) return "true";
-
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSFinish was not successful.");
+      //alert("Unable to locate the LMS's API Implementation.\nLMSFinish was not successful.");
       return "false";
    }
    else
    {
-      // xAPI Extension
-      xapi.terminateAttempt();
-
       // call the LMSFinish function that should be implemented by the API
+
       var result = api.LMSFinish("");
       if (result.toString() != "true")
       {
          var err = ErrorHandler();
-         message("LMSFinish failed with error code: " + err.code);
       }
-   }
 
-   initialized = false;
+   }
 
    return result.toString();
 }
@@ -226,29 +161,28 @@ function doLMSFinish()
 function doLMSGetValue(name)
 {
    var api = getAPIHandle();
-   var result = "";
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSGetValue was not successful.");
-   }
-   else if (! initialized && ! doLMSInitialize())
-   {
-      var err = ErrorHandler(); // get why doLMSInitialize() returned false
-      message("LMSGetValue failed - Could not initialize communication with the LMS - error code: " + err.code);
+      //alert("Unable to locate the LMS's API Implementation.\nLMSGetValue was not successful.");
+      return "";
    }
    else
    {
-      result = api.LMSGetValue(name);
-
-      var error = ErrorHandler();
-      if (error.code != _NoError.code)
+      var value = api.LMSGetValue(name);
+      var errCode = api.LMSGetLastError().toString();
+      if (errCode != _NoError)
       {
          // an error was encountered so display the error description
-         message("LMSGetValue("+name+") failed. \n"+ error.code + ": " + error.string);
-         result = "";
+         var errDescription = api.LMSGetErrorString(errCode);
+         //alert("LMSGetValue("+name+") failed. \n"+ errDescription);
+         return "";
+      }
+      else
+      {
+         
+         return value.toString();
       }
    }
-   return result.toString();
 }
 
 /*******************************************************************************
@@ -256,8 +190,8 @@ function doLMSGetValue(name)
 ** Function doLMSSetValue(name, value)
 ** Inputs:  name -string representing the data model defined category or element
 **          value -the value that the named element or category will be assigned
-** Return:  true if successful
-**          false if failed.
+** Return:  CMIBoolean true if successful
+**          CMIBoolean false if failed.
 **
 ** Description:
 ** Wraps the call to the LMS LMSSetValue function
@@ -266,63 +200,47 @@ function doLMSGetValue(name)
 function doLMSSetValue(name, value)
 {
    var api = getAPIHandle();
-   var result = "false";
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSSetValue was not successful.");
-   }
-   else if (! initialized && ! doLMSInitialize())
-   {
-      var err = ErrorHandler(); // get why doLMSInitialize() returned false
-      message("LMSSetValue failed - Could not initialize communication with the LMS - error code: " + err.code);
+      //alert("Unable to locate the LMS's API Implementation.\nLMSSetValue was not successful.");
+      return;
    }
    else
    {
-      // xAPI Extension
-      xapi.saveDataValue(name, value);
-
-      result = api.LMSSetValue(name, value);
+      var result = api.LMSSetValue(name, value);
       if (result.toString() != "true")
       {
          var err = ErrorHandler();
-         message("LMSSetValue("+name+", "+value+") failed. \n"+ err.code + ": " + err.string);
       }
    }
 
-   return result.toString();
+   return;
 }
 
 /*******************************************************************************
 **
 ** Function doLMSCommit()
 ** Inputs:  None
-** Return:  true if successful
-**          false if failed.
+** Return:  None
 **
 ** Description:
-** Commits the data to the LMS.
+** Call the LMSCommit function 
 **
 *******************************************************************************/
 function doLMSCommit()
 {
    var api = getAPIHandle();
-   var result = "false";
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSCommit was not successful.");
-   }
-   else if (! initialized && ! doLMSInitialize())
-   {
-      var err = ErrorHandler(); // get why doLMSInitialize() returned false
-      message("LMSCommit failed - Could not initialize communication with the LMS - error code: " + err.code);
+      //alert("Unable to locate the LMS's API Implementation.\nLMSCommit was not successful.");
+      return "false";
    }
    else
    {
-      result = api.LMSCommit("");
+      var result = api.LMSCommit("");
       if (result != "true")
       {
          var err = ErrorHandler();
-         message("LMSCommit failed - error code: " + err.code);
       }
    }
 
@@ -336,7 +254,7 @@ function doLMSCommit()
 ** Return:  The error code that was set by the last LMS function call
 **
 ** Description:
-** Call the LMSGetLastError function
+** Call the LMSGetLastError function 
 **
 *******************************************************************************/
 function doLMSGetLastError()
@@ -344,9 +262,9 @@ function doLMSGetLastError()
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSGetLastError was not successful.");
+      //alert("Unable to locate the LMS's API Implementation.\nLMSGetLastError was not successful.");
       //since we can't get the error code from the LMS, return a general error
-      return _GeneralException.code; //General Exception
+      return _GeneralError;
    }
 
    return api.LMSGetLastError().toString();
@@ -359,7 +277,7 @@ function doLMSGetLastError()
 ** Return:  The textual description that corresponds to the input error code
 **
 ** Description:
-** Call the LMSGetErrorString function
+** Call the LMSGetErrorString function 
 **
 ********************************************************************************/
 function doLMSGetErrorString(errorCode)
@@ -367,8 +285,7 @@ function doLMSGetErrorString(errorCode)
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSGetErrorString was not successful.");
-      return _GeneralException.string;
+      //alert("Unable to locate the LMS's API Implementation.\nLMSGetErrorString was not successful.");
    }
 
    return api.LMSGetErrorString(errorCode).toString();
@@ -378,7 +295,7 @@ function doLMSGetErrorString(errorCode)
 **
 ** Function doLMSGetDiagnostic(errorCode)
 ** Inputs:  errorCode - Error Code(integer format), or null
-** Return:  The vendor specific textual description that corresponds to the
+** Return:  The vendor specific textual description that corresponds to the 
 **          input error code
 **
 ** Description:
@@ -390,8 +307,7 @@ function doLMSGetDiagnostic(errorCode)
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nLMSGetDiagnostic was not successful.");
-      return "Unable to locate the LMS's API Implementation. LMSGetDiagnostic was not successful.";
+      //alert("Unable to locate the LMS's API Implementation.\nLMSGetDiagnostic was not successful.");
    }
 
    return api.LMSGetDiagnostic(errorCode).toString();
@@ -399,46 +315,81 @@ function doLMSGetDiagnostic(errorCode)
 
 /*******************************************************************************
 **
-** Function ErrorHandler()
-** Inputs:  None
-** Return:  The current error
+** Function LMSIsInitialized()
+** Inputs:  none
+** Return:  true if the LMS API is currently initialized, otherwise false
 **
 ** Description:
-** Determines if an error was encountered by the previous API call
-** and if so, returns the error.
+** Determines if the LMS API is currently initialized or not.
 **
-** Usage:
-** var last_error = ErrorHandler();
-** if (last_error.code != _NoError.code)
-** {
-**    message("Encountered an error. Code: " + last_error.code +
-**                                "\nMessage: " + last_error.string +
-**                                "\nDiagnostics: " + last_error.diagnostic);
-** }
 *******************************************************************************/
-function ErrorHandler()
+function LMSIsInitialized()
 {
-   var error = {"code":_NoError.code, "string":_NoError.string, "diagnostic":_NoError.diagnostic};
+   // there is no direct method for determining if the LMS API is initialized
+   // for example an LMSIsInitialized function defined on the API so we'll try
+   // a simple LMSGetValue and trap for the LMS Not Initialized Error
+
    var api = getAPIHandle();
    if (api == null)
    {
-      message("Unable to locate the LMS's API Implementation.\nCannot determine LMS error code.");
-      error.code = _GeneralException.code;
-      error.string = _GeneralException.string;
-      error.diagnostic = "Unable to locate the LMS's API Implementation. Cannot determine LMS error code.";
-      return error;
+      //alert("Unable to locate the LMS's API Implementation.\nLMSIsInitialized() failed.");
+      return false;
+   }
+   else
+   {
+      var value = api.LMSGetValue("cmi.core.student_name");
+      var errCode = api.LMSGetLastError().toString();
+      if (errCode == _NotInitialized)
+      {
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+   }
+}
+
+/*******************************************************************************
+**
+** Function ErrorHandler()
+** Inputs:  None
+** Return:  The current value of the LMS Error Code
+**
+** Description:
+** Determines if an error was encountered by the previous API call
+** and if so, displays a message to the user.  If the error code
+** has associated text it is also displayed.
+**
+*******************************************************************************/
+function ErrorHandler()
+{
+   var api = getAPIHandle();
+   if (api == null)
+   {
+      //alert("Unable to locate the LMS's API Implementation.\nCannot determine LMS error code.");
+      return;
    }
 
    // check for errors caused by or from the LMS
-   error.code = api.LMSGetLastError().toString();
-   if (error.code != _NoError.code)
+   var errCode = api.LMSGetLastError().toString();
+   if (errCode != _NoError)
    {
       // an error was encountered so display the error description
-      error.string = api.LMSGetErrorString(error.code);
-      error.diagnostic = api.LMSGetDiagnostic("");
+      var errDescription = api.LMSGetErrorString(errCode);
+
+      if (_Debug == true)
+      {
+         errDescription += "\n";
+         errDescription += api.LMSGetDiagnostic(null);
+         // by passing null to LMSGetDiagnostic, we get any available diagnostics
+         // on the previous error.
+      }
+
+      //alert(errDescription);
    }
 
-   return error;
+   return errCode;
 }
 
 /******************************************************************************
@@ -475,21 +426,23 @@ function getAPIHandle()
 *******************************************************************************/
 function findAPI(win)
 {
-	var findAPITries = 0;
    while ((win.API == null) && (win.parent != null) && (win.parent != win))
    {
       findAPITries++;
       // Note: 7 is an arbitrary number, but should be more than sufficient
-      if (findAPITries > 7)
+      if (findAPITries > 7) 
       {
-         message("Error finding API -- too deeply nested.");
+         //alert("Error finding API -- too deeply nested.");
          return null;
       }
-
+      
       win = win.parent;
+
    }
    return win.API;
 }
+
+
 
 /*******************************************************************************
 **
@@ -498,7 +451,7 @@ function findAPI(win)
 ** Return:  If an API object is found, it's returned, otherwise null is returned
 **
 ** Description:
-** This function looks for an object named API, first in the current window's
+** This function looks for an object named API, first in the current window's 
 ** frame hierarchy and then, if necessary, in the current window's opener window
 ** hierarchy (if there is an opener window).
 **
@@ -512,29 +465,9 @@ function getAPI()
    }
    if (theAPI == null)
    {
-      message("Unable to find an API adapter");
+      //alert("Unable to find an API adapter");
    }
    return theAPI
 }
 
-/*******************************************************************************
-**
-** Function message(str)
-** Inputs:  String - message you want to send to the designated output
-** Return:  none
-** Depends on: boolean debug to indicate if output is wanted
-**             object output to handle the messages. must implement a function
-**             log(string)
-**
-** Description:
-** This function outputs messages to a specified output. You can define your own
-** output object. It will just need to implement a log(string) function. This
-** interface was used so that the output could be assigned the window.console object.
-*******************************************************************************/
-function message(str)
-{
-   if(debug)
-   {
-      output.log(str);
-   }
-}
+
