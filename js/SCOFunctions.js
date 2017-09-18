@@ -20,7 +20,7 @@
 **
 ** References: ADL SCORM
 **
-********************************************************************************
+/*******************************************************************************
 **
 ** Concurrent Technologies Corporation (CTC) grants you ("Licensee") a non-
 ** exclusive, royalty free, license to use, modify and redistribute this
@@ -41,62 +41,122 @@
 ** POSSIBILITY OF SUCH DAMAGES.
 **
 *******************************************************************************/
+
+
 var startDate;
 var exitPageStatus;
-
+var currentstatus;
+var scormflag=true;
+var thisframe="";
+var suspendstr="";
+currentstatus="incomplete";
 function loadPage()
 {
-   var result = doInitialize();
-   exitPageStatus = false;
-   
-   
+	   var result = doLMSInitialize();
+	
+	   var status = doLMSGetValue( "cmi.core.lesson_status" );
+	   thisframe = doLMSGetValue("cmi.core.lesson_location");
+           suspendstr = doLMSGetValue("cmi.suspend_data");
+	   if (status == "not attempted")
+	   {
+		doLMSSetValue( "cmi.core.lesson_status", "incomplete" );
+	   }else if  (status == "incomplete")
+           {
+                currentstatus="incomplete";
+           }else if  (status == "completed")
+           {
+                currentstatus="completed";
+		doLMSSetValue( "cmi.core.lesson_status", "completed" );
+           }
+	   exitPageStatus = false;
+	   startTimer();
 }
 
-function checkLocation( current_location )
-{  
-     
-   var result = doInitialize();
-   
-   exitPageStatus = false;
-     
-   
-   var location = doGetValue( "cmi.location");
 
-   if ( location == "" ) 
+function startTimer()
+{
+   startDate = new Date().getTime();
+}
+
+function computeTime()
+{
+   if ( startDate != 0 )
    {
-       doSetValue( "cmi.location", current_location );
+      var currentDate = new Date().getTime();
+      var elapsedSeconds = ( (currentDate - startDate) / 1000 );
+      var formattedTime = convertTotalSeconds( elapsedSeconds );
    }
-   else if ( location != current_location )
+   else
    {
-       exitPageStatus = true;
-       document.location.href = location;
+      formattedTime = "00:00:00.0";
    }
-      
+
+   doLMSSetValue( "cmi.core.session_time", formattedTime );
 }
 
-function setLocation( current_location )
-{   
-  
-     doSetValue( "cmi.location", current_location );
-      
-}
+function doBack()
+{
+   doLMSSetValue( "cmi.core.exit", "suspend" );
 
-
-
-
-function doQuit()
-{   
-   doSetValue( "cmi.exit", "suspend" );
-   
+   computeTime();
    exitPageStatus = true;
    
    var result;
 
-	// NOTE: Terminate will unload the current SCO.  All processing
-	//       relative to the current page must be performed prior
-	//		 to calling Terminate.   
+   result = doLMSCommit();
 
-   result = doTerminate();
+	// NOTE: LMSFinish will unload the current SCO.  All processing
+	//       relative to the current page must be performed prior
+	//		 to calling LMSFinish.   
+   
+   result = doLMSFinish();
+
+}
+
+function doContinue( status )
+{
+   // Reinitialize Exit to blank
+   doLMSSetValue( "cmi.core.exit", "" );
+
+   var mode = doLMSGetValue( "cmi.core.lesson_mode" );
+
+   if ( mode != "review"  &&  mode != "browse" )
+   {
+      doLMSSetValue( "cmi.core.lesson_status", status );
+   }
+ 
+   computeTime();
+   exitPageStatus = true;
+   
+   var result;
+   result = doLMSCommit();
+	// NOTE: LMSFinish will unload the current SCO.  All processing
+	//       relative to the current page must be performed prior
+	//		 to calling LMSFinish.   
+
+   result = doLMSFinish();
+
+}
+
+function doQuit( status )
+{
+   computeTime();
+   exitPageStatus = true;
+   //currentstatus="incomplete";
+   var result;
+
+   result = doLMSCommit();
+   //alert(document.movie.TCurrentFrame("Moviebox")+1);
+   result = doLMSSetValue("cmi.core.lesson_status", status);
+   //doLMSSetValue("cmi.core.lesson_location", document.movie.TCurrentFrame("Moviebox")+1);
+   
+	// NOTE: LMSFinish will unload the current SCO.  All processing
+	//       relative to the current page must be performed prior
+	//		 to calling LMSFinish.   
+
+   result = doLMSFinish();
+   //window.opener=null;
+   //window.top.close();
 }
 
 /*******************************************************************************
@@ -111,17 +171,93 @@ function doQuit()
 ** button on the browser.  We'll handle this situation the same way we 
 ** would handle a "quit" - as in the user pressing the SCO's quit button.
 *******************************************************************************/
-function unloadPage()
-{    
-    
+function doQuitClose( status )
+{
+   computeTime();
+   exitPageStatus = true;
+   
+   var result;
+
+   result = doLMSCommit();
+
+   result = doLMSSetValue("cmi.core.lesson_status", status);
+   
+	// NOTE: LMSFinish will unload the current SCO.  All processing
+	//       relative to the current page must be performed prior
+	//		 to calling LMSFinish.   
+
+   result = doLMSFinish();
+   //window.top.opener=null;
+   //window.top.close();
+}
+
+function unloadPage( status )
+{         //computeTime();
+	//alert(status);
+	//alert(document.movie.getVariable("/:cframe"));
 	if (exitPageStatus != true)
 	{
-		doQuit();
+		doQuit( status );
 	}
 
 	// NOTE:  don't return anything that resembles a javascript
 	//		  string from this function or IE will take the
 	//		  liberty of displaying a confirm message box.
 	
+}
+
+/*******************************************************************************
+** this function will convert seconds into hours, minutes, and seconds in
+** CMITimespan type format - HHHH:MM:SS.SS (Hours has a max of 4 digits &
+** Min of 2 digits
+*******************************************************************************/
+function convertTotalSeconds(ts)
+{
+   var sec = (ts % 60);
+
+   ts -= sec;
+   var tmp = (ts % 3600);  //# of seconds in the total # of minutes
+   ts -= tmp;              //# of seconds in the total # of hours
+
+   // convert seconds to conform to CMITimespan type (e.g. SS.00)
+   sec = Math.round(sec*100)/100;
+   
+   var strSec = new String(sec);
+   var strWholeSec = strSec;
+   var strFractionSec = "";
+
+   if (strSec.indexOf(".") != -1)
+   {
+      strWholeSec =  strSec.substring(0, strSec.indexOf("."));
+      strFractionSec = strSec.substring(strSec.indexOf(".")+1, strSec.length);
+   }
+   
+   if (strWholeSec.length < 2)
+   {
+      strWholeSec = "0" + strWholeSec;
+   }
+   strSec = strWholeSec;
+   
+   if (strFractionSec.length)
+   {
+      strSec = strSec+ "." + strFractionSec;
+   }
+
+
+   if ((ts % 3600) != 0 )
+      var hour = 0;
+   else var hour = (ts / 3600);
+   if ( (tmp % 60) != 0 )
+      var min = 0;
+   else var min = (tmp / 60);
+
+   if ((new String(hour)).length < 2)
+      hour = "0"+hour;
+   if ((new String(min)).length < 2)
+      min = "0"+min;
+
+   var rtnVal = hour+":"+min+":"+strSec;
+
+   return rtnVal;
 }
 
