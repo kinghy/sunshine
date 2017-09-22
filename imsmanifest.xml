@@ -77,42 +77,67 @@
     </organization>
   </organizations>
   <resources>
-    <resource identifier="RES-CF2D0189DAB4DED1420C6330B73A1993" type="webcontent" href="s1s.html">
-      <file href="s1s.html" />
+    <resource identifier="RES-CF2D0189DAB4DED1420C6330B73A1993" type="webcontent" href="index.html" adlcp:scormtype="sco">
+      <file href="index.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-5175BA17121A25277730B5346762A8D0" type="webcontent" href="s2s.html">
       <file href="s2s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-B6537B3A08CC90F992AC2BA54341F87F" type="webcontent" href="s3s.html">
       <file href="s3s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-E534758903E6FF84DC3783DE3F45D901" type="webcontent" href="s4s.html">
       <file href="s4s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-243496F4B0C485E7422ACDF523656320" type="webcontent" href="s5s.html">
       <file href="s5s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-6456D3E70C7A38365D7028754247AF01" type="webcontent" href="s6s.html">
       <file href="s6s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-23B6BE509D002928EBC6BEC14A9E3E29" type="webcontent" href="s7s.html">
       <file href="s7s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-4CFE606D73552366ABE52B5B80122849" type="webcontent" href="s8s.html">
       <file href="s8s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-7540E88833D7A0193CE246BD58B4B695" type="webcontent" href="s9s.html">
       <file href="s9s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-447B940B8ADD98C94AE0B99CF8B06430" type="webcontent" href="s10s.html">
       <file href="s10s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-D4AB22CC519454407A8875B7BE5F82EB" type="webcontent" href="s11s.html">
       <file href="s11s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
     <resource identifier="RES-30E8535727DBEF6E13CE8D81B4309951" type="webcontent" href="s12s.html">
       <file href="s12s.html" />
+      <file href="js/APIWrapper.js" />
+      <file href="js/SCOFunctions.js" />
     </resource>
   </resources>
 </manifest>
+
 
