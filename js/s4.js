@@ -106,7 +106,7 @@ $().ready(function () {
             setTimeout(function () {
                 $i.attr("src","resource/fly.png");
                 s.hide();
-                s.runStage(11);
+                s.runStage(12);
             },500)
         })
 
@@ -131,15 +131,15 @@ $().ready(function () {
     var eights = Stage.init("engine_desc_3",134.5,137,back);
     var nines = Stage.init("engine_desc_4",137.5,140,back);
     var tens = Stage.init("engine_desc_5",140.7,143,back);
-
-    var es = Stage.init(null,144,0)
+    var elevens = Stage.init("engine_desc_6",143.7,146,back);
+    var es = Stage.init(null,146.5,0)
 
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
 //     var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,es],function () {
 //         $("#end_page").show();
 //     });
-    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,eights,nines,tens,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[zs,fs,ss,ts,fours,fives,sixs,sevens,eights,nines,tens,elevens,es],function () {
         $("#end_page").show();
     });
 
