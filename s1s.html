@@ -1,0 +1,133 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no,minimal-ui ">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>阳光之道</title>
+
+</head>
+
+<link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/s1.css">
+<script src="js/main.js"></script>
+<script src="js/s1.js"></script>
+
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/APIWrapper.js"></SCRIPT>
+<SCRIPT LANGUAGE=JAVASCRIPT SRC="js/SCOFunctions.js"></SCRIPT>
+<body ONLOAD="loadPage()" onunload="return unloadPage()">
+<div id="root" style="width: 100%;height: 100%">
+    <!-- Loading -->
+    <div id="loading_page" class="page_full">
+        <img id="bg" src="resource/bg.png" width="100%" height="100%" />
+        <div class="loading_head">
+            <img id="logo" src="resource/logo_s1.png" />
+        </div>
+        <div class="loading_foot">
+            <div style="margin-bottom: -25px;margin-left: 20px;"><canvas id="cv"></canvas></div>
+            <img id="stage" src="resource/stage.png"   />
+        </div>
+    </div>
+    <!-- 第二页 -->
+    <div  id="start_page" style="display: none" class="page_full">
+        <img id="bg2" src="resource/bg2.png" width="100%" height="100%" />
+        <div class="start_head">
+            <img id="logo_start" src="resource/logo_start.png"   />
+        </div>
+        <div class="start_foot" >
+            <div style="margin-bottom: 48px"><img id="go_btn" src="resource/go.png" /></div>
+            <div style="margin-right: 30px"><img id="logo_bottom" src="resource/logo_bottom.png" /></div>
+        </div>
+    </div>
+    <!-- 视频 -->
+    <div id="pageWrap" style="overflow: hidden; display: none;">
+
+        <video id="video" preload="auto" data-index="1" x-webkit-airplay="" playsinline="" webkit-playsinline=""
+               x5-video-player-fullscreen="true" x5-video-player-type="h5"
+               width="100%" height="100%" poster="" src="resource/s1.mp4" style="object-fit: fill;"></video>
+
+        <div id="desc" class="desc_book" style="display:none;">
+            <img src="resource/desc.png" >
+        </div>
+        <div id="start_qa" class="start_qa" style="display:none;">
+            <div class="light_book">
+                <img id="light_img" src="resource/light.png"  >
+                <div class="book_pos">
+                    <img id="book_img" src="resource/book.png" >
+                </div>
+                <div style="margin-top: -44px">
+                    <img src="resource/hand.png" >
+                </div>
+                <div>
+                    <img src="resource/goon_text.png" >
+                </div>
+            </div>
+            <div class="next_pos" >
+                <img src="resource/next.png" >
+            </div>
+        </div>
+        <div id="first_qa" style="display: none" class="question_pos">
+            <img id="y_btn" data="yes" src="resource/yes.png" style="margin-right: 200px"  />
+            <img id="n_btn" data="no" src="resource/no.png" style=""  />
+        </div>
+        <div id="second_qa" style="display: none" class="question_pos">
+            <img id="y3_btn" data="y3" src="resource/y3.png" style="margin-right: 200px"  />
+            <img id="y4_btn" data="y4" src="resource/y4.png" style=""  /><br><br><br><br>
+            <img id="y5_btn" data="y5" src="resource/y5.png" style="margin-right: 200px"  />
+            <img id="y6_btn" data="y6" src="resource/y6.png" style=""  />
+        </div>
+        <div id="third_qa" style="display: none" class="question_pos">
+            <img id="ysly_btn" data="ysly" src="resource/ysly.png" style="margin-right: 200px"  />
+            <img id="hlwjr_btn" data="hlwjr" src="resource/hlwjr.png" style=""  /><br><br><br><br>
+            <img id="swkj_btn" data="swkj" src="resource/swkj.png" style="margin-right: 200px"  />
+            <img id="qjny_btn" data="qjny" src="resource/qjny.png" style=""  />
+        </div>
+        <div id="fourth_qa" style="display: none" class="question_pos question_pos_f">
+            <div id="fourth_answer" style="margin:0 auto;padding-top:10px;width:585px;height:236px;background-image: url(resource/kuang.png);  -moz-background-size:100% 100%;background-size:100% 100%;">
+            </div>
+            <div><img id="submit_btn" data="submit" src="resource/submit.png" style=""></div>
+            <div id="fourth_choice" >
+                <div class="fourth_answer_btn">
+                    <div class="answer_div"><img id="zqjy_btn" data="zqjy" src="resource/zqjy.png" style=""  /></div>
+                    <div class="answer_div"><img id="hbjc_btn" data="hbjc" src="resource/hbjc.png" style=""  /></div>
+                    <div class="answer_div"><img id="rhyy_btn" data="rhyy" src="resource/rhyy.png" style=""  /></div>
+                    <div style="clear: both"></div>
+                </div>
+                <div class="fourth_answer_btn">
+                    <div class="answer_div"><img id="xybzbx_btn" data="xybzbx" src="resource/xybzbx.png" style=""  /></div>
+                    <div class="answer_div"><img id="zcgl_btn" data="zcgl" src="resource/zcgl.png" style=""  /></div>
+                    <div class="answer_div"><img id="hjs_btn" data="hjs" src="resource/hjs.png" style=""  /></div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 第三页 -->
+    <div  id="end_page" style="display: none" class="page_full">
+        <img id="bg3" src="resource/bg.png" width="100%" height="100%" />
+        <div class="end_head">
+            <img id="logo_end" src="resource/logo_end.png" style=""  />
+        </div>
+        <div class="end_foot">
+            <div style="margin-bottom: 73px">
+                <img id="exit_btn" src="resource/exit_btn.png" style=""/>
+                <img id="replay_btn" src="resource/replay_btn.png" style="margin-left: 75px"/>
+            </div>
+            <div style="margin-right: 60px"><img id="logo_bottom_end" src="resource/logo_bottom.png" style=""  /></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
