@@ -36,12 +36,12 @@ $().ready(function () {
     var ts = ChoiceStage.init("first_qa",71,79,$("#y_btn"),$("#n_btn"),79,82.5,82.6,86,86.3,92);
     var fours = ChoiceStage.init("second_qa",92.8,100,$("#y3_btn"),$("#y4_btn,#y5_btn,#y6_btn"),100.5,104,104.5,107,108.3,114);
     var fives = ChoiceStage.init("third_qa",114.8,120,$("#hlwjr_btn"),$("#ysly_btn,#qjny_btn,#swkj_btn"),121,124,124.7,128,128.7,134);
-    var sixs = MultiChoiceStage.init("fourth_qa",135,141,$("#submit_btn"),$("#fourth_choice img"),$("#fourth_answer"),["rhyy","xybzbx","zcgl","hjs"],141.5,145,145,148,148.8,154);
+    // var sixs = MultiChoiceStage.init("fourth_qa",135,141,$("#submit_btn"),$("#fourth_choice img"),$("#fourth_answer"),["rhyy","xybzbx","zcgl","hjs"],141.5,145,145,148,148.8,154);
 
     var es = Stage.init(null,155.5,0)
 
 //        $("#desc").find("#light_img").addClass("light_rotate")
-    var sm = VideoStageManager.init("pageWrap","video",[fs,ss,ts,fours,fives,sixs,es],function () {
+    var sm = VideoStageManager.init("pageWrap","video",[fs,ss,ts,fours,fives,es],function () {
         $("#end_page").show();
     });
 
