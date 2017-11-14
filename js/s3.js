@@ -53,13 +53,13 @@ $().ready(function () {
         })
     });
 
-    var sixs = Stage.init("book_1",140,275,function (s) {//初始化
+    var sixs = Stage.init("book_1",140,274,function (s) {//初始化
         $("#page2Next").click(function () {
             s.playNext();
         })
     });
 
-    var sevens = Stage.init("iphone",276,282,function (s) {//初始化
+    var sevens = Stage.init("iphone",275,282,function (s) {//初始化
         $("#article").scroll(function(e){
             var $this =$(this),
                 viewH =$this.height(),//可见高度
