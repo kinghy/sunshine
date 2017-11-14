@@ -85,11 +85,11 @@ $().ready(function () {
         function slideRight() {
             var left = parseFloat($("#office").css("left"));
             if(fstimes>1) {
-                if (left <= -3390) {
-                    $("#goonSecond").fadeIn();
-                } else {
-                    $("#goonSecond").fadeOut();
-                }
+                // if (left <= -3390) {
+                //     $("#goonSecond").fadeIn();
+                // } else {
+                //     $("#goonSecond").fadeOut();
+                // }
             }
             if(left>-3390){
                 left = left-50>-3390?left-50:-3390
@@ -100,11 +100,11 @@ $().ready(function () {
         function slideLeft() {
             var left = parseFloat($("#office").css("left"));
             if(fstimes>1){
-                if(left>=0){
-                    $("#goonSecond").fadeIn();
-                }else{
-                    $("#goonSecond").fadeOut();
-                }
+                // if(left>=0){
+                //     $("#goonSecond").fadeIn();
+                // }else{
+                //     $("#goonSecond").fadeOut();
+                // }
             }
             if (left < 0) {
                 left = left + 50 < 0 ? left + 50 : 0
@@ -181,13 +181,13 @@ $().ready(function () {
                     if(leftpush){
                         var handle = setInterval(function () {
                             var left = parseFloat($("#office").css("left"));
-                            if(fstimes>1){
-                                if(left>=0){
-                                    $("#goonSecond").fadeIn();
-                                }else{
-                                    $("#goonSecond").fadeOut();
-                                }
-                            }
+                            // if(fstimes>1){
+                            //     if(left>=0){
+                            //         $("#goonSecond").fadeIn();
+                            //     }else{
+                            //         $("#goonSecond").fadeOut();
+                            //     }
+                            // }
                             if(leftpush && left<0){
                                 left = left+10<0?left+10:0
                                 $("#office").css("left",left+"px");
@@ -212,13 +212,13 @@ $().ready(function () {
                     if(rightpush){
                         var handle = setInterval(function () {
                             var left = parseFloat($("#office").css("left"));
-                            if(fstimes>1){
-                                if(left <= -3390){
-                                    $("#goonSecond").fadeIn();
-                                }else{
-                                    $("#goonSecond").fadeOut();
-                                }
-                            }
+                            // if(fstimes>1){
+                            //     if(left <= -3390){
+                            //         $("#goonSecond").fadeIn();
+                            //     }else{
+                            //         $("#goonSecond").fadeOut();
+                            //     }
+                            // }
                             if(rightpush && left>-3390){
 
                                 left = left-10>-3390?left-10:-3390
@@ -241,6 +241,7 @@ $().ready(function () {
         //初始化
         if(fstimes>1){
             $("#goonFirst").hide();
+            $("#goonSecond").delay(3000).show();
             $("#tips").show().delay(3000).fadeOut();
         }else{
             $("#goonFirst").show();
